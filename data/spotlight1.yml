@@ -1,0 +1,10 @@
+####################### Spotlight #########################
+style: "style1 orient-right content-align-left image-position-center onscroll-image-fade-in"
+id: "first"
+title : "Work"
+content: |
+  Mike leads a team of Specialist Solutions Architects at Amazon Web Services. The team focuses on Security, Networking, and Migrations. Before moving into the Senior Leadership role, Mike was a Solutions Architect covering customers in the Energy, Logistics, and Telecommunications industries. In addition, Mike is a passionate thought leader, speaker, and writer focused on solving some of the more challenging problems in the Enterprise IT space. Mike has had the opportunity to speak at several technology conferences, including AWS re:Invent.
+# button: 
+#   label: "Learn More"
+#   link: "#"
+image: "https://imagedelivery.net/3iqqzuCu4mz697Mt3VX2wA/999ca55a-22d0-4960-c70e-d5d9a457fb00/post"

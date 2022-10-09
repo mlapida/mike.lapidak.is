@@ -1,0 +1,29 @@
+## -----------------------------------------------
+## Basic Configuration
+## -----------------------------------------------
+
+title = "Mike Lapidakis"
+theme = "hugo-story"
+
+
+## -----------------------------------------------
+## Hugo Built-in Features
+## -----------------------------------------------
+
+disableKinds = ["taxonomy", "taxonomyTerm", "section"]
+# googleAnalytics = "your-google-analytics-id"
+
+
+## -----------------------------------------------
+## Site Parameters
+## -----------------------------------------------
+
+[Params]
+  description = "Hi, my name is Mike Lapidakis. I'm an AWS Solutions Architect Leader and aspiring photographer in Colorado."
+  logo = "images/banner.jpg"
+  favicon = true
+
+[Params.social]
+  github = "https://github.com/mlapdia/"
+  twitter = "https://twitter.com/MikeLapidakis"
+  linkedin = "https://linkedin.com/in/MikeLapidakis"
