@@ -5,8 +5,8 @@ content: |
 pictures:
   - title: "Houston"
     content: "An arial photo of Houston."
-    image: "https://imagedelivery.net/3iqqzuCu4mz697Mt3VX2wA/4fa37910-cde2-4d76-88b6-9d76d2985a00/hero"
-    thumb: "https://imagedelivery.net/3iqqzuCu4mz697Mt3VX2wA/4fa37910-cde2-4d76-88b6-9d76d2985a00/thumbnailc"
+    image: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/4fa37910-cde2-4d76-88b6-9d76d2985a00/hero"
+    thumb: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/4fa37910-cde2-4d76-88b6-9d76d2985a00/thumbnailc"
     button: "Details"
 
   - title: "Red Cross"
