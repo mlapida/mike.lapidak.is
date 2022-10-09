@@ -27,3 +27,4 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
   github = "https://github.com/mlapdia/"
   twitter = "https://twitter.com/MikeLapidakis"
   linkedin = "https://linkedin.com/in/MikeLapidakis"
+  email = "hi@mikelap.com"
