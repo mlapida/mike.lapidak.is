@@ -8,5 +8,7 @@ content : |
 button:
   label : "Read"
   link : "https://empty.coffee"
-image : "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/4f7e1c06-371c-42a5-4c36-d611ac213900/hero"
+image : 
+  link: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/4f7e1c06-371c-42a5-4c36-d611ac213900/hero"
+  alt: "Mike Lapidakis and son"
 
