@@ -5,7 +5,6 @@
 title = "Mike Lapidakis"
 theme = "hugo-story"
 
-
 ## -----------------------------------------------
 ## Hugo Built-in Features
 ## -----------------------------------------------
@@ -20,11 +19,14 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
 
 [Params]
   description = "Hi, my name is Mike Lapidakis. I'm an AWS Solutions Architect Leader and aspiring photographer in Colorado."
-  logo = "images/banner.jpg"
+  logo = "MikeLapidakis.jpg"
   favicon = true
+  url = "https://mike.lapidak.is"
+  siteImage = "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/4f7e1c06-371c-42a5-4c36-d611ac213900/post"
 
 [Params.social]
   github = "https://github.com/mlapdia/"
   twitter = "https://twitter.com/MikeLapidakis"
   linkedin = "https://linkedin.com/in/MikeLapidakis"
+  flickr = "https://www.flickr.com/photos/mlapida/"
   email = "hi@mikelap.com"
