@@ -3,4 +3,3 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: same-origin
   Permissions-Policy: camera=(); geolocation=(); microphone=(); payment=(); usb=()
-  Content-Security-Policy: script-src 'self'; frame-ancestors 'none';
