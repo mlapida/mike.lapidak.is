@@ -3,6 +3,9 @@
     <div class="inner">
         <h2>{{ .title }}</h2>
         <p>{{ .content | safeHTML }}</p>
+        {{ with .button }}<ul class="actions stacked">
+            <li><a href="{{ .link }}" class="button primary large wide smooth-scroll-middle">{{ .label }}</a></li>
+        </ul>{{ end }}
     </div>
 
     <!-- Gallery -->

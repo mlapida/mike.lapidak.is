@@ -2,6 +2,9 @@ title: "Photography"
 style: "style2 medium lightbox onscroll-fade-in"
 content: |
   Mike is an avid amateur photographer
+button:
+  label : "Photos"
+  link : "https://lap.photos"
 pictures:
   - title: "Kauai"
     content: "A view of Kauai, Hawaii from the air"
