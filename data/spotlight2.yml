@@ -1,9 +1,12 @@
 ####################### Spotlight #########################
 style: "style1 orient-left content-align-left image-position-center onscroll-image-fade-in"
-title : "About"
+id: "second"
+title : "Work"
 content: |
-  
+  Mike heads a team of expert Solutions Architects at Amazon Web Services, concentrating on key areas such as Security, Networking, Compliance, Resilience, and Migrations. Prior to his ascent to a senior leadership position, Mike excelled as a Solutions Architect, catering to clients across the Energy, Logistics, and Telecommunications sectors. Beyond his professional expertise, Mike is a fervent thought leader, speaker, and author dedicated to addressing the most pressing challenges within the Enterprise IT landscape. His insights have been shared at numerous technology conferences, including notable appearances at AWS re:Invent.
 button: 
-  label: "Learn More"
-  link: "#"
-image: "images/spotlight02.jpg"
+  label: "Connect"
+  link: "https://linkedin.com/in/MikeLapidakis"
+image: 
+  link: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/999ca55a-22d0-4960-c70e-d5d9a457fb00/post"
+  alt: "Mike speaking at re:Invent 2019"

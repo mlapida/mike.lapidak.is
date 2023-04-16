@@ -1,14 +1,19 @@
 ####################### Banner #########################
 style: "style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right"
-title : "Mike Lapidakis"
+title: "Mike Lapidakis"
 subtitle: |
   Cloud Transformation Leader
-content : |
+content: |
   As an innovative thought leader, Mike collaborates with organizations to tackle complex issues by implementing cutting-edge solutions. Boasting over a decade of experience in collaborating with enterprise IT organizations, Mike fosters innovation by leveraging his extensive knowledge of both conventional and emerging technologies, coupled with an unwavering commitment to exceed customer expectations.
-button:
-  label : "Read"
-  link : "https://empty.coffee"
-image : 
+# button:
+#   label : "Read"
+#   link : "https://empty.coffee"
+image: 
   link: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/4f7e1c06-371c-42a5-4c36-d611ac213900/hero"
   alt: "Mike Lapidakis and son"
-
+social:
+  mastodon: "https://me.dm/@mike"
+  photos: "https://glass.photo/lap"
+  twitter: "https://twitter.com/MikeLapidakis"
+  linkedin: "https://linkedin.com/in/MikeLapidakis"
+  blog: "https://empty.coffee/"

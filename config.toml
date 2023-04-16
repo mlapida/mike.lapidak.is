@@ -31,3 +31,4 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
   twitter = "https://twitter.com/MikeLapidakis"
   linkedin = "https://linkedin.com/in/MikeLapidakis"
   medium = "https://mikelap.com/"
+  blog = "https://empty.coffee/"

@@ -1,10 +1,12 @@
 ####################### Spotlight #########################
 style: "style1 orient-right content-align-left image-position-center onscroll-image-fade-in"
 id: "first"
-title : "Work"
+title : "Writing"
 content: |
-  Mike heads a team of expert Solutions Architects at Amazon Web Services, concentrating on key areas such as Security, Networking, Compliance, Resilience, and Migrations. Prior to his ascent to a senior leadership position, Mike excelled as a Solutions Architect, catering to clients across the Energy, Logistics, and Telecommunications sectors. Beyond his professional expertise, Mike is a fervent thought leader, speaker, and author dedicated to addressing the most pressing challenges within the Enterprise IT landscape. His insights have been shared at numerous technology conferences, including notable appearances at AWS re:Invent.
+  On his blog Empty Coffee, Mike explores his passion for technology, the cloud, and photography. Through thought-provoking articles and stunning visuals, he strives to inspire and inform his readers. Join Mike as he shares his insights, discoveries, and experiences within these fascinating realms on Empty Coffee.
 button: 
-  label: "Connect"
-  link: "https://linkedin.com/in/MikeLapidakis"
-image: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/999ca55a-22d0-4960-c70e-d5d9a457fb00/post"
+  label : "Read"
+  link : "https://empty.coffee"
+image: 
+  link: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/c399e0aa-b432-4614-b43c-ab520f05e200/hero"
+  alt: "A photo taken by Mike of a water spout in Hawaii"
