@@ -27,7 +27,7 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
 [Params.social]
   github = "https://github.com/mlapida/"
   photos = "https://glass.photo/lap"
-  mastodon = "https://me.dm/@mike"
+  mastodon = "https://lapidak.is/@mike"
   twitter = "https://twitter.com/MikeLapidakis"
   linkedin = "https://linkedin.com/in/MikeLapidakis"
   medium = "https://mikelap.com/"
