@@ -18,7 +18,7 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
 ## -----------------------------------------------
 
 [Params]
-  description = "Hi, my name is Mike Lapidakis. I'm an AWS Solutions Architect Leader and aspiring photographer in Colorado."
+  description = "Mike Lapidakis is a technology enthusiast and AWS specialist from Denver, Colorado. He manages specialist solutions architects at Amazon Web Services (AWS), where he helps organizations optimize their cloud strategies. Outside of work, Mike writes extensively on his blog, Empty Coffee, covering topics such as self-hosted services, cloud infrastructure, and digital security. His writing is known for its clarity and practical advice, making complex tech topics accessible. An outdoor enthusiast, Mike enjoys running, biking, hiking, and camping with his family. He also speaks at industry events, sharing his expertise on cloud security and generative AI."
   logo = "MikeLapidakis.jpg"
   favicon = true
   url = "https://mike.lapidak.is"
@@ -28,7 +28,7 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
   github = "https://github.com/mlapida/"
   photos = "https://glass.photo/lap"
   mastodon = "https://lapidak.is/@mike"
-  twitter = "https://twitter.com/MikeLapidakis"
+  x = "https://x.com/MikeLapidakis"
+  threads = "https://www.threads.net/@mikelapidakis"
   linkedin = "https://linkedin.com/in/MikeLapidakis"
-  medium = "https://mikelap.com/"
   blog = "https://empty.coffee/"

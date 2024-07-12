@@ -10,6 +10,7 @@
         <div class="inner wrapper style1 align-center">
             <ul class="icons">
                 {{ with .social.blog }}<li><a target="_blank" rel="me" href="{{.}}" class="icon style2 regular fa-pen-to-square"><span class="label">Blog</span></a></li>{{end}}
+                {{ with .social.threads }}<li><a target="_blank" rel="me" href="{{.}}" class="icon style2 brands fa-threads"><span class="label">Threads</span></a></li>{{end}}
                 {{ with .social.mastodon }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-mastodon"><span class="label">Mastodon</span></a></li>{{end}}
                 {{ with .social.photos }}<li><a target="_blank" rel="me" href="{{.}}" class="icon style2 regular fa-images"><span class="label">Photography</span></a></li>{{end}}
                 {{ with .social.linkedin }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>{{end}}
@@ -18,7 +19,7 @@
                 {{ with .social.email }}<li><a target="_blank" rel="me" href="mailto:{{.}}" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>{{end}}
                 {{ with .social.flickr }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-flickr"><span class="label">Flickr</span></a></li>{{end}}
                 {{ with .social.github }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-github"><span class="label">Github</span></a></li>{{end}}
-                {{ with .social.twitter }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>{{end}}
+                {{ with .social.x }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-x-twitter"><span class="label">X</span></a></li>{{end}}
             </ul>
         </div>
     </div>

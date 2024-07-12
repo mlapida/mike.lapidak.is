@@ -4,7 +4,7 @@ title: "Mike Lapidakis"
 subtitle: |
   Cloud Transformation Leader
 content: |
-  As an innovative thought leader, Mike collaborates with organizations to tackle complex issues by implementing cutting-edge solutions. Boasting over a decade of experience in collaborating with enterprise IT organizations, Mike fosters innovation by leveraging his extensive knowledge of both conventional and emerging technologies, coupled with an unwavering commitment to exceed customer expectations.
+  Mike is a technology enthusiast and AWS specialist from Denver, Colorado. He manages specialist solutions architects at Amazon Web Services (AWS), where he helps organizations optimize their cloud strategies. Outside of work, Mike writes extensively on his blog, Empty Coffee, covering topics such as self-hosted services, cloud infrastructure, and digital security. His writing is known for its clarity and practical advice, making complex tech topics accessible. An outdoor enthusiast, Mike enjoys running, biking, hiking, and camping with his family. He also speaks at industry events,  <a href="https://youtu.be/G3YjjAbKZ-Y">sharing his expertise on cloud security and generative AI</a>.
 # button:
 #   label : "Read"
 #   link : "https://empty.coffee"
@@ -14,6 +14,7 @@ image:
 social:
   mastodon: "https://lapidak.is/@mike"
   photos: "https://glass.photo/lap"
-  twitter: "https://twitter.com/MikeLapidakis"
+  threads: "https://www.threads.net/@mikelapidakis"
+  x: "https://x.com/MikeLapidakis"
   linkedin: "https://linkedin.com/in/MikeLapidakis"
   blog: "https://empty.coffee/"

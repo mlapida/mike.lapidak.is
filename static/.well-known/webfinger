@@ -1,9 +1,23 @@
 {
-    "subject": "acct:${email}",
+    "subject": "acct:mike@lapidak.is",
+    "aliases": [
+        "https://gts.lapidak.is/users/mike",
+        "https://gts.lapidak.is/@mike"
+    ],
     "links": [
-      {
+        {
+        "rel": "http://webfinger.net/rel/profile-page",
+        "type": "text/html",
+        "href": "https://gts.lapidak.is/@mike"
+        },
+        {
+        "rel": "self",
+        "type": "application/activity+json",
+        "href": "https://gts.lapidak.is/users/mike"
+        },
+        {
         "rel": "http://openid.net/specs/connect/1.0/issuer",
         "href": "https://auth.down.house/"
-      }
+        }
     ]
-  }
+}
