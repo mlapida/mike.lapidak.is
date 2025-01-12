@@ -32,3 +32,4 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
   threads = "https://www.threads.net/@mikelapidakis"
   linkedin = "https://linkedin.com/in/MikeLapidakis"
   blog = "https://empty.coffee/"
+  bluesky = "https://bsky.app/profile/mike.lapidak.is"
