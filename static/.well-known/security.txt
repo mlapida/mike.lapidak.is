@@ -1,0 +1,12 @@
+Contact: mailto:mike@lapidak.is
+Contact: https://linkedin.com/in/MikeLapidakis
+Expires: 2026-08-02T00:00:00.000Z
+Acknowledgments: https://mike.lapidak.is/
+Preferred-Languages: en
+Canonical: https://mike.lapidak.is/.well-known/security.txt
+Policy: https://mike.lapidak.is/
+
+# Security Contact Information
+# This site is a personal portfolio/landing page for Mike Lapidakis.
+# For security issues, please reach out via the contact methods above.
+# Thank you for helping to keep this site secure!

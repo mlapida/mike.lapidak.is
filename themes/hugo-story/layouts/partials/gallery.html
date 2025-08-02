@@ -1,7 +1,7 @@
 <!-- Gallery -->
-<section class="wrapper style1 align-center" {{ with .id }} id="{{ . }}"{{ end }}>
+<section class="wrapper style1 align-center" {{ with .id }} id="{{ . }}"{{ end }} aria-labelledby="gallery-heading">
     <div class="inner">
-        <h2>{{ .title }}</h2>
+        <h2 id="gallery-heading">{{ .title }}</h2>
         <p>{{ .content | safeHTML }}</p>
         {{ with .button }}<ul class="actions stacked">
             <li><a href="{{ .link }}" class="button primary large wide smooth-scroll-middle">{{ .label }}</a></li>

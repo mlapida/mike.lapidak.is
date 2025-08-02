@@ -1,0 +1,106 @@
+/*
+ * Color Contrast Improvements for WCAG 2.1 AA/AAA Compliance
+ * Applied to ensure all interactive elements meet accessibility standards
+ */
+
+/* Enhanced focus contrast for all interactive elements */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+    outline: 3px solid #0066cc !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 1px #ffffff, 0 0 0 4px #0066cc !important;
+}
+
+/* Improve button text contrast */
+.button.primary {
+    background-color: #2c5aa0 !important;
+    border-color: #2c5aa0 !important;
+    color: #ffffff !important;
+}
+
+.button.primary:hover,
+.button.primary:active {
+    background-color: #1e3f73 !important;
+    border-color: #1e3f73 !important;
+    color: #ffffff !important;
+}
+
+/* Enhance link contrast in content areas */
+.content a:not(.button) {
+    color: #0066cc !important;
+    text-decoration: underline !important;
+}
+
+.content a:not(.button):hover,
+.content a:not(.button):focus {
+    color: #004499 !important;
+    text-decoration: underline !important;
+}
+
+/* Improve icon contrast on hover/focus - fix circular background */
+.icons a.icon.style2:hover:before,
+.icons a.icon.style2:focus:before {
+    background-color: #0066cc !important;
+    color: #ffffff !important;
+    box-shadow: inset 0 0 0 1px #0066cc !important;
+}
+
+.icons a.icon.style2:hover,
+.icons a.icon.style2:focus {
+    color: #ffffff !important;
+}
+
+/* Enhanced border contrast for form elements */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    border: 2px solid #666666 !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #0066cc !important;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    * {
+        outline-width: 3px !important;
+    }
+    
+    .button {
+        border-width: 2px !important;
+    }
+    
+    a:not(.button) {
+        text-decoration: underline !important;
+        text-decoration-thickness: 2px !important;
+    }
+}
+
+/* Ensure adequate contrast for gallery captions */
+.gallery .caption {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    color: #ffffff !important;
+}
+
+.gallery .caption h3,
+.gallery .caption p {
+    color: #ffffff !important;
+}
+
+/* Skip link high contrast */
+.skip-link:focus {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 3px solid #ffffff !important;
+}

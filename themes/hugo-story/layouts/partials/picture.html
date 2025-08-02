@@ -1,6 +1,11 @@
 <article>
     <a href="{{ .image }}" class="image">
-        <img src="{{ .thumb }}" alt="{{.content}}" />
+        <img 
+            src="{{ .thumb }}" 
+            srcset="{{ .thumb }}?w=240 240w, {{ .thumb }}?w=360 360w, {{ .thumb }}?w=480 480w"
+            sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, 25vw"
+            alt="{{.content}}" 
+            loading="lazy" />
     </a>
     <div class="caption">
         <h3>{{ .title }}</h3>

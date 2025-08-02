@@ -9,7 +9,12 @@ theme = "hugo-story"
 ## Hugo Built-in Features
 ## -----------------------------------------------
 
-disableKinds = ["taxonomy", "taxonomyTerm", "section"]
+disableKinds = ["taxonomy", "section", "RSS"]
+enableRobotsTXT = true
+
+[sitemap]
+  changeFreq = "monthly"
+  priority = 0.5
 # googleAnalytics = "your-google-analytics-id"
 
 

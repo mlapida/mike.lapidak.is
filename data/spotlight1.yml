@@ -3,7 +3,7 @@ style: "style1 orient-right content-align-left image-position-center onscroll-im
 id: "first"
 title : "Writing"
 content: |
-  On his blog Empty Coffee, Mike explores his passion for technology, the cloud, and photography. Through thought-provoking articles and stunning visuals, he strives to inspire and inform his readers. Join Mike as he shares his insights, discoveries, and experiences within these fascinating realms on Empty Coffee.
+  On his blog Empty Coffee, Mike explores his passion for technology, the cloud, and photography. Through thought-provoking articles and stunning visuals, he strives to inspire and inform his readers. Join Mike as he shares his insights, discoveries, and experiences within these fascinating realms.
 button: 
   label : "Read"
   link : "https://empty.coffee"

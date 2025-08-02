@@ -1,13 +1,18 @@
 <!-- Spotlight -->
-<section class="spotlight {{ .style }}"{{ with .id }} id="{{ . }}"{{ end }}>
+<section class="spotlight {{ .style }}"{{ with .id }} id="{{ . }}"{{ end }}{{ with .title }} aria-labelledby="spotlight-{{ $.id }}-heading"{{ end }}>
     <div class="content">
-        {{ with .title }}<h2>{{ . }}</h2>{{ end }}
+        {{ with .title }}<h2 id="spotlight-{{ $.id }}-heading">{{ . }}</h2>{{ end }}
         {{ with .content }}<p>{{ . | safeHTML }}</p>{{ end }}
         {{ with .button }}<ul class="actions stacked">
             <li><a href="{{ .link }}" class="button">{{ .label }}</a></li>
         </ul>{{ end }}
     </div>
     {{ with .image }}<div class="image">
-        <img src="{{.link}}" alt="{{.alt}}" />
+        <img 
+            src="{{.link}}" 
+            srcset="{{.link}}?w=480 480w, {{.link}}?w=768 768w, {{.link}}?w=1024 1024w"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="{{.alt}}" 
+            loading="lazy" />
     </div>{{end}}
 </section>

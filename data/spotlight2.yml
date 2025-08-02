@@ -3,7 +3,7 @@ style: "style1 orient-left content-align-left image-position-center onscroll-ima
 id: "second"
 title : "Work"
 content: |
-  Mike heads a team of expert Solutions Architects at Amazon Web Services, concentrating on key areas such as Security, Networking, Compliance, Resilience, and Migrations. Prior to his ascent to a senior leadership position, Mike excelled as a Solutions Architect, catering to clients across the Energy, Logistics, and Telecommunications sectors. Beyond his professional expertise, Mike is a fervent thought leader, speaker, and author dedicated to addressing the most pressing challenges within the Enterprise IT landscape. His insights have been shared at numerous technology conferences, including notable appearances at AWS re:Invent.
+  Mike leads a team of expert Solutions Architects at Amazon Web Services, focusing on Security, Networking, Compliance, Resilience, and Migrations. Prior to his leadership role, Mike excelled as a Solutions Architect, serving clients across the Energy, Logistics, and Telecommunications sectors. Beyond his professional expertise, Mike is a thought leader, speaker, and author dedicated to addressing the most pressing challenges in Enterprise IT. His insights have been shared at numerous technology conferences, including notable appearances at AWS re:Invent.
 button: 
   label: "Connect"
   link: "https://linkedin.com/in/MikeLapidakis"

@@ -1,18 +1,18 @@
 title: "Photography"
 style: "style2 medium lightbox onscroll-fade-in"
 content: |
-  Mike is an avid amateur photographer
+  Mike is an avid amateur photographer who captures the beauty of landscapes and cityscapes around the world.
 button:
   label : "Photos"
   link : "https://glass.photo/lap"
 pictures:
   - title: "Kauai"
-    content: "A view of Kauai, Hawaii from the air"
+    content: "An aerial view of Kauai, Hawaii"
     image: "https://glass.photo/lap/1SQnJ3VY3AyGnOop21taGH"
     thumb: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/1fd964d5-de6c-4d53-22d0-7f6fc9e05100/thumbnailc"
     button: "Details"
   - title: "Napali Coast"
-    content: "The Napali Coast in Kauai, Hawaii from the air"
+    content: "An aerial view of the Napali Coast in Kauai, Hawaii"
     image: "https://glass.photo/lap/3cU2LJLDjD6IxzXh0dQ4go"
     thumb: "https://mike.lapidak.is/cdn-cgi/imagedelivery/3iqqzuCu4mz697Mt3VX2wA/9bdd1016-fdc5-4aca-8838-cd087b6eff00/thumbnailc"
     button: "Details"

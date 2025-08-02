@@ -2,30 +2,67 @@
 	<title>{{ .Site.Title }}</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<meta name="description" content="{{ .Site.Params.Description }}">
+	{{ $description := .Site.Params.Description }}
+	{{ if .Page.Params.description }}{{ $description = .Page.Params.description }}{{ end }}
+	<meta name="description" content="{{ $description }}">
 	<meta property="og:site_name" content="{{ .Site.Title }}">
 	<meta property="og:title" content="{{ .Site.Title }}">
 	<meta property="og:type" content="website">
-	<meta property="og:description" content="{{ .Site.Params.Description }}">
+	<meta property="og:description" content="{{ $description }}">
 	<meta property="og:image" content="{{ .Site.Params.siteImage }}">
 	<meta property="og:image:type" content="image/jpeg">
 	<meta property="og:image:width" content="1200">
 	<meta property="og:image:height" content="800">
 	<meta property="og:url" content="{{ .Site.Params.url }}">
+	<link rel="canonical" href="{{ .Site.Params.url }}">
 	<meta property="twitter:card" content="summary_large_image">
-	<script src="https://kit.fontawesome.com/d34889f87c.js" crossorigin="anonymous"></script>
+	<meta name="twitter:creator" content="@MikeLapidakis">
+	<meta name="twitter:site" content="@MikeLapidakis">
+	<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/webfonts/source-sans-pro-v21-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/webfonts/source-sans-pro-v21-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+	{{ with .Site.Data.banner.image }}<link rel="preload" href="{{.link}}?w=1200" as="image" fetchpriority="high">{{ end }}
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": "{{ .Site.Title }}",
+		"description": "{{ $description }}",
+		"url": "{{ .Site.Params.url }}",
+		"image": "{{ .Site.Params.siteImage }}",
+		"jobTitle": "Cloud Transformation Leader",
+		"worksFor": {
+			"@type": "Organization",
+			"name": "Amazon Web Services (AWS)"
+		},
+		"sameAs": [
+			"{{ .Site.Params.social.linkedin }}",
+			"{{ .Site.Params.social.x }}",
+			"{{ .Site.Params.social.mastodon }}",
+			"{{ .Site.Params.social.threads }}",
+			"{{ .Site.Params.social.github }}",
+			"{{ .Site.Params.social.blog }}",
+			"{{ .Site.Params.social.bluesky }}"
+		]
+	}
+	</script>
+	<link rel="stylesheet" href="/css/fontawesome-minimal.css">
+	<link rel="stylesheet" href="/css/accessibility.css">
+	<link rel="stylesheet" href="/css/contrast-improvements.css">
 	{{ if .Site.Params.favicon }}
 	{{ partial "template/favicon" }}
 	{{ end }}
 	<!-- CSS -->
-	{{ if .Site.IsServer }}
+	{{ if hugo.IsServer }}
 	{{ $style := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "scss/main.scss" . | toCSS (dict "targetPath" "assets/css/main.css" "outputStyle" "compressed" "enableSourceMap" false) }}
 	<link rel="stylesheet" href="{{ ($style).RelPermalink }}">
 	{{ else }}
 	{{ $style := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "scss/main.scss" . | toCSS (dict "targetPath" "assets/css/main.css" "enableSourceMap" false) }}
 	<link rel="stylesheet" href="{{ ($style | minify).RelPermalink }}">
 	{{ end }}
-	{{ if .Site.IsServer }}
+	{{ if hugo.IsServer }}
 	{{ $noscript := resources.Get "sass/noscript.scss" | resources.ExecuteAsTemplate "noscript.scss" . | toCSS (dict "targetPath" "assets/css/noscript.css" "enableSourceMap" false) }}
 	<noscript><link rel="stylesheet" href="{{ ($noscript).RelPermalink }}" /></noscript>
 	{{ else }}

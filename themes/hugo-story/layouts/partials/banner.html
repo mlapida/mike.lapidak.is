@@ -1,7 +1,7 @@
 <!-- Banner -->
-<section class="banner {{ .style }}">
+<section class="banner {{ .style }}" id="main-content" role="banner" aria-labelledby="banner-heading">
     <div class="content">
-        {{ with .title }}<h1>{{ . }}</h1>{{ end }}
+        {{ with .title }}<h1 id="banner-heading">{{ . }}</h1>{{ end }}
         {{ with .subtitle }}<p class="major">{{ . | safeHTML }}</p>{{ end }}
         {{ with .content }}<p>{{ . | safeHTML }}</p>{{ end }}
         {{ with .button }}<ul class="actions stacked">
@@ -10,7 +10,7 @@
         <div class="inner wrapper style1 align-center">
             <ul class="icons">
                 {{ with .social.blog }}<li><a target="_blank" rel="me" href="{{.}}" class="icon style2 regular fa-pen-to-square"><span class="label">Blog</span></a></li>{{end}}
-                {{ with .social.threads }}<li><a target="_blank" rel="me" href="{{.}}" class="icon style2 brands fa-threads"><span class="label">Threads</span></a></li>{{end}}
+                {{ with .social.threads }}<li><a target="_blank" rel="me" href="{{.}}" class="icon style2 brands fa-at"><span class="label">Threads</span></a></li>{{end}}
                 {{ with .social.mastodon }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-mastodon"><span class="label">Mastodon</span></a></li>{{end}}
                 {{ with .social.photos }}<li><a target="_blank" rel="me" href="{{.}}" class="icon style2 regular fa-images"><span class="label">Photography</span></a></li>{{end}}
                 {{ with .social.linkedin }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>{{end}}
@@ -19,12 +19,18 @@
                 {{ with .social.email }}<li><a target="_blank" rel="me" href="mailto:{{.}}" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>{{end}}
                 {{ with .social.flickr }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-flickr"><span class="label">Flickr</span></a></li>{{end}}
                 {{ with .social.github }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-github"><span class="label">Github</span></a></li>{{end}}
-                {{ with .social.x }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-x-twitter"><span class="label">X</span></a></li>{{end}}
-                {{ with .social.bluesky }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-bluesky"><span class="label">Bluesky</span></a></li>{{end}}
+                {{ with .social.x }}<li><a target="_blank" rel="me" href="{{.}}" class="icon brands style2 fa-twitter"><span class="label">X</span></a></li>{{end}}
+                {{ with .social.bluesky }}<li><a target="_blank" rel="me" href="{{.}}" class="icon style2 fa-cloud"><span class="label">Bluesky</span></a></li>{{end}}
             </ul>
         </div>
     </div>
     {{ with .image }}<div class="image">
-        <img src="{{.link}}" alt="{{.alt}}" />
+        <img 
+            src="{{.link}}" 
+            srcset="{{.link}}?w=480 480w, {{.link}}?w=768 768w, {{.link}}?w=1024 1024w, {{.link}}?w=1200 1200w"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 1200px"
+            alt="{{.alt}}" 
+            loading="eager"
+            fetchpriority="high" />
     </div>{{end}}
 </section>
