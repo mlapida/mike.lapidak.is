@@ -9,7 +9,7 @@ theme = "hugo-story"
 ## Hugo Built-in Features
 ## -----------------------------------------------
 
-disableKinds = ["taxonomy", "section", "RSS"]
+disableKinds = ["taxonomy", "term", "section", "RSS"]
 enableRobotsTXT = true
 
 [sitemap]
