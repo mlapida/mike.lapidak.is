@@ -3,10 +3,6 @@
  * Handles API endpoints and utility functions
  */
 
-export interface Env {
-	// Add environment bindings here as needed
-}
-
 export default {
 	async fetch(
 		request: Request,
