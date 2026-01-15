@@ -1,0 +1,22 @@
+Watching for changes in /Users/mikelap/Dev/mike.lapidak.is/{archetypes,data,layouts,package.json,static,themes}
+Watching for config changes in /Users/mikelap/Dev/mike.lapidak.is/config.toml
+Start building sites … 
+hugo v0.147.4+extended+withdeploy darwin/arm64 BuildDate=2025-05-20T10:41:19Z VendorInfo=brew
+
+
+                   | EN   
+-------------------+------
+  Pages            |   3  
+  Paginator pages  |   0  
+  Non-page files   |   0  
+  Static files     | 106  
+  Processed images |   0  
+  Aliases          |   0  
+  Cleaned          |   0  
+
+Built in 217 ms
+Environment: "development"
+Serving pages from disk
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at //localhost:1313/ (bind address 0.0.0.0) 
+Press Ctrl+C to stop
