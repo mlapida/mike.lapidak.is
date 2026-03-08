@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Mike Lapidakis',
+  description = 'Engineering leader, photographer, and tinkerer.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://mike.lapidak.is');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{title === 'Mike Lapidakis' ? title : `${title} — Mike Lapidakis`}</title>
+
+    <!-- Adobe Fonts (Acumin Pro) — replace with your Typekit kit ID -->
+    <!-- <link rel="stylesheet" href="https://use.typekit.net/YOURKITID.css" /> -->
+
+    <!-- Inter fallback (system fonts cover most cases, uncomment if needed) -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" /> -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

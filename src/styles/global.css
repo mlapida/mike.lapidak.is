@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/* ============================================================
+   COLOR PALETTE — swap this block to retheme everything
+   ============================================================ */
+:root {
+  --color-bg: #f9f7f4;
+  --color-surface: #f0ede8;
+  --color-border: #ddd9d2;
+  --color-text: #1a1917;
+  --color-text-muted: #6b665e;
+  --color-accent: #2c5f8a;
+  --color-accent-hover: #1e4266;
+  --color-link: #2c5f8a;
+  --color-link-hover: #1e4266;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'acumin-pro', 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'acumin-pro', 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container--wide {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ============================================================
+   PHOTOSWIPE OVERRIDES
+   ============================================================ */
+.pswp__bg {
+  background: rgba(10, 10, 10, 0.92);
+}
+
+/* ============================================================
+   LEAFLET OVERRIDES
+   ============================================================ */
+.leaflet-container {
+  font-family: 'acumin-pro', 'Inter', system-ui, sans-serif;
+  border-radius: 0.5rem;
+}

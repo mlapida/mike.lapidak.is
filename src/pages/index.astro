@@ -1,0 +1,357 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+// Fetch empty.coffee RSS at build time
+interface RssItem {
+  title: string;
+  link: string;
+  pubDate: string;
+  description: string;
+}
+
+let rssItems: RssItem[] = [];
+
+try {
+  const res = await fetch('https://empty.coffee/feed.xml', {
+    headers: { 'User-Agent': 'mike.lapidak.is site builder' },
+    signal: AbortSignal.timeout(8000),
+  });
+  if (res.ok) {
+    const xml = await res.text();
+    const items = xml.match(/<item>[\s\S]*?<\/item>/g) ?? [];
+    rssItems = items.slice(0, 5).map(item => {
+      const get = (tag: string) => {
+        const cdata = item.match(new RegExp(`<${tag}[^>]*><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\\/${tag}>`));
+        if (cdata) return cdata[1];
+        const plain = item.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`));
+        return plain ? plain[1] : '';
+      };
+      return {
+        title: get('title').trim(),
+        link: get('link').trim(),
+        pubDate: get('pubDate').trim(),
+        description: get('description').replace(/<[^>]+>/g, '').trim().slice(0, 160),
+      };
+    });
+  }
+} catch {
+  // RSS fetch failed — degrade gracefully
+}
+
+const socialLinks = [
+  { label: 'GitHub', href: 'https://github.com/mlapidakis' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/mikelapidakis' },
+  { label: 'Writing', href: 'https://empty.coffee' },
+];
+---
+
+<Base title="Mike Lapidakis" description="Engineering leader, photographer, and tinkerer based in the Pacific Northwest.">
+  <Nav />
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__inner">
+          <div class="hero__avatar">
+            <img
+              src="/profile.jpg"
+              alt="Mike Lapidakis"
+              width="140"
+              height="140"
+              class="hero__photo"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <div class="hero__content">
+            <h1 class="hero__name">Mike Lapidakis</h1>
+            <p class="hero__role">Engineering Leader &middot; AWS &middot; Pacific Northwest</p>
+            <p class="hero__bio">
+              I build engineering teams and platforms at scale. Currently at AWS,
+              working on developer experience and distributed systems. Outside work
+              I'm usually chasing light with a camera or tinkering on something weird.
+            </p>
+            <ul class="hero__links">
+              {socialLinks.map(link => (
+                <li>
+                  <a href={link.href} target="_blank" rel="noopener" class="hero__link">
+                    {link.label} &rarr;
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Writing from empty.coffee -->
+    {rssItems.length > 0 && (
+      <section class="writing">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Recent Writing</h2>
+            <a href="https://empty.coffee" target="_blank" rel="noopener" class="section-more">
+              empty.coffee &rarr;
+            </a>
+          </div>
+          <ol class="post-list">
+            {rssItems.map(item => (
+              <li class="post-item">
+                <a href={item.link} target="_blank" rel="noopener" class="post-link">
+                  <span class="post-title">{item.title}</span>
+                  <time class="post-date">
+                    {new Date(item.pubDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </time>
+                </a>
+                {item.description && (
+                  <p class="post-desc">{item.description}&hellip;</p>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )}
+
+    <!-- Quick nav to other sections -->
+    <section class="sections-nav">
+      <div class="container">
+        <div class="section-cards">
+          <a href="/photography" class="section-card">
+            <span class="section-card__label">Photography</span>
+            <span class="section-card__desc">Landscapes, street, and travel &rarr;</span>
+          </a>
+          <a href="/work" class="section-card">
+            <span class="section-card__label">Work</span>
+            <span class="section-card__desc">Career, projects, and talks &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: 5rem 0 4rem;
+  }
+
+  .hero__inner {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  .hero__avatar {
+    flex-shrink: 0;
+  }
+
+  .hero__photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--color-surface);
+    border: 3px solid var(--color-border);
+  }
+
+  .hero__name {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__role {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0 0 1.25rem;
+    font-weight: 500;
+  }
+
+  .hero__bio {
+    font-size: 1.05rem;
+    color: var(--color-text);
+    max-width: 540px;
+    margin: 0 0 1.5rem;
+    line-height: 1.7;
+  }
+
+  .hero__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hero__link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  .hero__link:hover {
+    color: var(--color-accent-hover);
+  }
+
+  /* Writing section */
+  .writing {
+    padding: 3rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .section-more {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-item {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .post-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .post-link:hover .post-title {
+    color: var(--color-accent);
+  }
+
+  .post-title {
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.15s ease;
+  }
+
+  .post-date {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .post-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Section nav cards */
+  .sections-nav {
+    padding: 3rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .section-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    color: var(--color-text);
+    transition: border-color 0.15s ease;
+  }
+
+  .section-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .section-card__label {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .section-card__desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero {
+      padding: 3rem 0 2.5rem;
+    }
+
+    .hero__inner {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .hero__links {
+      justify-content: center;
+    }
+
+    .hero__name {
+      font-size: 1.75rem;
+    }
+
+    .section-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .post-link {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+</style>
