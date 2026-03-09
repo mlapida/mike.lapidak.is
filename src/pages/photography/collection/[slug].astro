@@ -3,6 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
 export function collectionSlug(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -65,9 +66,11 @@ const { name, photos } = Astro.props;
                 data-aspect={aspect.toFixed(4)}
                 aria-label={photo.data.title}
               >
-                <img
+                <Image
                   src={photo.data.image}
                   alt={photo.data.title}
+                  width={900}
+                  height={Math.round(900 / ((photo.data.imgWidth ?? 3) / (photo.data.imgHeight ?? 2)))}
                   loading={i < 3 ? 'eager' : 'lazy'}
                   decoding="async"
                   class="photo-thumb"

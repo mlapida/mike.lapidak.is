@@ -4,6 +4,7 @@
    COLOR PALETTE — swap this block to retheme everything
    ============================================================ */
 :root {
+  --nav-height: 3.25rem;
   --color-bg: #f8f6f1;
   --color-bg-glass: rgba(248, 246, 241, 0.88);
   --color-surface: #edeae3;
@@ -76,6 +77,7 @@ html::after {
 body {
   min-height: 100vh;
   margin: 0;
+  padding-top: calc(var(--nav-height) + env(safe-area-inset-top, 0px));
 }
 
 a {

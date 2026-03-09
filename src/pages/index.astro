@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { heroSocials } from '../config/site';
+import { Image } from 'astro:assets';
 
 interface RssItem {
   title: string;
@@ -78,11 +79,11 @@ const personJsonLd = {
       <div class="container">
         <div class="hero__inner">
           <div class="hero__avatar animate-fade-up">
-            <img
+            <Image
               src="/profile.jpg"
               alt="Mike Lapidakis"
-              width="112"
-              height="112"
+              width={112}
+              height={112}
               class="hero__photo"
               onerror="this.style.display='none'"
             />

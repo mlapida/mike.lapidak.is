@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import { collectionSlug } from './photography/collection/[slug].astro';
+import { Image } from 'astro:assets';
 
 const allPhotos = (await getCollection('photos')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -71,10 +72,12 @@ const collections = [...collectionMap.entries()].sort(
                     >
                       <div class="stack-wrap">
                         {stackPhotos.slice().reverse().map((photo, i) => (
-                          <img
+                          <Image
                             src={photo.data.image}
                             alt=""
                             class={`stack-img stack-img--${i}`}
+                            width={400}
+                            height={Math.round(400 / ((photo.data.imgWidth ?? 4) / (photo.data.imgHeight ?? 3)))}
                             loading="eager"
                             decoding="async"
                           />
@@ -115,9 +118,11 @@ const collections = [...collectionMap.entries()].sort(
                       data-aspect={aspect.toFixed(4)}
                       aria-label={photo.data.title}
                     >
-                      <img
+                      <Image
                         src={photo.data.image}
                         alt={photo.data.title}
+                        width={900}
+                        height={Math.round(900 / ((photo.data.imgWidth ?? 3) / (photo.data.imgHeight ?? 2)))}
                         loading={i < 3 ? 'eager' : 'lazy'}
                         decoding="async"
                         class="photo-thumb"

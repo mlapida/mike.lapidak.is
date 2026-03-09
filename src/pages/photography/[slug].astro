@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import { collectionSlug } from './collection/[slug].astro';
 import 'leaflet/dist/leaflet.css';
 
@@ -22,7 +23,7 @@ export async function getStaticPaths() {
 }
 
 const { photo, prev, next } = Astro.props;
-const { title, date, location, gps, camera, lens, aperture, shutter, iso, image, collection } = photo.data;
+const { title, date, location, gps, camera, lens, aperture, shutter, iso, image, collection, imgWidth, imgHeight } = photo.data;
 
 const dateFormatted = date.toLocaleDateString('en-US', {
   month: 'long',
@@ -78,10 +79,12 @@ const jsonLd = {
     <div class="photo-detail__layout">
       <!-- Photo panel -->
       <div class="photo-panel">
-        <img
+        <Image
           src={image}
           alt={title}
           class="photo-detail__img"
+          width={imgWidth ?? 2000}
+          height={imgHeight ?? 1333}
           loading="eager"
           decoding="async"
         />
@@ -192,14 +195,13 @@ const jsonLd = {
 
 <style>
   .photo-detail {
-    min-height: calc(100vh - 64px);
-    padding-top: 64px; /* nav height */
+    min-height: calc(100vh - var(--nav-height));
   }
 
   .photo-detail__layout {
     display: grid;
     grid-template-columns: 60fr 40fr;
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - var(--nav-height));
   }
 
   /* ── Photo panel ── */
