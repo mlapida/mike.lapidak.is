@@ -46,6 +46,7 @@ const RAW_EXTENSIONS = new Set([
   '3fr', 'fff',           // Hasselblad
   'iiq',                  // Phase One
   'cap', 'eip',           // Capture One
+  'heic', 'heif',         // Apple HEIC/HEIF (sharp requires libheif — export as JPEG)
 ]);
 
 // ─── CLI flags ───────────────────────────────────────────────────────────────
@@ -259,7 +260,7 @@ async function main() {
 
       const fileExt = (asset.originalFileName ?? '').split('.').pop().toLowerCase();
       if (RAW_EXTENSIONS.has(fileExt)) {
-        console.warn(`  ⚠  SKIPPED RAW: ${asset.originalFileName} — export a JPEG from Immich and re-add it to the album`);
+        console.warn(`  ⚠  SKIPPED (unsupported format .${fileExt}): ${asset.originalFileName} — export a JPEG from Immich and re-add it to the album`);
         continue;
       }
 
