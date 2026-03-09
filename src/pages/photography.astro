@@ -186,6 +186,7 @@ const collections = [...collectionMap.entries()].sort(
         for (const { el, a } of r) {
           el.style.width = `${a * rowH}px`;
           el.style.height = `${rowH}px`;
+          el.style.flexGrow = '0';
         }
       }
     }
