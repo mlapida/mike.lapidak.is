@@ -23,7 +23,7 @@
  */
 
 import { S3Client, PutObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, unlinkSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 
@@ -155,20 +155,20 @@ function buildFrontmatter(asset, album) {
   lines.push(`location: ${JSON.stringify(location)}`);
   if (exif.latitude != null && exif.longitude != null) {
     lines.push(`gps:`);
-    lines.push(`  lat: ${exif.latitude}`);
-    lines.push(`  lng: ${exif.longitude}`);
+    lines.push(`  lat: ${JSON.stringify(exif.latitude)}`);
+    lines.push(`  lng: ${JSON.stringify(exif.longitude)}`);
   }
   if (exif.make || exif.model) {
     const camera = [exif.make, exif.model].filter(Boolean).join(' ');
     lines.push(`camera: ${JSON.stringify(camera)}`);
   }
   if (exif.lensModel) lines.push(`lens: ${JSON.stringify(exif.lensModel)}`);
-  if (exif.fNumber  != null) lines.push(`aperture: "f/${exif.fNumber}"`);
+  if (exif.fNumber  != null) lines.push(`aperture: ${JSON.stringify(`f/${exif.fNumber}`)}`);
   if (exif.exposureTime != null) lines.push(`shutter: ${JSON.stringify(String(exif.exposureTime))}`);
-  if (exif.iso      != null) lines.push(`iso: ${exif.iso}`);
+  if (exif.iso      != null) lines.push(`iso: ${JSON.stringify(exif.iso)}`);
   lines.push(`image: ${JSON.stringify(image)}`);
-  if (imgWidth  != null) lines.push(`imgWidth: ${imgWidth}`);
-  if (imgHeight != null) lines.push(`imgHeight: ${imgHeight}`);
+  if (imgWidth  != null) lines.push(`imgWidth: ${JSON.stringify(imgWidth)}`);
+  if (imgHeight != null) lines.push(`imgHeight: ${JSON.stringify(imgHeight)}`);
   lines.push(`featured: ${asset.isFavorite ? 'true' : 'false'}`);
   lines.push(`orientation: ${orientation}`);
   if (collection) lines.push(`collection: ${JSON.stringify(collection)}`);
@@ -198,9 +198,8 @@ function loadExistingMd() {
 
 // ─── Git helpers ──────────────────────────────────────────────────────────────
 function git(...args) {
-  const cmd = `git -C ${JSON.stringify(REPO)} ${args.join(' ')}`;
-  console.log(`  $ ${cmd}`);
-  if (!DRY_RUN) execSync(cmd, { stdio: 'inherit' });
+  console.log(`  $ git -C ${REPO} ${args.join(' ')}`);
+  if (!DRY_RUN) execFileSync('git', ['-C', REPO, ...args], { stdio: 'inherit' });
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
