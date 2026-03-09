@@ -74,6 +74,7 @@ const { name, photos } = Astro.props;
                   loading={i < 3 ? 'eager' : 'lazy'}
                   decoding="async"
                   class="photo-thumb"
+                  quality={85}
                 />
                 <div class="photo-overlay">
                   <span class="photo-title">{photo.data.title}</span>

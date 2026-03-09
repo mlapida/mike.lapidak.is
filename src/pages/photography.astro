@@ -80,6 +80,7 @@ const collections = [...collectionMap.entries()].sort(
                             height={Math.round(400 / ((photo.data.imgWidth ?? 4) / (photo.data.imgHeight ?? 3)))}
                             loading="eager"
                             decoding="async"
+                            quality={85}
                           />
                         ))}
                       </div>
@@ -126,6 +127,7 @@ const collections = [...collectionMap.entries()].sort(
                         loading={i < 3 ? 'eager' : 'lazy'}
                         decoding="async"
                         class="photo-thumb"
+                        quality={85}
                       />
                       <div class="photo-overlay">
                         <span class="photo-title">{photo.data.title}</span>
