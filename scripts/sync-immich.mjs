@@ -163,7 +163,7 @@ function buildFrontmatter(asset, album) {
     lines.push(`camera: ${JSON.stringify(camera)}`);
   }
   if (exif.lensModel) lines.push(`lens: ${JSON.stringify(exif.lensModel)}`);
-  if (exif.fNumber  != null) lines.push(`aperture: ${JSON.stringify(`f/${exif.fNumber}`)}`);
+  if (exif.fNumber  != null) lines.push(`aperture: ${JSON.stringify(String(exif.fNumber))}`);
   if (exif.exposureTime != null) lines.push(`shutter: ${JSON.stringify(String(exif.exposureTime))}`);
   if (exif.iso      != null) lines.push(`iso: ${JSON.stringify(exif.iso)}`);
   lines.push(`image: ${JSON.stringify(image)}`);
