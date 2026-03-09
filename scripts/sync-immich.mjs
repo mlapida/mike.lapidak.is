@@ -117,6 +117,7 @@ async function r2Upload(key, body, contentType = 'image/jpeg') {
     Key: key,
     Body: body,
     ContentType: contentType,
+    CacheControl: 'no-store',
   }));
 }
 
@@ -285,7 +286,8 @@ async function main() {
   console.log(`\n${writes.length} asset(s) to sync...\n`);
   for (const { asset, album } of writes) {
     const r2Key = `${asset.id}.jpg`;
-    const slug = toSlug(asset.originalFileName ?? asset.id);
+    // Preserve existing slug on --force re-sync so URLs stay stable even if filename changes
+    const slug = existing.get(asset.id)?.slug ?? toSlug(asset.originalFileName ?? asset.id);
     const mdPath = join(PHOTOS_DIR, `${slug}.md`);
 
     console.log(`→ ${asset.originalFileName} (${album.albumName})`);
