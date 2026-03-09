@@ -18,7 +18,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
 const pageTitle = title === 'Mike Lapidakis' ? title : `${title} — Mike Lapidakis`;
 const ogImage = image
   ? new URL(image, siteUrl).toString()
-  : `${siteUrl}/profile.jpg`;
+  : `${siteUrl}/social-card.jpg`;
 ---
 <!doctype html>
 <html lang="en">
