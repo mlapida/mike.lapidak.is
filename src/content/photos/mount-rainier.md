@@ -1,17 +1,18 @@
 ---
-title: "Mount Rainier at Dawn"
-date: 2024-08-15
+title: "Mount Rainier"
+date: 2025-08-22
 location: "Mount Rainier National Park, WA"
 gps:
   lat: 46.8523
   lng: -121.7603
-camera: "Sony A7R V"
-lens: "24mm f/1.4 GM"
-aperture: "5.6"
-shutter: "1/250s"
+camera: "Leica Q3"
+lens: "Summilux 28mm f/1.7 ASPH"
+aperture: "8.0"
+shutter: "1/500s"
 iso: 100
 image: "/photos/mount-rainier.jpg"
-featured: true
+imgWidth: 1920
+imgHeight: 1280
+featured: false
+orientation: "landscape"
 ---
-
-Golden hour light on the summit. The mountain was completely clear after a week of clouds.

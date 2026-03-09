@@ -1,17 +1,18 @@
 ---
-title: "Seattle from Kerry Park"
-date: 2024-03-05
-location: "Kerry Park, Seattle, WA"
+title: "Seattle skyline"
+date: 2025-07-04
+location: "Seattle, WA"
 gps:
-  lat: 47.6295
-  lng: -122.3598
-camera: "Sony A7R V"
-lens: "85mm f/1.4 GM"
-aperture: "8"
-shutter: "8s"
+  lat: 47.6062
+  lng: -122.3321
+camera: "Leica Q3"
+lens: "Summilux 28mm f/1.7 ASPH"
+aperture: "5.6"
+shutter: "1/250s"
 iso: 100
 image: "/photos/seattle-skyline.jpg"
-featured: true
+imgWidth: 1920
+imgHeight: 1280
+featured: false
+orientation: "landscape"
 ---
-
-Long exposure after a winter storm cleared. Space Needle and the Olympics perfectly aligned.
