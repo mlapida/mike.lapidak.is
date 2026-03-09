@@ -16,7 +16,12 @@ const photos = defineCollection({
     shutter: z.string().optional(),
     iso: z.number().optional(),
     image: z.string(),
+    imgWidth: z.number().optional(),
+    imgHeight: z.number().optional(),
     featured: z.boolean().default(false),
+    orientation: z.enum(['landscape', 'portrait', 'square']).default('landscape'),
+    collection: z.string().optional(),
+    immichId: z.string().optional(),
   }),
 });
 

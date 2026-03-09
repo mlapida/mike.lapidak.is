@@ -3,239 +3,228 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
+import { collectionSlug } from './photography/collection/[slug].astro';
 
 const allPhotos = (await getCollection('photos')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
-const gpsPhotos = allPhotos.filter(p => p.data.gps);
+// Group into collections (preserving sort order within each group)
+const collectionMap = new Map<string, typeof allPhotos>();
+const uncollected: typeof allPhotos = [];
 
-// Serialize metadata for client scripts
-const photoMeta = allPhotos.map((p, i) => ({
-  idx: i,
-  title: p.data.title,
-  date: p.data.date.toISOString().slice(0, 10),
-  location: p.data.location,
-  camera: p.data.camera ?? null,
-  lens: p.data.lens ?? null,
-  aperture: p.data.aperture ?? null,
-  shutter: p.data.shutter ?? null,
-  iso: p.data.iso ?? null,
-  image: p.data.image,
-}));
+for (const photo of allPhotos) {
+  if (photo.data.collection) {
+    const key = photo.data.collection;
+    if (!collectionMap.has(key)) collectionMap.set(key, []);
+    collectionMap.get(key)!.push(photo);
+  } else {
+    uncollected.push(photo);
+  }
+}
 
-const mapPoints = gpsPhotos.map(p => ({
-  title: p.data.title,
-  location: p.data.location,
-  lat: p.data.gps!.lat,
-  lng: p.data.gps!.lng,
-  image: p.data.image,
-}));
-
-const hasMap = gpsPhotos.length > 0;
+const collections = [...collectionMap.entries()].sort(
+  (a, b) => b[1][0].data.date.valueOf() - a[1][0].data.date.valueOf()
+);
 ---
 
 <Base
   title="Photography"
-  description="Photos by Mike Lapidakis — landscapes, street, and travel."
+  description="Photos by Mike Lapidakis — street, travel, and landscape."
 >
   <Nav />
 
   <main>
     <section class="page-header">
       <div class="container">
-        <h1 class="page-title">Photography</h1>
+        <p class="page-eyebrow">Portfolio</p>
+        <h1 class="page-title display">Photography</h1>
         <p class="page-desc">
-          Landscapes, street scenes, and moments from travels.
-          Shot mostly on Sony mirrorless with prime lenses.
+          Street, travel, and aerial photography.
+          More on <a href="https://glass.photo/lap" target="_blank" rel="noopener">glass.photo/lap</a>.
         </p>
       </div>
     </section>
 
     {allPhotos.length === 0 ? (
       <div class="container">
-        <p class="empty-state">
-          No photos yet — add some in <code>src/content/photos/</code>.
-        </p>
+        <p class="empty-state">No photos yet — add some in <code>src/content/photos/</code>.</p>
       </div>
     ) : (
-      <>
-        <!-- Photo grid -->
-        <section class="gallery-section">
-          <div class="container--wide">
-            <div class="photo-grid" id="gallery">
-              {allPhotos.map((photo, i) => (
-                <a
-                  href={photo.data.image}
-                  class="photo-item"
-                  data-pswp-width="1920"
-                  data-pswp-height="1280"
-                  data-index={String(i)}
-                  aria-label={photo.data.title}
-                >
-                  <img
-                    src={photo.data.image}
-                    alt={photo.data.title}
-                    loading={i < 6 ? 'eager' : 'lazy'}
-                    class="photo-thumb"
-                  />
-                  <div class="photo-overlay">
-                    <span class="photo-title">{photo.data.title}</span>
-                    <span class="photo-location">{photo.data.location}</span>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
+      <div class="gallery-wrapper">
 
-        <!-- Map section -->
-        {hasMap && (
-          <section class="map-section">
-            <div class="container">
-              <h2 class="section-label">Locations</h2>
-              <div id="photo-map" class="map-container"></div>
+        {/* ── Collections ── */}
+        {collections.length > 0 && (
+          <section class="gallery-section">
+            <div class="container--wide">
+              <div class="section-label">
+                <span class="section-eyebrow">Collections</span>
+              </div>
+              <div class="collection-cards">
+                {collections.map(([name, photos]) => {
+                  const stackPhotos = photos.slice(0, 3);
+                  return (
+                    <a
+                      href={`/photography/collection/${collectionSlug(name)}`}
+                      class="collection-card"
+                      aria-label={name}
+                    >
+                      <div class="stack-wrap">
+                        {stackPhotos.slice().reverse().map((photo, i) => (
+                          <img
+                            src={photo.data.image}
+                            alt=""
+                            class={`stack-img stack-img--${i}`}
+                            loading="eager"
+                            decoding="async"
+                          />
+                        ))}
+                      </div>
+                      <div class="card-info">
+                        <span class="card-eyebrow">Collection</span>
+                        <h2 class="card-title display">{name}</h2>
+                        <span class="card-count">{photos.length} photo{photos.length !== 1 ? 's' : ''}</span>
+                        <span class="card-arrow">View collection →</span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </section>
         )}
-      </>
+
+        {/* ── Singles ── */}
+        {uncollected.length > 0 && (
+          <section class="gallery-section">
+            <div class="container--wide">
+              {collections.length > 0 && (
+                <div class="section-label">
+                  <span class="section-eyebrow">Singles</span>
+                </div>
+              )}
+              <div class="photo-grid">
+                {uncollected.map((photo, i) => {
+                  const aspect = photo.data.imgWidth && photo.data.imgHeight
+                    ? photo.data.imgWidth / photo.data.imgHeight
+                    : photo.data.orientation === 'portrait' ? 2/3 : 3/2;
+                  return (
+                    <a
+                      href={`/photography/${photo.id.replace(/\.md$/, '')}`}
+                      class="photo-item"
+                      data-aspect={aspect.toFixed(4)}
+                      aria-label={photo.data.title}
+                    >
+                      <img
+                        src={photo.data.image}
+                        alt={photo.data.title}
+                        loading={i < 3 ? 'eager' : 'lazy'}
+                        decoding="async"
+                        class="photo-thumb"
+                      />
+                      <div class="photo-overlay">
+                        <span class="photo-title">{photo.data.title}</span>
+                        <span class="photo-location">{photo.data.location}</span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
+      </div>
     )}
   </main>
 
   <Footer />
-</Base>
 
-<!-- Embed metadata as JSON for scripts -->
-<script type="application/json" id="photo-meta-json" set:text={JSON.stringify(photoMeta)} />
-{hasMap && <script type="application/json" id="map-points-json" set:text={JSON.stringify(mapPoints)} />}
+  <script>
+    function justify(grid: HTMLElement, targetH = 280, gap = 8) {
+      const items = Array.from(grid.querySelectorAll<HTMLElement>('.photo-item'));
+      if (!items.length) return;
+      const W = grid.clientWidth;
 
-<!-- PhotoSwipe -->
-<script>
-  import PhotoSwipeLightbox from 'photoswipe/lightbox';
-  import 'photoswipe/style.css';
+      // Greedy row packing at target height
+      type Item = { el: HTMLElement; a: number };
+      const rows: Item[][] = [];
+      let row: Item[] = [];
+      let rowW = 0;
 
-  interface PhotoMeta {
-    idx: number;
-    title: string;
-    date: string;
-    location: string;
-    camera: string | null;
-    lens: string | null;
-    aperture: string | null;
-    shutter: string | null;
-    iso: number | null;
-    image: string;
-  }
-
-  const metaRaw = document.getElementById('photo-meta-json')?.textContent ?? '[]';
-  const allMeta: PhotoMeta[] = JSON.parse(metaRaw);
-
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: '#gallery',
-    children: 'a',
-    pswpModule: () => import('photoswipe'),
-    padding: { top: 20, bottom: 80, left: 20, right: 20 },
-  });
-
-  // Build EXIF caption bar
-  lightbox.on('change', () => {
-    const el = lightbox.pswp?.currSlide?.data.element as HTMLElement | undefined;
-    const idx = el ? parseInt(el.dataset.index ?? '0', 10) : 0;
-    const meta = allMeta[idx];
-    const bar = document.getElementById('pswp-caption');
-    if (!bar || !meta) return;
-
-    const exif: string[] = [];
-    if (meta.camera) exif.push(meta.camera);
-    if (meta.lens) exif.push(meta.lens);
-    if (meta.aperture) exif.push(`f/${meta.aperture}`);
-    if (meta.shutter) exif.push(meta.shutter);
-    if (meta.iso) exif.push(`ISO ${meta.iso}`);
-
-    bar.innerHTML = `
-      <span class="pswp-caption__title">${meta.title}</span>
-      <span class="pswp-caption__meta">
-        ${meta.location}${exif.length ? ' &middot; ' + exif.join(' &middot; ') : ''}
-      </span>
-    `;
-    bar.hidden = false;
-  });
-
-  lightbox.on('close', () => {
-    const bar = document.getElementById('pswp-caption');
-    if (bar) bar.hidden = true;
-  });
-
-  lightbox.init();
-</script>
-
-<!-- Leaflet map -->
-<script>
-  const mapEl = document.getElementById('photo-map');
-  const pointsEl = document.getElementById('map-points-json');
-  if (mapEl && pointsEl) {
-    interface MapPoint { title: string; location: string; lat: number; lng: number; image: string; }
-    const points: MapPoint[] = JSON.parse(pointsEl.textContent ?? '[]');
-
-    Promise.all([
-      import('leaflet'),
-      // @ts-ignore — CSS module
-      import('leaflet/dist/leaflet.css'),
-    ]).then(([{ default: L }]) => {
-      const map = L.map('photo-map');
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 18,
-      }).addTo(map);
-
-      const markers = points.map(p => {
-        const m = L.marker([p.lat, p.lng]);
-        m.bindPopup(`
-          <div class="map-popup">
-            <img src="${p.image}" alt="${p.title}" class="map-popup__img" />
-            <div class="map-popup__info">
-              <strong>${p.title}</strong>
-              <span>${p.location}</span>
-            </div>
-          </div>
-        `);
-        return m;
-      });
-
-      markers.forEach(m => m.addTo(map));
-
-      if (points.length > 1) {
-        const group = L.featureGroup(markers);
-        map.fitBounds(group.getBounds(), { padding: [40, 40] });
-      } else if (points.length === 1) {
-        map.setView([points[0].lat, points[0].lng], 8);
+      for (const el of items) {
+        const a = parseFloat(el.dataset.aspect ?? '1.5');
+        const photoW = targetH * a;
+        const extra = row.length > 0 ? gap : 0;
+        if (row.length > 0 && rowW + extra + photoW > W) {
+          rows.push(row);
+          row = [{ el, a }];
+          rowW = photoW;
+        } else {
+          row.push({ el, a });
+          rowW += extra + photoW;
+        }
       }
-    });
-  }
-</script>
+      if (row.length) rows.push(row);
 
-<!-- Caption bar element (lives outside PhotoSwipe pswp root) -->
-<div id="pswp-caption" class="pswp-caption" hidden></div>
+      // Apply exact dimensions per row
+      for (let ri = 0; ri < rows.length; ri++) {
+        const r = rows[ri];
+        const isLast = ri === rows.length - 1;
+        const sumA = r.reduce((s, x) => s + x.a, 0);
+        // Last row: don't scale up, keep target height
+        const rowH = isLast
+          ? targetH
+          : (W - gap * (r.length - 1)) / sumA;
+        for (const { el, a } of r) {
+          el.style.width = `${a * rowH}px`;
+          el.style.height = `${rowH}px`;
+        }
+      }
+    }
+
+    function runAll() {
+      document.querySelectorAll<HTMLElement>('.photo-grid').forEach(g => justify(g));
+    }
+
+    runAll();
+
+    let t: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(runAll, 100); });
+  </script>
+</Base>
 
 <style>
   .page-header {
-    padding: 4rem 0 2.5rem;
+    padding: 4.5rem 0 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.75rem;
   }
 
   .page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 0.75rem;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.75rem, 6vw, 4.25rem);
+    font-weight: 300;
+    font-style: italic;
+    margin: 0 0 1rem;
+    letter-spacing: -0.025em;
+    line-height: 1;
   }
 
   .page-desc {
     font-size: 1rem;
     color: var(--color-text-muted);
-    max-width: 520px;
+    max-width: 480px;
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.65;
+    font-weight: 300;
   }
 
   .empty-state {
@@ -244,43 +233,161 @@ const hasMap = gpsPhotos.length > 0;
     font-size: 0.95rem;
   }
 
-  .empty-state code {
-    background: var(--color-surface);
-    padding: 0.1em 0.4em;
-    border-radius: 3px;
-    font-size: 0.9em;
+  .gallery-wrapper {
+    padding-bottom: 5rem;
   }
 
-  /* Photo grid */
   .gallery-section {
-    padding-bottom: 3rem;
+    padding: 2.5rem 0 0;
   }
 
-  .photo-grid {
+  .section-label {
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+
+  /* ── Collection cards ── */
+  .collection-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .collection-card {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  @media (hover: hover) {
+    .collection-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    }
+  }
+
+  /* Photo stack */
+  .stack-wrap {
+    position: relative;
+    width: 130px;
+    height: 90px;
+    flex-shrink: 0;
+  }
+
+  .stack-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    transform-origin: center bottom;
+  }
+
+  /* back → front: index 0 = back (first rendered), index 2 = front */
+  .stack-img--0 { transform: rotate(-5deg) translate(-6px, -3px); z-index: 1; }
+  .stack-img--1 { transform: rotate(-2deg) translate(-2px, -1px); z-index: 2; }
+  .stack-img--2 { transform: rotate(0deg);                        z-index: 3; }
+
+  @media (hover: hover) {
+    .collection-card:hover .stack-img--0 { transform: rotate(-8deg) translate(-10px, -2px); }
+    .collection-card:hover .stack-img--1 { transform: rotate(-3deg) translate(-4px, -1px); }
+    .collection-card:hover .stack-img--2 { transform: rotate(1deg); }
+  }
+
+  /* Card info */
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .card-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .card-count {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.1rem;
+  }
+
+  .card-arrow {
+    font-size: 0.78rem;
+    color: var(--color-accent);
+    margin-top: 0.5rem;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  @media (hover: hover) {
+    .collection-card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* ── Justified row grid ── */
+  .photo-grid {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
+    align-items: flex-start;
   }
 
   .photo-item {
-    position: relative;
     display: block;
-    aspect-ratio: 3 / 2;
+    position: relative;
     overflow: hidden;
     background: var(--color-surface);
-    cursor: zoom-in;
+    flex-shrink: 0;
+    /* JS sets width + height; fallback keeps things visible */
+    height: 280px;
+    flex-grow: 1;
   }
 
   .photo-thumb {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.35s ease;
     display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
   }
 
-  .photo-item:hover .photo-thumb {
-    transform: scale(1.04);
+  @media (hover: hover) {
+    .photo-item:hover .photo-thumb {
+      transform: scale(1.03);
+    }
   }
 
   .photo-overlay {
@@ -293,98 +400,29 @@ const hasMap = gpsPhotos.length > 0;
     padding: 1rem;
     opacity: 0;
     transition: opacity 0.25s ease;
+    pointer-events: none;
   }
 
-  .photo-item:hover .photo-overlay {
-    opacity: 1;
+  @media (hover: hover) {
+    .photo-item:hover .photo-overlay {
+      opacity: 1;
+    }
   }
 
   .photo-title {
     color: #fff;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 500;
+    font-size: 0.875rem;
     line-height: 1.3;
   }
 
   .photo-location {
-    color: rgba(255,255,255,0.72);
-    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    font-size: 0.75rem;
     margin-top: 0.2rem;
   }
 
-  /* Section label */
-  .section-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-muted);
-    margin: 0 0 1rem;
-  }
-
-  /* Map */
-  .map-section {
-    padding: 3rem 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .map-container {
-    height: 420px;
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
-
-  /* Leaflet popup */
-  :global(.map-popup) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    min-width: 160px;
-  }
-
-  :global(.map-popup__img) {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-
-  :global(.map-popup__info) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    font-size: 0.85rem;
-  }
-
-  :global(.map-popup__info span) {
-    color: #666;
-    font-size: 0.8rem;
-  }
-
-  /* PhotoSwipe caption bar */
-  .pswp-caption {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
-    padding: 2rem 2rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    pointer-events: none;
-  }
-
-  :global(.pswp-caption__title) {
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
-  :global(.pswp-caption__meta) {
-    color: rgba(255,255,255,0.65);
-    font-size: 0.8rem;
+  @media (max-width: 900px) {
+    .collection-cards { grid-template-columns: 1fr; }
   }
 </style>

@@ -1,12 +1,23 @@
 ---
+import { footerSocials } from '../config/site';
+
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
   <div class="container">
-    <p class="footer__text">
-      &copy; {year} Mike Lapidakis &mdash;
-      Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
-    </p>
+    <nav class="footer__socials" aria-label="Social links">
+      {footerSocials.map(link => (
+        <a
+          href={link.href}
+          target="_blank"
+          rel={`noopener${link.rel ? ` ${link.rel}` : ''}`}
+          class="footer__link"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <p class="footer__copy">&copy; {year} Mike Lapidakis</p>
   </div>
 </footer>
 
@@ -17,10 +28,33 @@ const year = new Date().getFullYear();
     margin-top: 4rem;
   }
 
-  .footer__text {
-    font-size: 0.85rem;
+  .footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer__link {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  .footer__copy {
+    font-size: 0.78rem;
     color: var(--color-text-muted);
     text-align: center;
     margin: 0;
+    opacity: 0.7;
   }
 </style>
