@@ -2,7 +2,7 @@ export const site = {
   name: 'Mike Lapidakis',
   url: 'https://mike.lapidak.is',
   description: 'Engineering leader, photographer, and tinkerer based in the Pacific Northwest.',
-  role: 'Solutions Architect Manager · AWS · Denver, CO',
+  role: 'Security & Networking SA Leader · AWS · Denver, CO',
 };
 
 export const socials = [
