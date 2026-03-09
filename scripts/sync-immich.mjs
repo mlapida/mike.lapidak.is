@@ -28,8 +28,25 @@ import { readFileSync, writeFileSync, unlinkSync, existsSync, readdirSync } from
 import { resolve, join } from 'node:path';
 import sharp from 'sharp';
 
-// Maximum pixels on the longest edge for web-optimised uploads
-const MAX_LONG_EDGE = 2400;
+// Maximum pixels on the longest edge for web-optimised uploads.
+// 3200px ensures 2× retina sharpness at the 60% panel width on a 2560px display.
+const MAX_LONG_EDGE = 3200;
+
+// Known RAW file extensions — warn and skip rather than attempting to process
+const RAW_EXTENSIONS = new Set([
+  'nef', 'nrw',           // Nikon
+  'cr2', 'cr3',           // Canon
+  'arw', 'srf', 'sr2',   // Sony
+  'raf',                  // Fujifilm
+  'orf',                  // Olympus
+  'rw2',                  // Panasonic
+  'pef', 'ptx',           // Pentax
+  'dng',                  // Adobe DNG (may be RAW)
+  'rwl',                  // Leica
+  '3fr', 'fff',           // Hasselblad
+  'iiq',                  // Phase One
+  'cap', 'eip',           // Capture One
+]);
 
 // ─── CLI flags ───────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -239,6 +256,13 @@ async function main() {
 
     for (const asset of assets) {
       if (asset.type !== 'IMAGE') continue;
+
+      const fileExt = (asset.originalFileName ?? '').split('.').pop().toLowerCase();
+      if (RAW_EXTENSIONS.has(fileExt)) {
+        console.warn(`  ⚠  SKIPPED RAW: ${asset.originalFileName} — export a JPEG from Immich and re-add it to the album`);
+        continue;
+      }
+
       activeImmichIds.add(asset.id);
 
       if (seenAssetIds.has(asset.id)) {
