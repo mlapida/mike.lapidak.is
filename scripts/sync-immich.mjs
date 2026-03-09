@@ -341,10 +341,8 @@ async function main() {
   }
 
   console.log('\nCommitting changes...');
-  git('config', 'user.email', JSON.stringify(GIT_USER_EMAIL));
-  git('config', 'user.name', JSON.stringify(GIT_USER_NAME));
   git('add', 'src/content/photos/');
-  git('commit', '-m', '"chore: sync photos from immich"');
+  git('-c', `user.email=${GIT_USER_EMAIL}`, '-c', `user.name=${GIT_USER_NAME}`, 'commit', '-m', 'chore: sync photos from immich');
 
   if (!NO_PUSH && !DRY_RUN) {
     console.log('Pushing...');
