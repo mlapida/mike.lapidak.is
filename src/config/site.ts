@@ -7,7 +7,7 @@ export const site = {
 
 export const socials = [
   { label: 'LinkedIn',     href: 'https://linkedin.com/in/mikelapidakis' },
-  { label: 'GitHub',       href: 'https://github.com/mlapidakis' },
+  { label: 'GitHub',       href: 'https://github.com/mlapida' },
   { label: 'Threads',      href: 'https://www.threads.net/@mikelapidakis' },
   { label: 'Mastodon',     href: 'https://lap.social/@mike',              rel: 'me' },
   { label: 'Bluesky',      href: 'https://bsky.app/profile/mike.lapidak.is' },
