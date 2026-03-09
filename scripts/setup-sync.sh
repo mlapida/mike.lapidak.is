@@ -28,7 +28,8 @@ cat > "${SYNC_DIR}/package.json" <<'EOF'
   "type": "module",
   "version": "1.0.0",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.0.0"
+    "@aws-sdk/client-s3": "^3.0.0",
+    "sharp": "^0.34.0"
   }
 }
 EOF

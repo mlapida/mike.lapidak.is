@@ -26,6 +26,10 @@ import { S3Client, PutObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, unlinkSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import sharp from 'sharp';
+
+// Maximum pixels on the longest edge for web-optimised uploads
+const MAX_LONG_EDGE = 2400;
 
 // ─── CLI flags ───────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
@@ -118,7 +122,7 @@ function albumToCollection(album) {
 }
 
 // ─── Frontmatter builder ──────────────────────────────────────────────────────
-function buildFrontmatter(asset, album) {
+function buildFrontmatter(asset, album, resized = null) {
   const exif = asset.exifInfo ?? {};
 
   // title: description from Immich, or cleaned filename
@@ -132,14 +136,12 @@ function buildFrontmatter(asset, album) {
   const locationParts = [exif.city, exif.country].filter(Boolean);
   const location = locationParts.join(', ') || 'Unknown';
 
-  // image URL on CDN
-  const ext = (asset.originalFileName ?? 'photo.jpg').split('.').pop().toLowerCase();
-  const r2Key = `${asset.id}.${ext}`;
-  const image = `${PHOTOS_CDN_URL}/${r2Key}`;
+  // image URL on CDN — always stored as .jpg after resize
+  const image = `${PHOTOS_CDN_URL}/${asset.id}.jpg`;
 
-  // dimensions + orientation
-  const imgWidth  = exif.exifImageWidth  ?? null;
-  const imgHeight = exif.exifImageHeight ?? null;
+  // dimensions — prefer actual resized output over EXIF (which may reflect original RAW)
+  const imgWidth  = resized?.width  ?? exif.exifImageWidth  ?? null;
+  const imgHeight = resized?.height ?? exif.exifImageHeight ?? null;
   let orientation = 'landscape';
   if (imgWidth && imgHeight) {
     if (imgWidth < imgHeight) orientation = 'portrait';
@@ -257,23 +259,29 @@ async function main() {
   // 4. Process new/updated assets
   console.log(`\n${writes.length} asset(s) to sync...\n`);
   for (const { asset, album } of writes) {
-    const ext = (asset.originalFileName ?? 'photo.jpg').split('.').pop().toLowerCase();
-    const r2Key = `${asset.id}.${ext}`;
+    const r2Key = `${asset.id}.jpg`;
     const slug = toSlug(asset.originalFileName ?? asset.id);
     const mdPath = join(PHOTOS_DIR, `${slug}.md`);
 
     console.log(`→ ${asset.originalFileName} (${album.albumName})`);
 
     // Upload to R2
+    let resized = null;
     const r2KeyExists = !DRY_RUN && await r2Exists(r2Key);
     if (!r2KeyExists || FORCE) {
       console.log(`  Downloading original...`);
       if (!DRY_RUN) {
-        const buf = await immichDownload(asset.id);
-        console.log(`  Uploading to R2: ${r2Key}`);
-        await r2Upload(r2Key, buf, `image/${ext === 'jpg' ? 'jpeg' : ext}`);
+        const raw = await immichDownload(asset.id);
+        console.log(`  Resizing to max ${MAX_LONG_EDGE}px...`);
+        const buf = await sharp(raw)
+          .resize(MAX_LONG_EDGE, MAX_LONG_EDGE, { fit: 'inside', withoutEnlargement: true })
+          .jpeg({ quality: 85, mozjpeg: true })
+          .toBuffer({ resolveWithObject: true });
+        resized = { width: buf.info.width, height: buf.info.height };
+        console.log(`  ${buf.info.width}×${buf.info.height} (${Math.round(buf.data.length / 1024)}kB) → R2: ${r2Key}`);
+        await r2Upload(r2Key, buf.data, 'image/jpeg');
       } else {
-        console.log(`  [dry] Would download + upload to R2: ${r2Key}`);
+        console.log(`  [dry] Would download + resize + upload to R2: ${r2Key}`);
       }
     } else {
       console.log(`  R2 key already exists, skipping upload`);
@@ -281,7 +289,7 @@ async function main() {
 
     // Fetch full EXIF (asset list may be partial)
     const fullAsset = DRY_RUN ? asset : await immichGet(`/api/assets/${asset.id}`);
-    const fm = buildFrontmatter(fullAsset, album);
+    const fm = buildFrontmatter(fullAsset, album, resized);
 
     console.log(`  Writing ${mdPath}`);
     if (!DRY_RUN) writeFileSync(mdPath, fm, 'utf8');
