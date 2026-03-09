@@ -298,6 +298,7 @@ async function main() {
         const raw = await immichDownload(asset.id);
         console.log(`  Resizing to max ${MAX_LONG_EDGE}px...`);
         const buf = await sharp(raw)
+          .rotate()  // auto-apply EXIF orientation before resize
           .resize(MAX_LONG_EDGE, MAX_LONG_EDGE, { fit: 'inside', withoutEnlargement: true })
           .jpeg({ quality: 85, mozjpeg: true })
           .toBuffer({ resolveWithObject: true });
