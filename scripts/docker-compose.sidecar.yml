@@ -1,0 +1,65 @@
+# photo-sync sidecar — add this service to your Immich docker-compose.yml
+#
+# Prerequisites:
+#   1. Clone the site repo into a named volume (see scripts/setup-sync.sh)
+#   2. Fill in all env vars in your .env file alongside Immich compose
+#   3. Run: docker compose up -d photo-sync
+#
+# To run a manual sync:
+#   docker compose exec photo-sync node sync-immich.mjs --dry-run
+#
+# Logs:
+#   docker compose logs -f photo-sync
+#   docker compose exec photo-sync cat /var/log/sync.log
+
+services:
+  photo-sync:
+    image: node:20-alpine
+    container_name: photo-sync
+    working_dir: /app
+    volumes:
+      # Sync script directory (bind-mount from host)
+      - ./photo-sync:/app
+      # Site repo clone (named Docker volume, populated by setup-sync.sh)
+      - site-repo:/site
+      # Optional: SSH key for git push via SSH
+      # - ~/.ssh/photo-sync-deploy:/root/.ssh/id_ed25519:ro
+    environment:
+      - IMMICH_URL=http://immich_server:3001
+      - IMMICH_API_KEY=${IMMICH_API_KEY}
+      - R2_ACCOUNT_ID=${R2_ACCOUNT_ID}
+      - R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
+      - R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}
+      - R2_BUCKET_NAME=${R2_BUCKET_NAME:-site-photos}
+      - PHOTOS_CDN_URL=${PHOTOS_CDN_URL:-https://assets.lapidak.is}
+      - SITE_REPO_PATH=/site
+      - GIT_USER_EMAIL=${GIT_USER_EMAIL:-sync@mike.lapidak.is}
+      - GIT_USER_NAME=${GIT_USER_NAME:-photo-sync}
+      # For HTTPS git push — token embedded in remote URL (see setup-sync.sh)
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    networks:
+      - immich-network
+    command: >
+      sh -c "
+        npm install --prefix /app --silent &&
+        echo '0 * * * * cd /app && node sync-immich.mjs >> /var/log/sync.log 2>&1' | crontab - &&
+        echo 'photo-sync: cron running, syncs every hour' &&
+        crond -f -l 8
+      "
+    restart: unless-stopped
+    # Limit log size
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# Declare the named volume (if not already declared in your main compose)
+volumes:
+  site-repo:
+
+# Use the same network as Immich so immich_server hostname resolves
+networks:
+  immich-network:
+    external: true
+    name: immich_default   # adjust to match your Immich network name
