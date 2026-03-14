@@ -1,6 +1,6 @@
 # mike.lapidak.is
 
-Personal site for Mike Lapidakis — Solutions Architect Manager at AWS. Built with Astro 5, deployed to Cloudflare Pages.
+Personal site for Mike Lapidakis — Security & Networking SA Leader at AWS. Built with Astro 5, deployed to Cloudflare Pages.
 
 ## Stack
 
@@ -76,7 +76,9 @@ scripts/
 public/
   favicon-16x16.png
   favicon-32x32.png
+  favicon.ico
   apple-touch-icon.png
+  social-card.jpg
   profile.jpg
   robots.txt
 ```

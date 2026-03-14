@@ -34,6 +34,7 @@ Accessible via Tailscale at port 4321.
 | `src/pages/photography/collection/[slug].astro` | Per-collection grid page with justified row layout |
 | `src/pages/work.astro` | Professional background + Spotlight (AWS publications) |
 | `src/content.config.ts` | Photo collection schema |
+| `src/index.ts` | Cloudflare Worker handler — `/api/health` + `/api/contact` placeholder endpoints |
 
 ## Content
 
@@ -46,7 +47,7 @@ Accessible via Tailscale at port 4321.
 
 ## Photo Sync Pipeline
 
-`scripts/sync-immich.mjs` runs on the same host as Immich (or any host with network access):
+`scripts/sync-immich.mjs` runs on the same host as Immich (or any host with network access). `scripts/setup-sync.sh` and `scripts/docker-compose.sidecar.yml` provide a one-time Docker sidecar setup for running the sync on a separate host.
 
 1. Fetches all Immich albums ending in `-share`
 2. For each new/updated image: downloads original → `sharp().rotate()` (EXIF auto-orient) → resize to 3200px max edge → JPEG 85% → uploads to R2
@@ -93,7 +94,7 @@ All colors are CSS custom properties in `src/styles/global.css`:
 ## SEO
 
 - `astro.config.mjs` has `site: 'https://mike.lapidak.is'` — enables `Astro.site` and sitemap URLs
-- `Base.astro` accepts optional `image` prop (defaults to `/profile.jpg`); emits full OG + Twitter Card meta, `author` meta, `rel="sitemap"` link
+- `Base.astro` accepts optional `image` prop (defaults to `/social-card.jpg`); emits full OG + Twitter Card meta, `author` meta, `rel="sitemap"` link
 - `public/robots.txt` — `Allow: *` with sitemap pointer
 - Homepage: Person JSON-LD (`schema.org/Person`) with `sameAs` social URLs
 - Photo detail pages: Photograph JSON-LD (`schema.org/Photograph`) with absolute `contentUrl`, GPS `GeoCoordinates`, creator
@@ -104,7 +105,7 @@ All colors are CSS custom properties in `src/styles/global.css`:
 - Build: `npm run build` → output: `./dist`
 - Cloudflare Pages: build command `npm run build`, output directory `dist`, Node 20
 - `wrangler.toml` present
-- Active branch: `immich-sync` (preview: `immich-sync.mike-lapidak-is.pages.dev`); merge to `main` for production
+- Deploy branch: `main` → production at `mike.lapidak.is`
 
 ## Astro Script Rules
 
@@ -127,10 +128,9 @@ Nav is `position: fixed` with `padding-top: env(safe-area-inset-top, 0px)` for D
 
 ## Favicons
 
-Three PNG files in `public/`: `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`. Linked in `Base.astro`. No `.ico` file used.
+`public/`: `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `favicon.ico`. All linked in `Base.astro`.
 
 ## Pending
 
 - CDN cache purge in sync script after R2 upload (currently manual / wait 4h)
-- Merge `immich-sync` → `main` once stable
 - Task #10: Improve homepage section nav cards (Photography card with lead photo background)

@@ -8,36 +8,50 @@ const spotlight = [
     type: 'AWS Publication',
     title: 'Generative AI Security Scoping Matrix',
     desc: 'A five-scope framework that gives security teams a common language for categorizing generative AI deployments — from consuming third-party apps to training foundation models — each mapped to distinct security responsibilities and controls.',
-    href: 'https://aws.amazon.com/blogs/security/securing-generative-ai-an-introduction-to-the-generative-ai-security-scoping-matrix/',
     meta: 'AWS Security Blog · re:Inforce 2024',
-    productHref: 'https://aws.amazon.com/ai/security/generative-ai-scoping-matrix/',
+    links: [
+      { label: 'Read', href: 'https://aws.amazon.com/blogs/security/securing-generative-ai-an-introduction-to-the-generative-ai-security-scoping-matrix/' },
+      { label: 'AWS page', href: 'https://aws.amazon.com/ai/security/generative-ai-scoping-matrix/' },
+    ],
   },
   {
     type: 'AWS Publication',
     title: 'Agentic AI Security Scoping Matrix',
     desc: 'Extends the GenAI framework to autonomous systems, categorizing agentic AI across four scopes by level of agency and autonomy — from read-only, human-initiated tasks through self-initiating systems with minimal human oversight.',
-    href: 'https://aws.amazon.com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/',
     meta: 'AWS Security Blog · November 2025',
-    productHref: 'https://aws.amazon.com/ai/security/agentic-ai-scoping-matrix/',
+    links: [
+      { label: 'Read', href: 'https://aws.amazon.com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/' },
+      { label: 'AWS page', href: 'https://aws.amazon.com/ai/security/agentic-ai-scoping-matrix/' },
+    ],
   },
   {
     type: 'Conference Talk',
     title: 'APS201: Accelerate Securely — The GenAI Security Scoping Matrix',
     desc: 'Breakout session presenting the five-scope framework to enterprise security practitioners at AWS re:Inforce 2024 in Philadelphia, covering real-world application across cloud, SaaS, and foundation model deployment patterns.',
-    href: 'https://reinforce.awsevents.com/content/dam/reinforce/2024/slides/APS201_Accelerate-securely-The-Generative-AI-Security-Scoping-Matrix.pdf',
     meta: 'AWS re:Inforce · Philadelphia, June 2024',
-    productHref: null,
+    links: [
+      { label: 'Watch', href: 'https://www.youtube.com/watch?v=G3YjjAbKZ-Y' },
+      { label: 'Slides', href: 'https://reinforce.awsevents.com/content/dam/reinforce/2024/slides/APS201_Accelerate-securely-The-Generative-AI-Security-Scoping-Matrix.pdf' },
+    ],
   },
 ];
 
 const experience = [
   {
     company: 'Amazon Web Services',
-    role: 'Senior Manager, Specialist Solutions Architects',
-    period: '2020 – present',
+    role: 'Senior Manager, Security & Networking Specialist SAs',
+    period: '2025 – present',
     location: 'Denver, CO',
-    description: 'Lead a team of Networking, Security, Compliance, Resilience, and Cloud Operations Specialist Solutions Architects serving AWS\'s largest global accounts. Drive technical strategy and generative AI adoption across enterprise cloud portfolios. Pioneered a generative AI security framework adopted by 200+ Solutions Architects and presented at AWS re:Inforce 2024. Built and scaled a high-performing specialist team, achieving consistent year-over-year growth across three consecutive cycles.',
-    tags: ['Team Leadership', 'Cloud Security', 'Generative AI', 'Networking', 'Resilience', 'Migrations', 'Global Accounts'],
+    description: 'Leading a team of 19 Security and Networking Specialist Solutions Architects — including one manager — across North America within AWS Global Sales. Recruited into the organization by a former director who trusted my ability to build high-performing teams and deliver in complex environments.',
+    tags: ['Security', 'Networking', 'Team Leadership', 'North America', 'AWS Global Sales'],
+  },
+  {
+    company: 'Amazon Web Services',
+    role: 'Senior Manager, Specialist Solutions Architects',
+    period: '2020 – 2025',
+    location: 'Denver, CO',
+    description: 'Built and led specialist SA organizations across Security, Networking, Resilience, Migration, and Generative AI for AWS\'s largest enterprise accounts (Global Accounts / AWS Industries). Grew the team from 7 to over 35, hiring 3 managers and 30+ individuals across multiple technical domains. Teams influenced an estimated $100M–$550M in ARR over the tenure. Served as interim leader for a 50-person organization — spanning Specialist, Pooled, and Emerging Talent SAs — during a director transition, hiring 8 roles and maintaining full team momentum. Rebuilt the Pooled SA function into a focused Rapid Response Team; the rebuilt org contributed $90M+ in ARR in its first eight months. Established a generative AI SA operating model with industry vertical alignment, producing recognized internal brands and enterprise wins across HCLS, Energy, Media & Entertainment, and Telecom. Co-led development of the Generative AI Security Scoping Matrix, adopted by 200+ Solutions Architects and launched as an AWS product at re:Inforce 2024. Promoted 3 times at AWS; developed and promoted 6+ team members. Amazon Bar Raiser.',
+    tags: ['Org Design', 'Hiring & Development', 'GenAI', 'Cloud Security', 'Networking', 'Resilience', 'Bar Raiser', 'Global Accounts'],
   },
   {
     company: 'Amazon Web Services',
@@ -81,47 +95,52 @@ const experience = [
   },
 ];
 
-const talks: { title: string; event: string; year: string; href: string }[] = [
+const talks: { type: string; title: string; event: string; year: string; desc?: string; links: { label: string; href: string }[] }[] = [
   {
-    title: 'Generative AI Security Framework for Solutions Architects',
+    type: 'Conference Talk',
+    title: 'APS201: Accelerate Securely — The GenAI Security Scoping Matrix',
     event: 'AWS re:Inforce',
     year: '2024',
-    href: 'https://reinforce.awsevents.com',
+    desc: 'Breakout session presenting the five-scope GenAI security framework to enterprise practitioners in Philadelphia. Covered real-world application across SaaS, self-hosted, and foundation model deployment patterns, with audience Q&A on operationalizing the framework at scale.',
+    links: [
+      { label: 'Watch', href: 'https://www.youtube.com/watch?v=G3YjjAbKZ-Y' },
+      { label: 'Slides', href: 'https://reinforce.awsevents.com/content/dam/reinforce/2024/slides/APS201_Accelerate-securely-The-Generative-AI-Security-Scoping-Matrix.pdf' },
+    ],
   },
   {
-    title: 'Cloud Architecture & Security',
+    type: 'Conference Talk',
+    title: 'Lessons Learned from a Large-Scale Legacy Migration with Sysco (STG311)',
     event: 'AWS re:Invent',
     year: '2018',
-    href: 'https://reinvent.awsevents.com',
+    desc: 'Presented alongside Sysco — a Fortune 50 company — on migrating mission-critical legacy business systems to AWS. Covered the ten commandments of enterprise migration and the results: 60% decrease in run costs, 30% improvement in performance, and 3× improvement in user accessibility.',
+    links: [{ label: 'Watch', href: 'https://www.youtube.com/watch?v=naPWVBDuuqw' }],
   },
   {
-    title: 'Cloud Architecture & Security',
+    type: 'Workshop',
+    title: 'Solutions Architect Certification Bootcamp',
     event: 'AWS re:Invent',
     year: '2017',
-    href: 'https://reinvent.awsevents.com',
+    desc: 'Led four sessions of an intensive SA certification preparation workshop at re:Invent 2017, coaching practitioners on AWS architecture best practices and exam readiness across a full day of hands-on instruction.',
+    links: [],
   },
 ];
 
 const skillGroups = [
   {
-    label: 'Cloud Platforms',
-    skills: ['Amazon Web Services', 'Microsoft Azure', 'Hybrid Cloud', 'Equinix Cloud Exchange'],
+    label: 'Leadership',
+    skills: ['Org Design & Team Building', 'Hiring & Performance Management', 'Interim Leadership', 'Cross-functional Program Management', 'Operating Plans & Strategy', 'Amazon Bar Raiser'],
   },
   {
-    label: 'Architecture & Frameworks',
-    skills: ['AWS Well-Architected', 'Landing Zone', 'Zero Trust Security', 'Cloud Security Posture Management', 'FinOps', 'Cloud Migration (7Rs)'],
+    label: 'Technical Domains',
+    skills: ['Cloud Security Architecture', 'Network Transformation', 'Generative AI Security', 'Cloud Resilience', 'Enterprise Migration', 'Zero Trust', 'DevSecOps'],
   },
   {
-    label: 'AWS Services',
-    skills: ['EC2', 'VPC', 'IAM', 'S3', 'CloudFormation', 'Control Tower', 'GuardDuty', 'WAF', 'Shield', 'Transit Gateway', 'Direct Connect', 'EKS', 'Lambda', 'Redshift'],
+    label: 'Cloud & Infrastructure',
+    skills: ['Amazon Web Services', 'Microsoft Azure', 'Hybrid Cloud Architecture', 'AWS Well-Architected', 'Landing Zone / Control Tower', 'Direct Connect', 'Transit Gateway'],
   },
   {
-    label: 'Tools & Automation',
-    skills: ['Terraform', 'AWS CloudFormation', 'Ansible', 'Git / GitHub', 'CI/CD Pipelines', 'Infrastructure-as-Code'],
-  },
-  {
-    label: 'Compliance & Security',
-    skills: ['NIST CSF', 'CIS Benchmarks', 'SOC 2', 'HIPAA', 'PCI DSS', 'AWS CAF', 'DevSecOps'],
+    label: 'Compliance & Risk',
+    skills: ['NIST CSF', 'CIS Benchmarks', 'AWS CAF', 'SOC 2', 'HIPAA', 'PCI DSS'],
   },
 ];
 ---
@@ -138,9 +157,10 @@ const skillGroups = [
         <p class="page-eyebrow">Background</p>
         <h1 class="page-title display">Work</h1>
         <p class="page-desc">
-          Senior cloud executive with 10+ years at AWS. I build specialist teams,
-          architect enterprise-scale solutions, and help organizations make cloud
-          transformation real.
+          I've spent the last decade building and leading specialist teams at AWS —
+          growing organizations, stepping in during leadership transitions, and
+          developing frameworks that outlast the moment. Currently leading Security
+          &amp; Networking SAs across North America.
         </p>
       </div>
     </section>
@@ -158,14 +178,11 @@ const skillGroups = [
               <div class="spotlight-footer">
                 <span class="spotlight-meta">{item.meta}</span>
                 <div class="spotlight-links">
-                  <a href={item.href} target="_blank" rel="noopener" class="spotlight-link">
-                    Read →
-                  </a>
-                  {item.productHref && (
-                    <a href={item.productHref} target="_blank" rel="noopener" class="spotlight-link">
-                      AWS page →
+                  {item.links.map(link => (
+                    <a href={link.href} target="_blank" rel="noopener" class="spotlight-link">
+                      {link.label} →
                     </a>
-                  )}
+                  ))}
                 </div>
               </div>
             </div>
@@ -228,15 +245,43 @@ const skillGroups = [
           <h2 class="section-label">Talks &amp; Writing</h2>
           <div class="talks-list">
             {talks.map(talk => (
-              <a href={talk.href} target="_blank" rel="noopener" class="talk-item">
+              <div class="talk-item">
+                <span class="talk-type">{talk.type}</span>
                 <span class="talk-title">{talk.title}</span>
-                <span class="talk-meta">{talk.event} &middot; {talk.year}</span>
-              </a>
+                {talk.desc && <p class="talk-desc">{talk.desc}</p>}
+                <div class="talk-footer">
+                  <span class="talk-meta">{talk.event} &middot; {talk.year}</span>
+                  {talk.links.length > 0 && (
+                    <div class="talk-links">
+                      {talk.links.map(link => (
+                        <a href={link.href} target="_blank" rel="noopener" class="talk-link">
+                          {link.label} &rarr;
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
     )}
+
+    <!-- Education -->
+    <section class="work-section">
+      <div class="container">
+        <h2 class="section-label">Education</h2>
+        <div class="job">
+          <div class="job__header">
+            <div>
+              <h3 class="job__company">University of Toledo</h3>
+              <p class="job__role">Bachelor of Science, Computer Science Engineering</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Contact -->
     <section class="work-section work-section--last">
@@ -435,20 +480,19 @@ const skillGroups = [
   .talk-item {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.5rem;
     color: var(--color-text);
     padding: 1.1rem 1.25rem;
     border: 1px solid var(--color-border);
     border-radius: 0.4rem;
-    transition: border-color 0.15s ease, transform 0.15s ease;
   }
 
-  @media (hover: hover) {
-    .talk-item:hover {
-      border-color: var(--color-accent);
-      transform: translateX(2px);
-      color: var(--color-text);
-    }
+  .talk-type {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
   }
 
   .talk-title {
@@ -456,9 +500,42 @@ const skillGroups = [
     font-size: 0.95rem;
   }
 
+  .talk-desc {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .talk-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
   .talk-meta {
     font-size: 0.82rem;
     color: var(--color-text-muted);
+  }
+
+  .talk-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .talk-link {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+
+  @media (hover: hover) {
+    .talk-link:hover {
+      color: var(--color-accent-hover);
+    }
   }
 
   /* Contact */
