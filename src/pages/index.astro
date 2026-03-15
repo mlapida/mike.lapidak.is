@@ -17,12 +17,16 @@ interface RssItem {
   categories: string[];
 }
 
+const RSS_TIMEOUT_MS = 8000;
+const IMAGE_TIMEOUT_MS = 5000;
+const MAX_IMAGE_BYTES = 5_000_000;
+
 let rssItems: RssItem[] = [];
 
 try {
   const res = await fetch('https://empty.coffee/rss/', {
     headers: { 'User-Agent': 'mike.lapidak.is site builder' },
-    signal: AbortSignal.timeout(8000),
+    signal: AbortSignal.timeout(RSS_TIMEOUT_MS),
   });
   if (res.ok) {
     const xml = await res.text();
@@ -58,12 +62,12 @@ try {
       rssItems.map(async (item, i) => {
         if (!item.image) return item;
         try {
-          const imgRes = await fetch(item.image, { signal: AbortSignal.timeout(5000) });
+          const imgRes = await fetch(item.image, { signal: AbortSignal.timeout(IMAGE_TIMEOUT_MS) });
           if (!imgRes.ok) return { ...item, image: '' };
           const contentType = imgRes.headers.get('content-type') ?? '';
           if (!contentType.startsWith('image/')) return { ...item, image: '' };
           const contentLength = imgRes.headers.get('content-length');
-          if (contentLength && parseInt(contentLength) > 5_000_000) return { ...item, image: '' };
+          if (contentLength && parseInt(contentLength) > MAX_IMAGE_BYTES) return { ...item, image: '' };
           const ext = item.image.match(/\.(jpe?g|png|webp|gif)(\?|$)/i)?.[1] ?? 'jpg';
           const filename = `feed-${i}.${ext}`;
           writeFileSync(join(thumbsDir, filename), Buffer.from(await imgRes.arrayBuffer()));
