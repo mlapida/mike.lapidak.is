@@ -18,6 +18,38 @@
 }
 
 /* ============================================================
+   DARK MODE — explicit toggle
+   ============================================================ */
+[data-theme="dark"] {
+  --color-bg:          #1a1814;
+  --color-bg-glass:    rgba(26, 24, 20, 0.88);
+  --color-surface:     #252320;
+  --color-border:      #37332d;
+  --color-text:        #f0ede6;
+  --color-text-muted:  #9e9890;
+  --color-accent:      #5a9c6f;
+  --color-accent-hover:#4a8a5c;
+  --color-link:        #5a9c6f;
+  --color-link-hover:  #4a8a5c;
+}
+
+/* DARK MODE — system preference (no stored override) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:          #1a1814;
+    --color-bg-glass:    rgba(26, 24, 20, 0.88);
+    --color-surface:     #252320;
+    --color-border:      #37332d;
+    --color-text:        #f0ede6;
+    --color-text-muted:  #9e9890;
+    --color-accent:      #5a9c6f;
+    --color-accent-hover:#4a8a5c;
+    --color-link:        #5a9c6f;
+    --color-link-hover:  #4a8a5c;
+  }
+}
+
+/* ============================================================
    FONTS
    When Acumin Pro Typekit is ready:
    - Replace 'DM Sans' with 'acumin-pro' in --font-body

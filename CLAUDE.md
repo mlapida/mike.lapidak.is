@@ -172,3 +172,4 @@ Run with `npx vitest run` (143 tests across 7 files). Tests require a completed 
 
 - CDN cache purge in sync script after R2 upload (currently manual / wait 4h)
 - Task #10: Improve homepage section nav cards (Photography card with lead photo background)
+- Verify / fix floating nav gap on iPhone with Dynamic Island — `.nav__safe-fill` approach deployed but needs on-device confirmation; if gap persists, investigate `env(safe-area-inset-top)` resolution in iOS Safari and whether `viewport-fit=cover` + `<meta name="theme-color">` is needed
