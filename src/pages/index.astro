@@ -2,8 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { heroSocials } from '../config/site';
+import { site, heroSocials } from '../config/site';
 import { Image } from 'astro:assets';
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
+import profileImg from '../assets/profile.jpg';
 
 interface RssItem {
   title: string;
@@ -43,6 +46,25 @@ try {
         categories,
       };
     });
+
+    // Download thumbnails to public/feed-thumbs/ so they're local at build time
+    const thumbsDir = join(process.cwd(), 'public', 'feed-thumbs');
+    mkdirSync(thumbsDir, { recursive: true });
+    rssItems = await Promise.all(
+      rssItems.map(async (item, i) => {
+        if (!item.image) return item;
+        try {
+          const imgRes = await fetch(item.image, { signal: AbortSignal.timeout(5000) });
+          if (!imgRes.ok) return { ...item, image: '' };
+          const ext = item.image.match(/\.(jpe?g|png|webp|gif)(\?|$)/i)?.[1] ?? 'jpg';
+          const filename = `feed-${i}.${ext}`;
+          writeFileSync(join(thumbsDir, filename), Buffer.from(await imgRes.arrayBuffer()));
+          return { ...item, image: `/feed-thumbs/${filename}` };
+        } catch {
+          return { ...item, image: '' };
+        }
+      })
+    );
   }
 } catch {
   // RSS unavailable at build time — degrade gracefully
@@ -51,8 +73,8 @@ try {
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Mike Lapidakis',
-  url: 'https://mike.lapidak.is',
+  name: site.name,
+  url: site.url,
   jobTitle: 'Security & Networking SA Leader',
   worksFor: { '@type': 'Organization', name: 'Amazon Web Services' },
   sameAs: [
@@ -80,10 +102,11 @@ const personJsonLd = {
         <div class="hero__inner">
           <div class="hero__avatar animate-fade-up">
             <Image
-              src="/profile.jpg"
+              src={profileImg}
               alt="Mike Lapidakis"
-              width={112}
-              height={112}
+              width={224}
+              height={224}
+              quality={95}
               class="hero__photo"
               onerror="this.style.display='none'"
             />
@@ -95,14 +118,11 @@ const personJsonLd = {
             </h1>
 
             <p class="hero__role animate-fade-up animate-delay-2">
-              Security &amp; Networking SA Leader &middot; AWS &middot; Denver, CO
+              {site.role}
             </p>
 
             <p class="hero__bio animate-fade-up animate-delay-3">
-              I've spent 10 years at AWS — the last 6 building and leading specialist
-              teams across security, networking, and generative AI. I still get into
-              the weeds when it matters, and I build things meant to last.
-              Dad, photographer, perpetual tinkerer.
+              {site.bio}
             </p>
 
             <ul class="hero__links animate-fade-up animate-delay-4">
@@ -135,9 +155,11 @@ const personJsonLd = {
                 <a href={item.link} target="_blank" rel="noopener" class="post-card">
                   {item.image && (
                     <div class="post-thumb">
-                      <img
+                      <Image
                         src={item.image}
                         alt=""
+                        width={88}
+                        height={60}
                         loading={i === 0 ? 'eager' : 'lazy'}
                         decoding="async"
                       />
