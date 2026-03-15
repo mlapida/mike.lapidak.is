@@ -47,8 +47,12 @@ try {
       };
     });
 
-    // Download thumbnails to public/feed-thumbs/ so they're local at build time
-    const thumbsDir = join(process.cwd(), 'public', 'feed-thumbs');
+    // Download thumbnails at build time.
+    // In production, Vite copies public/ before SSG runs, so we write directly
+    // to dist/feed-thumbs/. In dev, Astro serves public/ live, so we write there.
+    const thumbsDir = import.meta.env.PROD
+      ? join(process.cwd(), 'dist', 'feed-thumbs')
+      : join(process.cwd(), 'public', 'feed-thumbs');
     mkdirSync(thumbsDir, { recursive: true });
     rssItems = await Promise.all(
       rssItems.map(async (item, i) => {
