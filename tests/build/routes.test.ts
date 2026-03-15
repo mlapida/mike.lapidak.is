@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { existsSync, readdirSync } from 'node:fs';
 import { requireDist, distPath } from '../helpers/dist.js';
+import { loadHtml } from '../helpers/parse-html.js';
 
 const PHOTO_SLUGS = [
   'l1000444',
@@ -79,5 +80,26 @@ describe('static files', () => {
 
   it('dist/robots.txt exists', () => {
     expect(existsSync(distPath('robots.txt'))).toBe(true);
+  });
+});
+
+describe('feed thumbnails', () => {
+  it('dist/feed-thumbs/ directory exists', () => {
+    expect(existsSync(distPath('feed-thumbs'))).toBe(true);
+  });
+
+  it('dist/feed-thumbs/ contains at least one feed-N.* file', () => {
+    const files = readdirSync(distPath('feed-thumbs'));
+    const thumbs = files.filter(f => /^feed-\d+\.\w+$/.test(f));
+    expect(thumbs.length).toBeGreaterThan(0);
+  });
+
+  it('homepage post thumbnails reference /feed-thumbs/ paths', () => {
+    const $ = loadHtml('index.html');
+    const thumbImgs = $('.post-thumb img');
+    expect(thumbImgs.length).toBeGreaterThan(0);
+    thumbImgs.each((_, el) => {
+      expect($(el).attr('src')).toMatch(/^\/feed-thumbs\/feed-\d+\./);
+    });
   });
 });
