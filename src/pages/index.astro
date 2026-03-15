@@ -60,11 +60,16 @@ try {
         try {
           const imgRes = await fetch(item.image, { signal: AbortSignal.timeout(5000) });
           if (!imgRes.ok) return { ...item, image: '' };
+          const contentType = imgRes.headers.get('content-type') ?? '';
+          if (!contentType.startsWith('image/')) return { ...item, image: '' };
+          const contentLength = imgRes.headers.get('content-length');
+          if (contentLength && parseInt(contentLength) > 5_000_000) return { ...item, image: '' };
           const ext = item.image.match(/\.(jpe?g|png|webp|gif)(\?|$)/i)?.[1] ?? 'jpg';
           const filename = `feed-${i}.${ext}`;
           writeFileSync(join(thumbsDir, filename), Buffer.from(await imgRes.arrayBuffer()));
           return { ...item, image: `/feed-thumbs/${filename}` };
-        } catch {
+        } catch (err) {
+          console.warn(`[feed-thumbs] failed to download thumbnail ${i}: ${err}`);
           return { ...item, image: '' };
         }
       })
