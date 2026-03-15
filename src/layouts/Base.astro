@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { site } from '../config/site';
 
 export interface Props {
   title?: string;
@@ -8,12 +9,12 @@ export interface Props {
 }
 
 const {
-  title = 'Mike Lapidakis',
-  description = 'Engineering leader, photographer, and tinkerer based in the Pacific Northwest.',
+  title = site.name,
+  description = site.description,
   image,
 } = Astro.props;
 
-const siteUrl = 'https://mike.lapidak.is';
+const siteUrl = site.url;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
 const pageTitle = title === 'Mike Lapidakis' ? title : `${title} — Mike Lapidakis`;
 const ogImage = image

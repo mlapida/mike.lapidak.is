@@ -2,8 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { heroSocials } from '../config/site';
+import { site, heroSocials } from '../config/site';
 import { Image } from 'astro:assets';
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
+import profileImg from '../assets/profile.jpg';
 
 interface RssItem {
   title: string;
@@ -14,12 +17,16 @@ interface RssItem {
   categories: string[];
 }
 
+const RSS_TIMEOUT_MS = 8000;
+const IMAGE_TIMEOUT_MS = 5000;
+const MAX_IMAGE_BYTES = 5_000_000;
+
 let rssItems: RssItem[] = [];
 
 try {
   const res = await fetch('https://empty.coffee/rss/', {
     headers: { 'User-Agent': 'mike.lapidak.is site builder' },
-    signal: AbortSignal.timeout(8000),
+    signal: AbortSignal.timeout(RSS_TIMEOUT_MS),
   });
   if (res.ok) {
     const xml = await res.text();
@@ -43,6 +50,34 @@ try {
         categories,
       };
     });
+
+    // Download thumbnails at build time.
+    // In production, Vite copies public/ before SSG runs, so we write directly
+    // to dist/feed-thumbs/. In dev, Astro serves public/ live, so we write there.
+    const thumbsDir = import.meta.env.PROD
+      ? join(process.cwd(), 'dist', 'feed-thumbs')
+      : join(process.cwd(), 'public', 'feed-thumbs');
+    mkdirSync(thumbsDir, { recursive: true });
+    rssItems = await Promise.all(
+      rssItems.map(async (item, i) => {
+        if (!item.image) return item;
+        try {
+          const imgRes = await fetch(item.image, { signal: AbortSignal.timeout(IMAGE_TIMEOUT_MS) });
+          if (!imgRes.ok) return { ...item, image: '' };
+          const contentType = imgRes.headers.get('content-type') ?? '';
+          if (!contentType.startsWith('image/')) return { ...item, image: '' };
+          const contentLength = imgRes.headers.get('content-length');
+          if (contentLength && parseInt(contentLength) > MAX_IMAGE_BYTES) return { ...item, image: '' };
+          const ext = item.image.match(/\.(jpe?g|png|webp|gif)(\?|$)/i)?.[1] ?? 'jpg';
+          const filename = `feed-${i}.${ext}`;
+          writeFileSync(join(thumbsDir, filename), Buffer.from(await imgRes.arrayBuffer()));
+          return { ...item, image: `/feed-thumbs/${filename}` };
+        } catch (err) {
+          console.warn(`[feed-thumbs] failed to download thumbnail ${i}: ${err}`);
+          return { ...item, image: '' };
+        }
+      })
+    );
   }
 } catch {
   // RSS unavailable at build time — degrade gracefully
@@ -51,8 +86,8 @@ try {
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Mike Lapidakis',
-  url: 'https://mike.lapidak.is',
+  name: site.name,
+  url: site.url,
   jobTitle: 'Security & Networking SA Leader',
   worksFor: { '@type': 'Organization', name: 'Amazon Web Services' },
   sameAs: [
@@ -80,10 +115,11 @@ const personJsonLd = {
         <div class="hero__inner">
           <div class="hero__avatar animate-fade-up">
             <Image
-              src="/profile.jpg"
+              src={profileImg}
               alt="Mike Lapidakis"
-              width={112}
-              height={112}
+              width={224}
+              height={224}
+              quality={95}
               class="hero__photo"
               onerror="this.style.display='none'"
             />
@@ -95,14 +131,11 @@ const personJsonLd = {
             </h1>
 
             <p class="hero__role animate-fade-up animate-delay-2">
-              Security &amp; Networking SA Leader &middot; AWS &middot; Denver, CO
+              {site.role}
             </p>
 
             <p class="hero__bio animate-fade-up animate-delay-3">
-              I've spent 10 years at AWS — the last 6 building and leading specialist
-              teams across security, networking, and generative AI. I still get into
-              the weeds when it matters, and I build things meant to last.
-              Dad, photographer, perpetual tinkerer.
+              {site.bio}
             </p>
 
             <ul class="hero__links animate-fade-up animate-delay-4">
@@ -138,6 +171,8 @@ const personJsonLd = {
                       <img
                         src={item.image}
                         alt=""
+                        width="88"
+                        height="60"
                         loading={i === 0 ? 'eager' : 'lazy'}
                         decoding="async"
                       />

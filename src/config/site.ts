@@ -3,6 +3,7 @@ export const site = {
   url: 'https://mike.lapidak.is',
   description: 'Engineering leader, photographer, and tinkerer based in the Pacific Northwest.',
   role: 'Security & Networking SA Leader · AWS · Denver, CO',
+  bio: "I've spent 10 years at AWS — the last 6 building and leading specialist teams across security, networking, and generative AI. I still get into the weeds when it matters, and I build things meant to last. Dad, photographer, perpetual tinkerer.",
 };
 
 export const socials = [

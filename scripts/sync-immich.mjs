@@ -27,6 +27,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, unlinkSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import sharp from 'sharp';
+import heicConvert from 'heic-convert';
 
 // Maximum pixels on the longest edge for web-optimised uploads.
 // 3200px ensures 2× retina sharpness at the 60% panel width on a 2560px display.
@@ -46,7 +47,7 @@ const RAW_EXTENSIONS = new Set([
   '3fr', 'fff',           // Hasselblad
   'iiq',                  // Phase One
   'cap', 'eip',           // Capture One
-  'heic', 'heif',         // Apple HEIC/HEIF (sharp requires libheif — export as JPEG)
+  // heic/heif handled via heic-convert (not skipped)
 ]);
 
 // ─── CLI flags ───────────────────────────────────────────────────────────────
@@ -290,6 +291,7 @@ async function main() {
     const slug = existing.get(asset.id)?.slug ?? toSlug(asset.originalFileName ?? asset.id);
     const mdPath = join(PHOTOS_DIR, `${slug}.md`);
 
+    const fileExt = (asset.originalFileName ?? '').split('.').pop().toLowerCase();
     console.log(`→ ${asset.originalFileName} (${album.albumName})`);
 
     // Upload to R2
@@ -298,7 +300,11 @@ async function main() {
     if (!r2KeyExists || FORCE) {
       console.log(`  Downloading original...`);
       if (!DRY_RUN) {
-        const raw = await immichDownload(asset.id);
+        let raw = await immichDownload(asset.id);
+        if (fileExt === 'heic' || fileExt === 'heif') {
+          console.log(`  Converting HEIC/HEIF → JPEG...`);
+          raw = Buffer.from(await heicConvert({ buffer: raw, format: 'JPEG', quality: 1 }));
+        }
         console.log(`  Resizing to max ${MAX_LONG_EDGE}px...`);
         const buf = await sharp(raw)
           .rotate()  // auto-apply EXIF orientation before resize
@@ -324,17 +330,21 @@ async function main() {
     else console.log(`  [dry] Would write:\n${fm}`);
   }
 
-  // 5. Remove stale .md files
-  console.log('\nChecking for stale photos...');
+  // 5. Remove stale .md files (skip when --album is set — partial scan can't determine global staleness)
   let removedCount = 0;
-  for (const [immichId, { slug, filePath }] of existing) {
-    if (!activeImmichIds.has(immichId)) {
-      console.log(`  Removing stale: ${slug}.md (immichId: ${immichId})`);
-      if (!DRY_RUN) unlinkSync(filePath);
-      removedCount++;
+  if (ONLY_ALBUM) {
+    console.log('\nSkipping stale check (--album mode: partial scan).');
+  } else {
+    console.log('\nChecking for stale photos...');
+    for (const [immichId, { slug, filePath }] of existing) {
+      if (!activeImmichIds.has(immichId)) {
+        console.log(`  Removing stale: ${slug}.md (immichId: ${immichId})`);
+        if (!DRY_RUN) unlinkSync(filePath);
+        removedCount++;
+      }
     }
+    if (removedCount === 0) console.log('  None.');
   }
-  if (removedCount === 0) console.log('  None.');
 
   // 6. Git commit + push
   if (writes.length === 0 && removedCount === 0) {
