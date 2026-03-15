@@ -17,9 +17,9 @@
     "test:ci": "npm run build && vitest run"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/sitemap": "^3.7.1",
     "@tailwindcss/vite": "^4.2.1",
-    "astro": "^5.17.1",
+    "astro": "^6.0.4",
     "leaflet": "^1.9.4",
     "photoswipe": "^5.4.4",
     "tailwindcss": "^4.2.1"
