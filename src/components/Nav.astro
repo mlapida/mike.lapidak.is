@@ -62,6 +62,9 @@ const current = Astro.url.pathname;
   function setTheme(theme: string) {
     html.setAttribute('data-theme', theme);
     localStorage.setItem('theme-preference', theme);
+    const colors: Record<string, string> = { light: '#f8f6f1', dark: '#1a1814' };
+    const meta = document.getElementById('theme-color-meta');
+    if (meta) meta.setAttribute('content', colors[theme]);
   }
 
   if (btn) {
@@ -85,6 +88,9 @@ const current = Astro.url.pathname;
     left: 0;
     right: 0;
     z-index: 100;
+    /* Solid fallback so the safe area is always opaque even if
+       nav__safe-fill collapses (e.g. env() resolves to 0). */
+    background-color: var(--color-bg);
   }
 
   /* Solid fill for the safe-area inset (beside Dynamic Island / notch).
