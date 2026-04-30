@@ -48,8 +48,17 @@ These files contain site content and can be edited independently of the Astro te
 | `public/profile.jpg` | Profile photo shown on homepage hero |
 | `public/social-card.jpg` | Default OG/Twitter card image |
 | `public/robots.txt` | Crawler rules |
+| `public/llms.txt` | LLM-readable site summary per llmstxt.org spec — hand-maintained |
 
 **Template files** (layout, components, pages) live in `src/layouts/`, `src/components/`, and `src/pages/`. Edit these only when changing site structure or design.
+
+> **Keep `public/llms.txt` in sync.** It's a static, hand-written file — it does **not** auto-regenerate from `site.ts`, `work.ts`, or the photo collection. Update it whenever any of these change materially:
+> - Bio, role, or social links in `src/config/site.ts`
+> - Spotlight publications, talks, or experience in `src/data/work.ts`
+> - New top-level pages added to `src/pages/`
+> - Significant new photo collections (the file references the photography section in general, not individual photos — single-photo additions don't require an update)
+>
+> If updates start feeling like a chore, convert it to an Astro endpoint at `src/pages/llms.txt.ts` that renders from the same data sources at build time.
 
 ## Content Details
 

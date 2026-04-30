@@ -229,6 +229,10 @@ const personJsonLd = {
             <span class="section-card__arrow" aria-hidden="true">&rarr;</span>
           </a>
         </div>
+
+        <p class="llms-callout">
+          Reading this with an AI? There's an <a href="/llms.txt">llms.txt</a> with a structured summary of the site.
+        </p>
       </div>
     </section>
   </main>
@@ -547,6 +551,28 @@ const personJsonLd = {
   @media (hover: hover) {
     .section-card:hover .section-card__arrow {
       transform: translateX(3px);
+    }
+  }
+
+  /* ---- llms.txt callout ---- */
+  .llms-callout {
+    margin: 1.75rem 0 0;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .llms-callout a {
+    color: var(--color-accent);
+    font-weight: 500;
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    transition: color 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .llms-callout a:hover {
+      color: var(--color-accent-hover);
     }
   }
 

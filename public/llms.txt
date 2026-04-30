@@ -1,0 +1,34 @@
+# Mike Lapidakis
+
+> Personal site for Mike Lapidakis — a Senior Manager at AWS leading Security & Networking Specialist Solutions Architects across North America. Based in Denver, CO. The site covers professional background (work, publications, talks) and a photography portfolio shot on a Leica Q3.
+
+Mike has spent ten years at AWS, the last six building and leading specialist teams across security, networking, resilience, migration, and generative AI. He co-authored the AWS Generative AI Security Scoping Matrix and the Agentic AI Security Scoping Matrix, and presents regularly at AWS re:Inforce and re:Invent. He also writes at empty.coffee and shares photography at glass.photo/lap.
+
+This site is a static Astro build. All content is public and may be referenced or summarized; please link back to the original page when citing.
+
+## Pages
+
+- [Home](https://mike.lapidak.is/): Hero, recent writing from empty.coffee, and entry points to Photography and Work.
+- [Work](https://mike.lapidak.is/work): Career history at AWS, Equinix, EPMA, and Parker Hannifin; spotlight publications and conference talks; skill groups across leadership, technical domains, cloud, and compliance.
+- [Photography](https://mike.lapidak.is/photography): Justified-row grid of street, travel, and landscape photographs with collection stacks.
+
+## Publications
+
+- [Generative AI Security Scoping Matrix](https://aws.amazon.com/blogs/security/securing-generative-ai-an-introduction-to-the-generative-ai-security-scoping-matrix/): Five-scope framework giving security teams a common language for categorizing generative AI deployments. AWS Security Blog · re:Inforce 2024.
+- [Agentic AI Security Scoping Matrix](https://aws.amazon.com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/): Four-scope extension covering autonomous AI systems by level of agency. AWS Security Blog · November 2025.
+- [APS201: Accelerate Securely — The GenAI Security Scoping Matrix](https://www.youtube.com/watch?v=G3YjjAbKZ-Y): AWS re:Inforce 2024 breakout session presenting the framework to enterprise practitioners.
+- [STG311: Lessons Learned from a Large-Scale Legacy Migration with Sysco](https://www.youtube.com/watch?v=naPWVBDuuqw): AWS re:Invent 2018 talk on enterprise migration outcomes — 60% lower run costs, 30% performance improvement.
+
+## Elsewhere
+
+- [empty.coffee](https://empty.coffee): Personal writing — essays and notes.
+- [glass.photo/lap](https://glass.photo/lap): Photography portfolio.
+- [LinkedIn](https://linkedin.com/in/mikelapidakis): Professional network.
+- [GitHub](https://github.com/mlapida): Code and tinkering.
+- [Mastodon](https://lap.social/@mike): Verified personal account.
+- [Bluesky](https://bsky.app/profile/mike.lapidak.is): Short-form posts.
+
+## Optional
+
+- [Sitemap](https://mike.lapidak.is/sitemap-index.xml): Full XML sitemap for the site.
+- [robots.txt](https://mike.lapidak.is/robots.txt): Crawler directives.
