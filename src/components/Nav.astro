@@ -86,13 +86,21 @@ const current = Astro.url.pathname;
     left: 0;
     right: 0;
     z-index: 100;
-    /* Solid (no glass) so content scrolling under the safe-area inset on
-       iPhone with Dynamic Island doesn't bleed through. The glass blur
-       version created either a visible seam (split element) or visible
-       content bleed (unified element). Solid solves both. */
-    padding-top: env(safe-area-inset-top, 0px);
+    /* Belt and suspenders for iOS Dynamic Island: solid background plus
+       an explicit ::before pseudo that fills the safe-area inset with the
+       same solid color. Either alone proved unreliable across iOS versions
+       (padding-top sometimes didn't paint the padded area, split element
+       caused seams when colors mismatched). With both — same solid color
+       throughout — there's no seam and no bleed. */
     background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav::before {
+    content: '';
+    display: block;
+    height: env(safe-area-inset-top, 0px);
+    background-color: var(--color-bg);
   }
 
   .nav__inner {
