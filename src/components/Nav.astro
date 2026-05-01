@@ -86,12 +86,12 @@ const current = Astro.url.pathname;
     left: 0;
     right: 0;
     z-index: 100;
-    /* Single unified frosted surface that extends through the safe-area
-       inset so the Dynamic Island region matches the bar visually. */
+    /* Solid (no glass) so content scrolling under the safe-area inset on
+       iPhone with Dynamic Island doesn't bleed through. The glass blur
+       version created either a visible seam (split element) or visible
+       content bleed (unified element). Solid solves both. */
     padding-top: env(safe-area-inset-top, 0px);
-    background-color: var(--color-bg-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
   }
 
