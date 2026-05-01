@@ -109,11 +109,11 @@ html::after {
 body {
   min-height: 100vh;
   margin: 0;
-  /* max() with 50px floor compensates for iOS configs (e.g. iOS 18.7 +
-     Safari 26.4) where env(safe-area-inset-top) returns 0 even on
-     Dynamic Island devices. Keep this in sync with the same expression
-     in Nav.astro. */
-  padding-top: calc(var(--nav-height) + max(env(safe-area-inset-top, 0px), 50px));
+  /* --safe-top is set by an inline script in Base.astro <head>, replacing
+     env(safe-area-inset-top) which returns 0 on some iOS configs (e.g.
+     iOS 18.7 + Safari 26.4) even on Dynamic Island devices. Flat var()
+     avoids Safari's nested calc(var() + max(env())) evaluation bug. */
+  padding-top: calc(var(--nav-height) + var(--safe-top, 0px));
 }
 
 a {
