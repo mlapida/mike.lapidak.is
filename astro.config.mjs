@@ -9,7 +9,13 @@ export default defineConfig({
   image: {
     domains: ['pub-1925a6f6efeb4b71bc918d8041c946c6.r2.dev'],
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Exclude .md companion routes and llms.txt — they duplicate or supplement
+      // content already covered by canonical HTML routes.
+      filter: page => !page.endsWith('.md') && !page.endsWith('/llms.txt'),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
