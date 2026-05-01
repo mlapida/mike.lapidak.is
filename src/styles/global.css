@@ -109,7 +109,11 @@ html::after {
 body {
   min-height: 100vh;
   margin: 0;
-  padding-top: calc(var(--nav-height) + env(safe-area-inset-top, 0px));
+  /* max() with 50px floor compensates for iOS configs (e.g. iOS 18.7 +
+     Safari 26.4) where env(safe-area-inset-top) returns 0 even on
+     Dynamic Island devices. Keep this in sync with the same expression
+     in Nav.astro. */
+  padding-top: calc(var(--nav-height) + max(env(safe-area-inset-top, 0px), 50px));
 }
 
 a {

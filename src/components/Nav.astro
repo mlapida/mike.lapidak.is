@@ -97,19 +97,24 @@ const current = Astro.url.pathname;
      the safe-area zone and the bar element other than visual
      continuity. */
 
+  /* Some iOS configurations (observed: iOS 18.7 / Safari 26.4) report
+     env(safe-area-inset-top) as 0 even on Dynamic Island devices that
+     visibly need a ~50px top inset. max() floors the value at 50px so
+     the nav covers the Dynamic Island region in that broken-env() case
+     while still using the true value when env() works. */
   .nav__safe-fill {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: env(safe-area-inset-top, 0px);
+    height: max(env(safe-area-inset-top, 0px), 50px);
     background-color: var(--color-bg);
     z-index: 100;
   }
 
   .nav {
     position: fixed;
-    top: env(safe-area-inset-top, 0px);
+    top: max(env(safe-area-inset-top, 0px), 50px);
     left: 0;
     right: 0;
     z-index: 100;
