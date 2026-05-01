@@ -8,6 +8,7 @@ const links = [
 
 const current = Astro.url.pathname;
 ---
+<div class="nav__safe-fill" aria-hidden="true"></div>
 <nav class="nav">
   <div class="container">
     <div class="nav__inner">
@@ -80,27 +81,40 @@ const current = Astro.url.pathname;
 </script>
 
 <style>
-  .nav {
+  /* Approach C: two sibling fixed elements. Belt-and-suspenders #2.
+     Earlier attempts (padding-top + bg, ::before pseudo + bg) both
+     failed on iOS Safari with Dynamic Island — content bled through
+     the safe-area inset. Hypothesis: the safe-area portion of a
+     fixed element doesn't reliably paint background on some iOS
+     versions when defined via padding/pseudo on the same element.
+
+     Two SEPARATE fixed elements with explicit positioning and the
+     same solid bg color:
+       - .nav__safe-fill: top: 0, height: env(...)
+       - .nav: top: env(...), height: auto
+     Renders as one continuous solid block from the absolute viewport
+     top through the bottom of the bar, with no relationship between
+     the safe-area zone and the bar element other than visual
+     continuity. */
+
+  .nav__safe-fill {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
-    /* Belt and suspenders for iOS Dynamic Island: solid background plus
-       an explicit ::before pseudo that fills the safe-area inset with the
-       same solid color. Either alone proved unreliable across iOS versions
-       (padding-top sometimes didn't paint the padded area, split element
-       caused seams when colors mismatched). With both — same solid color
-       throughout — there's no seam and no bleed. */
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .nav::before {
-    content: '';
-    display: block;
     height: env(safe-area-inset-top, 0px);
     background-color: var(--color-bg);
+    z-index: 100;
+  }
+
+  .nav {
+    position: fixed;
+    top: env(safe-area-inset-top, 0px);
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .nav__inner {

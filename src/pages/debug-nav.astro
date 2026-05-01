@@ -1,0 +1,206 @@
+---
+// Diagnostic page for iOS Dynamic Island nav issue.
+// Filename starts with _ so Astro won't include it in production routing
+// in some configs. To access: visit /_debug-nav directly. To remove later:
+// just delete this file.
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1a1814" />
+    <title>Nav debug</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #1a1814;
+        color: #f0ede6;
+        font-family: ui-monospace, monospace;
+        font-size: 13px;
+      }
+      body {
+        min-height: 250vh; /* tall so we can scroll */
+      }
+
+      /* === Approach 1: padding-top on fixed parent (current shipped) === */
+      .nav-a {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 100;
+        padding-top: env(safe-area-inset-top, 0px);
+        background: #c0392b; /* red, very visible */
+      }
+      .nav-a__bar {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+      }
+
+      /* === Approach 2: ::before pseudo with explicit height (last shipped) === */
+      .nav-b {
+        position: fixed;
+        top: 60px; left: 0; right: 0;
+        z-index: 100;
+        background: #2980b9; /* blue */
+      }
+      .nav-b::before {
+        content: '';
+        display: block;
+        height: env(safe-area-inset-top, 0px);
+        background: #2980b9;
+      }
+      .nav-b__bar {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+      }
+
+      /* === Approach 3: sibling fixed elements (bulletproof candidate) === */
+      .nav-c__safe {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: env(safe-area-inset-top, 0px);
+        background: #27ae60; /* green */
+        z-index: 100;
+      }
+      .nav-c__bar {
+        position: fixed;
+        top: env(safe-area-inset-top, 0px);
+        left: 0; right: 0;
+        z-index: 100;
+        height: 40px;
+        background: #27ae60;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+      }
+
+      /* All three offset visually for side-by-side comparison via top values:
+         A starts at 0, B at 60, C uses real safe-area + explicit. We'll only
+         enable one at a time via querystring. */
+
+      .info {
+        position: fixed;
+        bottom: 100px; left: 10px; right: 10px;
+        background: rgba(0,0,0,0.85);
+        padding: 12px;
+        border-radius: 6px;
+        z-index: 200;
+        line-height: 1.5;
+        max-height: 50vh;
+        overflow: auto;
+      }
+      .info h2 { margin: 0 0 6px; font-size: 13px; color: #5a9c6f; }
+      .info dt { color: #9e9890; }
+      .info dd { margin: 0 0 6px; word-break: break-all; }
+      .info button {
+        font: inherit; padding: 4px 8px; margin-right: 6px;
+        background: #444; color: white; border: none; border-radius: 3px;
+      }
+
+      .scroll-content {
+        padding: 200px 20px 40px;
+        background: repeating-linear-gradient(
+          to bottom,
+          #2c2520 0px, #2c2520 40px,
+          #382f29 40px, #382f29 80px
+        );
+      }
+      .marker {
+        background: yellow;
+        color: black;
+        padding: 4px 8px;
+        margin: 8px 0;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Approach selector via URL: ?a / ?b / ?c -->
+    <script>
+      const variant = new URLSearchParams(location.search).get('v') || 'a';
+      document.documentElement.dataset.variant = variant;
+    </script>
+    <style>
+      [data-variant="a"] .nav-a { display: block; }
+      [data-variant="a"] .nav-b, [data-variant="a"] .nav-c__safe, [data-variant="a"] .nav-c__bar { display: none; }
+      [data-variant="b"] .nav-b { display: block; }
+      [data-variant="b"] .nav-a, [data-variant="b"] .nav-c__safe, [data-variant="b"] .nav-c__bar { display: none; }
+      [data-variant="c"] .nav-c__safe, [data-variant="c"] .nav-c__bar { display: block; }
+      [data-variant="c"] .nav-a, [data-variant="c"] .nav-b { display: none; }
+    </style>
+
+    <!-- Approach A: padding-top on fixed (RED) -->
+    <div class="nav-a">
+      <div class="nav-a__bar">A: padding-top env() (red)</div>
+    </div>
+
+    <!-- Approach B: ::before pseudo (BLUE) -->
+    <div class="nav-b">
+      <div class="nav-b__bar">B: ::before pseudo (blue)</div>
+    </div>
+
+    <!-- Approach C: sibling fixed elements (GREEN) -->
+    <div class="nav-c__safe"></div>
+    <div class="nav-c__bar">C: sibling fixed elements (green)</div>
+
+    <!-- Diagnostic info overlay -->
+    <div class="info" id="info">
+      <h2>device + env() diagnostic</h2>
+      <dl id="dl"></dl>
+      <p>
+        <button onclick="location.search='?v=a'">A (red)</button>
+        <button onclick="location.search='?v=b'">B (blue)</button>
+        <button onclick="location.search='?v=c'">C (green)</button>
+      </p>
+      <p>scroll up & down. the nav color band SHOULD cover the area between status bar and the page repeating-stripe content. if you see stripes peeking through above the colored bar, that approach is broken on this device.</p>
+    </div>
+
+    <!-- Scrollable content with markers -->
+    <div class="scroll-content">
+      <div class="marker">START of body content</div>
+      <p>If the nav is doing its job, this stripe pattern should NOT be visible behind the nav, the safe-area, or the Dynamic Island.</p>
+      <p>Repeating stripe = body. Solid color band = nav (success).</p>
+      <p style="height: 100vh">Scroll down through this filler...</p>
+      <div class="marker">MIDDLE of body content</div>
+      <p style="height: 100vh">More scrolling...</p>
+      <div class="marker">END of body content</div>
+    </div>
+
+    <script>
+      const dl = document.getElementById('dl');
+      function row(k, v) {
+        const dt = document.createElement('dt'); dt.textContent = k;
+        const dd = document.createElement('dd'); dd.textContent = v;
+        dl.appendChild(dt); dl.appendChild(dd);
+      }
+
+      // Probe env() values via temporary element
+      const probe = document.createElement('div');
+      probe.style.cssText = 'position:fixed;top:env(safe-area-inset-top,0px);left:env(safe-area-inset-left,0px);width:1px;height:env(safe-area-inset-top,0px);';
+      document.body.appendChild(probe);
+      const probeRect = probe.getBoundingClientRect();
+      const probeStyles = getComputedStyle(probe);
+
+      row('window.innerWidth × innerHeight', `${window.innerWidth} × ${window.innerHeight}`);
+      row('document.documentElement client', `${document.documentElement.clientWidth} × ${document.documentElement.clientHeight}`);
+      row('visualViewport (if supported)', window.visualViewport ? `${window.visualViewport.width} × ${window.visualViewport.height} @ scale ${window.visualViewport.scale}` : 'not supported');
+      row('devicePixelRatio', window.devicePixelRatio);
+      row('screen.width × height', `${screen.width} × ${screen.height}`);
+      row('probe.top (env safe-area-inset-top)', probeRect.top + 'px');
+      row('probe.left (env safe-area-inset-left)', probeRect.left + 'px');
+      row('probe.height (computed env top)', probeRect.height + 'px');
+      row('computed top style', probeStyles.top);
+      row('userAgent', navigator.userAgent);
+      row('current variant', document.documentElement.dataset.variant);
+      probe.remove();
+    </script>
+  </body>
+</html>
