@@ -36,40 +36,9 @@ const ogImage = image
         document.documentElement.setAttribute('data-theme', theme);
         var meta = document.getElementById('theme-color-meta');
         if (meta) meta.setAttribute('content', colors[theme]);
-
-        // Compute safe-area-inset-top once and expose as --safe-top.
-        // Some iOS configs (e.g. iOS 18.7 + Safari 26.4) report
-        // env(safe-area-inset-top) as 0 even on Dynamic Island devices.
-        // We measure env() at runtime, fall back to a UA+screen-based
-        // estimate if it's zero, and set a flat CSS variable so nothing
-        // downstream has to deal with calc(var + max(env, ...)) chains
-        // that some Safari versions evaluate incorrectly.
-        var safeTop = 0;
-        try {
-          var probe = document.createElement('div');
-          probe.style.cssText = 'position:fixed;top:env(safe-area-inset-top,0px);height:env(safe-area-inset-top,0px);width:1px;visibility:hidden;pointer-events:none;';
-          (document.body || document.documentElement).appendChild(probe);
-          safeTop = probe.getBoundingClientRect().height;
-          probe.remove();
-        } catch (e) {}
-
-        if (safeTop === 0) {
-          var ua = navigator.userAgent || '';
-          var isiOS = /iPhone|iPad|iPod/.test(ua);
-          if (isiOS) {
-            var sh = (screen && screen.height) || 0;
-            // Dynamic Island devices (iPhone 14 Pro and newer)
-            if (sh >= 852) safeTop = 59;
-            // Older iPhone with notch
-            else if (sh >= 800) safeTop = 47;
-            // Legacy iPhones / iPads
-            else safeTop = 20;
-          }
-        }
-        document.documentElement.style.setProperty('--safe-top', safeTop + 'px');
       })();
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Primary meta -->
     <title>{pageTitle}</title>
