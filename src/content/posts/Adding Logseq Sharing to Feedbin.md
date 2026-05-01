@@ -6,6 +6,7 @@ description: "A quick guide to adding a quick capture share extension for Logseq
 publish_date: 2022-12-05
 modified_date: 2022-12-10
 source_url: https://empty.coffee/logseq-feedbin-share-quick-capture/
+feature_image: /post-images/logseq-feedbin-share-quick-capture/feature.png
 slug: logseq-feedbin-share-quick-capture
 author: Mike Lapidakis
 word_count: 125

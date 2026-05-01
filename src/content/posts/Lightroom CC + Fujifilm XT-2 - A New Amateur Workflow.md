@@ -6,6 +6,7 @@ description: "Creating a workflow for importing RAW photos from a Fuji X-T2 to a
 publish_date: 2018-01-28
 modified_date: 2022-12-10
 source_url: https://empty.coffee/lightroom-fujifilm-xt-2-workflow/
+feature_image: /post-images/lightroom-fujifilm-xt-2-workflow/feature.png
 slug: lightroom-fujifilm-xt-2-workflow
 author: Mike Lapidakis
 word_count: 898

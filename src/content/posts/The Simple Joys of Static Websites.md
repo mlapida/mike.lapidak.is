@@ -6,6 +6,7 @@ description: "Learning to embrace simplicity and bask in the speed of static web
 publish_date: 2021-02-14
 modified_date: 2022-12-10
 source_url: https://empty.coffee/simple-joys-static-sites/
+feature_image: /post-images/simple-joys-static-sites/feature.jpg
 slug: simple-joys-static-sites
 author: Mike Lapidakis
 word_count: 1368

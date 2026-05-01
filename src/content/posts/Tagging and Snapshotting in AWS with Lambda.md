@@ -6,6 +6,7 @@ description: "Two Lambda functions for AWS housekeeping: propagating EC2 instanc
 publish_date: 2016-01-16
 modified_date: 2022-12-10
 source_url: https://empty.coffee/tagging-and-snapshotting-with-lambda/
+feature_image: /post-images/tagging-and-snapshotting-with-lambda/feature.jpeg
 slug: tagging-and-snapshotting-with-lambda
 author: Mike Lapidakis
 word_count: 897

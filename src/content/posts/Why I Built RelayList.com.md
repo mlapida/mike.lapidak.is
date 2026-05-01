@@ -6,6 +6,7 @@ description: "Why I set out to build a trusted source for up-to-date information
 publish_date: 2022-12-18
 modified_date: 2022-12-18
 source_url: https://empty.coffee/why-i-built-relaylist-mastodon/
+feature_image: /post-images/why-i-built-relaylist-mastodon/feature.png
 slug: why-i-built-relaylist-mastodon
 author: Mike Lapidakis
 word_count: 633

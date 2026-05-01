@@ -6,6 +6,7 @@ description: "Initial impressions of Levels Health continuous glucose monitoring
 publish_date: 2021-02-07
 modified_date: 2022-12-10
 source_url: https://empty.coffee/levels-health-first-impressions/
+feature_image: /post-images/levels-health-first-impressions/feature.jpg
 slug: levels-health-first-impressions
 author: Mike Lapidakis
 word_count: 1313

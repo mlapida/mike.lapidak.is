@@ -6,6 +6,7 @@ description: "The personal weather station market is full of ugly, complicated c
 publish_date: 2022-04-17
 modified_date: 2022-12-11
 source_url: https://empty.coffee/review-weatherflow-tempest-weather-station/
+feature_image: /post-images/review-weatherflow-tempest-weather-station/feature.jpeg
 slug: review-weatherflow-tempest-weather-station
 author: Mike Lapidakis
 word_count: 908

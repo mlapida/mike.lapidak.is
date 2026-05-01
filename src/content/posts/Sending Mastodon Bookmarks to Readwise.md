@@ -6,6 +6,7 @@ description: "A guide on using Zapier to pull bookmarks in from Mastodon and sen
 publish_date: 2023-01-08
 modified_date: 2023-01-08
 source_url: https://empty.coffee/sending-mastodon-bookmarks-to-readwise-zapier/
+feature_image: /post-images/sending-mastodon-bookmarks-to-readwise-zapier/feature.png
 slug: sending-mastodon-bookmarks-to-readwise-zapier
 author: Mike Lapidakis
 word_count: 885

@@ -6,6 +6,7 @@ description: "A how-to guide on setting up NextDNS on a RaspberryPi for your hom
 publish_date: 2019-12-09
 modified_date: 2022-12-10
 source_url: https://empty.coffee/replacing-pi-hole-with-nextdns/
+feature_image: /post-images/replacing-pi-hole-with-nextdns/feature.jpg
 slug: replacing-pi-hole-with-nextdns
 author: Mike Lapidakis
 word_count: 1163

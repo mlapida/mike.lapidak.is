@@ -6,6 +6,7 @@ description: "A year later, and NextDNS is faster and quicker to set up"
 publish_date: 2021-01-22
 modified_date: 2022-12-10
 source_url: https://empty.coffee/nextdns-cacheing-unifi-dream-machine/
+feature_image: /post-images/nextdns-caching-unifi-dream-machine/feature.jpg
 slug: nextdns-caching-unifi-dream-machine
 author: Mike Lapidakis
 word_count: 500

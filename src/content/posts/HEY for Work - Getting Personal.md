@@ -6,6 +6,7 @@ description: "Sharing the experience of using HEY for Work for a personal, custo
 publish_date: 2021-02-27
 modified_date: 2022-12-10
 source_url: https://empty.coffee/hey-for-work-personal/
+feature_image: /post-images/hey-for-work-personal/feature.jpg
 slug: hey-for-work-personal
 author: Mike Lapidakis
 word_count: 938

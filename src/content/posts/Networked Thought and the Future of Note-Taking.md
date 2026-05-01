@@ -6,6 +6,7 @@ description: "Roam Research has changed the way I take notes through networked t
 publish_date: 2021-03-20
 modified_date: 2022-12-10
 source_url: https://empty.coffee/networked-notes-roam-research-future/
+feature_image: /post-images/networked-notes-roam-research-future/feature.jpeg
 slug: networked-notes-roam-research-future
 author: Mike Lapidakis
 word_count: 841

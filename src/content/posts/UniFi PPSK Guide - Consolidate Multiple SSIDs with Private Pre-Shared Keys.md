@@ -6,6 +6,7 @@ description: "Tired of broadcasting multiple WiFi networks for IoT devices? I us
 publish_date: 2025-11-09
 modified_date: 2025-11-09
 source_url: https://empty.coffee/unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys/
+feature_image: /post-images/unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys/feature.jpeg
 slug: unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys
 author: Mike Lapidakis
 word_count: 437

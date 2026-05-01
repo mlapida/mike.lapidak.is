@@ -94,11 +94,16 @@ const personJsonLd = {
             {recentPosts.map(post => {
               const tags = post.data.tags
                 .filter(t => !['empty-coffee', 'published', 'draft', 'idea'].includes(t))
-                .slice(0, 3)
+                .slice(0, 1)
                 .map(t => t.replace(/-/g, ' '));
               return (
                 <li class="post-item">
                   <a href={`/posts/${post.data.slug}/`} class="post-card">
+                    <div class="post-thumb" aria-hidden="true">
+                      {post.data.feature_image && (
+                        <img src={post.data.feature_image} alt="" loading="lazy" decoding="async" />
+                      )}
+                    </div>
                     <div class="post-body">
                       <div class="post-meta">
                         <time class="post-date" datetime={post.data.publish_date!.toISOString().split('T')[0]}>
@@ -136,7 +141,7 @@ const personJsonLd = {
             <span class="section-card__eyebrow">Explore</span>
             <span class="section-card__label">Photography</span>
             <span class="section-card__desc">
-              Street, travel, and landscape — shot on a Leica Q3. Also on glass.photo/lap.
+              Street, travel, and landscape, shot on a Leica Q3. Also on glass.photo/lap.
             </span>
             <span class="section-card__arrow" aria-hidden="true">&rarr;</span>
           </a>
@@ -295,16 +300,41 @@ const personJsonLd = {
   }
 
   .post-card {
-    display: block;
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1rem;
     padding: 1rem 0;
     color: var(--color-text);
     transition: color 0.15s ease;
+    align-items: start;
   }
 
   @media (hover: hover) {
     .post-card:hover .post-title {
       color: var(--color-accent);
     }
+
+    .post-card:hover .post-thumb img {
+      transform: scale(1.04);
+    }
+  }
+
+  .post-thumb {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
   }
 
   .post-body {

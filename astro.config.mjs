@@ -13,10 +13,13 @@ export default defineConfig({
     sitemap({
       // Exclude .md companion routes and llms.txt — they duplicate or supplement
       // content already covered by canonical HTML routes.
-      filter: page => !page.endsWith('.md') && !page.endsWith('/llms.txt'),
+      filter: page => !page.endsWith('.md') && !page.endsWith('/llms.txt') && !page.endsWith('/rss.xml'),
     }),
   ],
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['.ts.net'],
+    },
   },
 });

@@ -40,7 +40,7 @@ const posts = defineCollection({
     source_url: z.string().url().optional(),
     author: z.string().default('Mike Lapidakis'),
     word_count: z.number().int().nonnegative().optional(),
-    feature_image: z.string().url().optional(),
+    feature_image: z.string().optional(),
     ghost_id: z.string().optional(),
     updated_at: z.string().optional(),
     tags: z.array(z.string()).default([]),

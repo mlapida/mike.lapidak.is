@@ -6,6 +6,7 @@ description: "Revisiting the state of Custom Domains on iCloud Mail two years af
 publish_date: 2023-08-03
 modified_date: 2023-08-03
 source_url: https://empty.coffee/custom-domains-in-apples-icloud-mail-two-years-later/
+feature_image: /post-images/custom-domains-in-apples-icloud-mail-two-years-later/feature.jpg
 slug: custom-domains-in-apples-icloud-mail-two-years-later
 author: Mike Lapidakis
 word_count: 741

@@ -6,6 +6,7 @@ description: "A guide for setting up Cloudflare Zero Trust with Home Assistant f
 publish_date: 2022-10-17
 modified_date: 2022-12-11
 source_url: https://empty.coffee/home-assistant-cloudflare-zero-trust-setup/
+feature_image: /post-images/home-assistant-cloudflare-zero-trust-setup/feature.png
 slug: home-assistant-cloudflare-zero-trust-setup
 author: Mike Lapidakis
 word_count: 1346

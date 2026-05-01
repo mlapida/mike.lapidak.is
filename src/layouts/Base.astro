@@ -16,7 +16,7 @@ const {
 
 const siteUrl = site.url;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
-const pageTitle = title === 'Mike Lapidakis' ? title : `${title} — Mike Lapidakis`;
+const pageTitle = title === 'Mike Lapidakis' ? title : `${title} · Mike Lapidakis`;
 const ogImage = image
   ? new URL(image, siteUrl).toString()
   : `${siteUrl}/social-card.jpg`;
@@ -46,6 +46,7 @@ const ogImage = image
     <meta name="author" content="Mike Lapidakis" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Mike Lapidakis · Writing" href="/rss.xml" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 
 const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
-const { title, description, publish_date, modified_date, word_count, tags } = post.data;
+const { title, description, publish_date, modified_date, word_count, tags, feature_image } = post.data;
 
 const dateFormatted = publish_date!.toLocaleDateString('en-US', {
   month: 'long',
@@ -43,6 +43,7 @@ const articleJsonLd = {
   url: pageUrl,
   datePublished: dateISO,
   dateModified: modified_date ? modified_date.toISOString().split('T')[0] : dateISO,
+  ...(feature_image ? { image: new URL(feature_image, siteUrl).toString() } : {}),
   author: {
     '@type': 'Person',
     name: 'Mike Lapidakis',
@@ -56,11 +57,20 @@ const articleJsonLd = {
 };
 ---
 
-<Base title={title} description={description ?? title}>
+<Base title={title} description={description ?? title} image={feature_image}>
   <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <Nav />
 
   <article class="post">
+    {feature_image && (
+      <div class="post__hero-wrap">
+        <div class="container post__container">
+          <figure class="post__hero">
+            <img src={feature_image} alt="" loading="eager" decoding="async" />
+          </figure>
+        </div>
+      </div>
+    )}
     <div class="container post__container">
       <header class="post__header">
         <div class="post__meta">
@@ -121,6 +131,25 @@ const articleJsonLd = {
 
   .post__container {
     max-width: 42rem;
+  }
+
+  .post__hero-wrap {
+    margin-bottom: 2.5rem;
+  }
+
+  .post__hero {
+    margin: 0;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .post__hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
   .post__header {

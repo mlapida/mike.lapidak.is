@@ -6,6 +6,7 @@ description: "A brief comparison of Mastodon and GoToSocial from a systems admin
 publish_date: 2022-12-24
 modified_date: 2023-08-03
 source_url: https://empty.coffee/mastodon-vs-gotosocial/
+feature_image: /post-images/mastodon-vs-gotosocial/feature.png
 slug: mastodon-vs-gotosocial
 author: Mike Lapidakis
 word_count: 879

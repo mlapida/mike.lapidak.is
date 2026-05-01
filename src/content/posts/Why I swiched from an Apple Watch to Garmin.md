@@ -6,6 +6,7 @@ description: "My impressions of the Garmin Epix after seven years with an Apple 
 publish_date: 2022-06-19
 modified_date: 2022-12-10
 source_url: https://empty.coffee/switch-apple-watch-garmin-epix-watch/
+feature_image: /post-images/switch-apple-watch-garmin-epix-watch/feature.jpeg
 slug: switch-apple-watch-garmin-epix-watch
 author: Mike Lapidakis
 word_count: 884

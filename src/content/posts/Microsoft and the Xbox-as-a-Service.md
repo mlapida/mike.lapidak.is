@@ -6,6 +6,7 @@ description: "Microsoft is lowering the barrier to entry for the next generation
 publish_date: 2020-09-27
 modified_date: 2022-12-10
 source_url: https://empty.coffee/microsoft-and-the-xbox-as-a-service/
+feature_image: /post-images/microsoft-and-the-xbox-as-a-service/feature.jpeg
 slug: microsoft-and-the-xbox-as-a-service
 author: Mike Lapidakis
 word_count: 671

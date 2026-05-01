@@ -6,6 +6,7 @@ description: "Which self-hosted photo and video platform is right for you? Photo
 publish_date: 2023-11-21
 modified_date: 2023-11-22
 source_url: https://empty.coffee/photo-backup-bakeoff-photoprism-vs-immich-review/
+feature_image: /post-images/photo-backup-bakeoff-photoprism-vs-immich-review/feature.png
 slug: photo-backup-bakeoff-photoprism-vs-immich-review
 author: Mike Lapidakis
 word_count: 2579

@@ -55,6 +55,7 @@ ${publicationLines.join('\n')}
 ## Optional
 
 - [Sitemap](${SITE}/sitemap-index.xml): Full XML sitemap for the site.
+- [RSS feed](${SITE}/rss.xml): RSS 2.0 feed of all published writing.
 - [robots.txt](${SITE}/robots.txt): Crawler directives.
 `;
 

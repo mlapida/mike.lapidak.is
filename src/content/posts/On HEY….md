@@ -6,6 +6,7 @@ description: "My overview and thoughts on HEY, a new and opinionated email servi
 publish_date: 2020-07-22
 modified_date: 2022-12-10
 source_url: https://empty.coffee/on-hey-email/
+feature_image: /post-images/on-hey-email/feature.jpg
 slug: on-hey-email
 author: Mike Lapidakis
 word_count: 1359

@@ -6,6 +6,7 @@ description: "A compilation of lessons learned while installing and tuning a sma
 publish_date: 2022-12-11
 modified_date: 2023-01-01
 source_url: https://empty.coffee/notes-on-standing-up-a-mastodon-server-aws/
+feature_image: /post-images/notes-on-standing-up-a-mastodon-server-aws/feature.jpg
 slug: notes-on-standing-up-a-mastodon-server-aws
 author: Mike Lapidakis
 word_count: 1495
