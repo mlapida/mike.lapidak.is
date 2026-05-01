@@ -48,17 +48,11 @@ These files contain site content and can be edited independently of the Astro te
 | `public/profile.jpg` | Profile photo shown on homepage hero |
 | `public/social-card.jpg` | Default OG/Twitter card image |
 | `public/robots.txt` | Crawler rules |
-| `public/llms.txt` | LLM-readable site summary per llmstxt.org spec — hand-maintained |
+| `src/data/work.ts` (referenced by `src/pages/llms.txt.ts`) | LLM-readable site summary now generated at build — pulls dynamic post list and spotlight from data sources |
 
 **Template files** (layout, components, pages) live in `src/layouts/`, `src/components/`, and `src/pages/`. Edit these only when changing site structure or design.
 
-> **Keep `public/llms.txt` in sync.** It's a static, hand-written file — it does **not** auto-regenerate from `site.ts`, `work.ts`, or the photo collection. Update it whenever any of these change materially:
-> - Bio, role, or social links in `src/config/site.ts`
-> - Spotlight publications, talks, or experience in `src/data/work.ts`
-> - New top-level pages added to `src/pages/`
-> - Significant new photo collections (the file references the photography section in general, not individual photos — single-photo additions don't require an update)
->
-> If updates start feeling like a chore, convert it to an Astro endpoint at `src/pages/llms.txt.ts` that renders from the same data sources at build time.
+> **`/llms.txt` is now an Astro endpoint** at `src/pages/llms.txt.ts`. It pulls posts from the `posts` content collection and spotlight publications from `src/data/work.ts` at build time. Hand-edit only when changing the static prose (bio paragraph, page descriptions, "Elsewhere" links). Post additions and publication updates flow automatically.
 
 ## Content Details
 
@@ -118,8 +112,16 @@ All colors are CSS custom properties in `src/styles/global.css`:
 ## SEO
 
 - `astro.config.mjs` has `site: 'https://mike.lapidak.is'` — enables `Astro.site` and sitemap URLs
+- Sitemap excludes `.md` companion routes and `llms.txt` via the `filter` option to avoid duplicate-content competition
+- `public/_headers` sends `X-Robots-Tag: noindex` on `/posts/*.md` and `/llms.txt` so crawlers drop them while LLMs and direct fetchers still see them
 - `Base.astro` accepts optional `image` prop (defaults to `/social-card.jpg`); emits full OG + Twitter Card meta, `author` meta, `rel="sitemap"` link
 - `public/robots.txt` — `Allow: *` with sitemap pointer
+
+## LLM-readable Routes
+
+- `/llms.txt` — site summary per llmstxt.org spec, generated from `src/pages/llms.txt.ts` at build (pulls posts + spotlight)
+- `/posts/<slug>.md` — markdown source per post via `src/pages/posts/[slug].md.ts`. Strips the duplicate H1+blockquote that's pre-baked in the body, prepends a clean header (title, description, date, read time, tags, source URL)
+- Both noindexed for search engines; both fetchable by anyone with the URL
 - Homepage: Person JSON-LD (`schema.org/Person`) with `sameAs` social URLs
 - Photo detail pages: Photograph JSON-LD (`schema.org/Photograph`) with absolute `contentUrl`, GPS `GeoCoordinates`, creator
 - Photo page descriptions: `"Title — Location · Date · Camera"`
