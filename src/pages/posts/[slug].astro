@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
+import { displayableTags } from '../../lib/posts';
 
 export async function getStaticPaths() {
   const all = await getCollection('posts');
@@ -95,13 +96,11 @@ const articleJsonLd = {
         <Content />
       </div>
 
-      {tags.length > 0 && (
+      {displayableTags(tags).length > 0 && (
         <ul class="post__tags" aria-label="tags">
-          {tags
-            .filter(t => !['empty-coffee', 'published', 'draft', 'idea'].includes(t))
-            .map(t => (
-              <li class="post__tag">{t.replace(/-/g, ' ')}</li>
-            ))}
+          {displayableTags(tags).map(t => (
+            <li class="post__tag">{t.replace(/-/g, ' ')}</li>
+          ))}
         </ul>
       )}
 

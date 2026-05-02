@@ -6,6 +6,7 @@ import { site, heroSocials } from '../config/site';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import profileImg from '../assets/profile.jpg';
+import { displayableTags } from '../lib/posts';
 
 const allPosts = await getCollection('posts');
 const recentPosts = allPosts
@@ -92,8 +93,7 @@ const personJsonLd = {
           </div>
           <ol class="post-list">
             {recentPosts.map(post => {
-              const tags = post.data.tags
-                .filter(t => !['empty-coffee', 'published', 'draft', 'idea'].includes(t))
+              const tags = displayableTags(post.data.tags)
                 .slice(0, 1)
                 .map(t => t.replace(/-/g, ' '));
               return (

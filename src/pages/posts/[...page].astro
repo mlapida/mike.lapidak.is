@@ -4,6 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
+import { displayableTags } from '../../lib/posts';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const all = await getCollection('posts');
@@ -59,8 +60,7 @@ const isFirstPage = page.currentPage === 1;
           <h2 class="posts__year">{year}</h2>
           <ol class="posts__list">
             {byYear.get(year)!.map(post => {
-              const tag = post.data.tags
-                .filter(t => !['empty-coffee', 'published', 'draft', 'idea'].includes(t))
+              const tag = displayableTags(post.data.tags)
                 .map(t => t.replace(/-/g, ' '))[0];
               return (
                 <li class="posts__item">
