@@ -80,11 +80,6 @@ const current = Astro.url.pathname;
 </script>
 
 <style>
-  /* Sticky nav. Stays at the top of the viewport on scroll. No
-     position: fixed (which required body padding-top + safe-area math
-     and led to a parade of iOS rendering bugs). No env(safe-area-...)
-     usage. iOS handles the chrome region above the nav via the
-     <meta name="theme-color"> in Base.astro. */
   .nav {
     position: sticky;
     top: 0;
