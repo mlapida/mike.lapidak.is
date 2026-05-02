@@ -50,9 +50,9 @@ describe('Homepage meta tags', () => {
 });
 
 describe('Work page meta tags', () => {
-  it('<title> is "Work — Mike Lapidakis"', () => {
+  it('<title> is "Work · Mike Lapidakis"', () => {
     const $ = loadHtml('work/index.html');
-    expect($('title').text()).toBe('Work — Mike Lapidakis');
+    expect($('title').text()).toBe('Work · Mike Lapidakis');
   });
 
   it('canonical href is https://mike.lapidak.is/work/', () => {
@@ -69,9 +69,9 @@ describe('Work page meta tags', () => {
 });
 
 describe('Photo detail meta tags (l1003743)', () => {
-  it('<title> is "L1003743 — Mike Lapidakis"', () => {
+  it('<title> is "L1003743 · Mike Lapidakis"', () => {
     const $ = loadHtml('photography/l1003743/index.html');
-    expect($('title').text()).toBe('L1003743 — Mike Lapidakis');
+    expect($('title').text()).toBe('L1003743 · Mike Lapidakis');
   });
 
   it('og:description contains location, year, and camera brand', () => {
@@ -94,6 +94,84 @@ describe('Photo detail meta tags (l1003743)', () => {
     expect($('link[rel="canonical"]').attr('href')).toBe(
       'https://mike.lapidak.is/photography/l1003743/'
     );
+  });
+});
+
+describe('RSS auto-discovery', () => {
+  it('homepage <head> includes <link rel="alternate" type="application/rss+xml" href="/rss.xml">', () => {
+    const $ = loadHtml('index.html');
+    const link = $('link[rel="alternate"][type="application/rss+xml"]');
+    expect(link.length).toBe(1);
+    expect(link.attr('href')).toBe('/rss.xml');
+  });
+
+  it('post detail <head> includes the same RSS alternate link', () => {
+    const $ = loadHtml('posts/review-weatherflow-tempest-weather-station/index.html');
+    const link = $('link[rel="alternate"][type="application/rss+xml"]');
+    expect(link.length).toBe(1);
+    expect(link.attr('href')).toBe('/rss.xml');
+  });
+});
+
+describe('Posts index meta tags', () => {
+  it('<title> is "Writing · Mike Lapidakis" on page 1', () => {
+    const $ = loadHtml('posts/index.html');
+    expect($('title').text()).toBe('Writing · Mike Lapidakis');
+  });
+
+  it('<title> is "Writing · page 2 · Mike Lapidakis" on page 2', () => {
+    const $ = loadHtml('posts/2/index.html');
+    expect($('title').text()).toBe('Writing · page 2 · Mike Lapidakis');
+  });
+
+  it('canonical href on page 1 is /posts/', () => {
+    const $ = loadHtml('posts/index.html');
+    expect($('link[rel="canonical"]').attr('href')).toBe('https://mike.lapidak.is/posts/');
+  });
+
+  it('the RSS callout link in the page header points to /rss.xml', () => {
+    const $ = loadHtml('posts/index.html');
+    expect($('.page-rss').attr('href')).toBe('/rss.xml');
+  });
+});
+
+describe('Post detail meta tags (review-weatherflow-tempest-weather-station)', () => {
+  const path = 'posts/review-weatherflow-tempest-weather-station/index.html';
+
+  it('<title> uses · separator (no em-dash)', () => {
+    const $ = loadHtml(path);
+    expect($('title').text()).toBe('A Month with the Tempest Weather Station · Mike Lapidakis');
+  });
+
+  it('og:image is the absolute feature image URL', () => {
+    const $ = loadHtml(path);
+    expect($('meta[property="og:image"]').attr('content')).toBe(
+      'https://mike.lapidak.is/post-images/review-weatherflow-tempest-weather-station/feature.jpeg',
+    );
+  });
+
+  it('twitter:image matches og:image', () => {
+    const $ = loadHtml(path);
+    const og = $('meta[property="og:image"]').attr('content');
+    const tw = $('meta[name="twitter:image"]').attr('content');
+    expect(tw).toBe(og);
+  });
+});
+
+describe('No em-dash in any rendered page <title>', () => {
+  const pages = [
+    'index.html',
+    'work/index.html',
+    'photography/index.html',
+    'posts/index.html',
+    'posts/2/index.html',
+    'posts/review-weatherflow-tempest-weather-station/index.html',
+    'photography/l1003743/index.html',
+  ];
+
+  it.each(pages)('%s title uses no em-dash or en-dash', (page) => {
+    const $ = loadHtml(page);
+    expect($('title').text()).not.toMatch(/[—–]/);
   });
 });
 
@@ -128,9 +206,15 @@ describe('Footer (homepage)', () => {
     expect(copy).toContain('Mike Lapidakis');
   });
 
-  it('.footer__link count is 6', () => {
+  it('.footer__link count is 7 (6 socials + RSS)', () => {
     const $ = loadHtml('index.html');
-    expect($('.footer__link').length).toBe(6);
+    expect($('.footer__link').length).toBe(7);
+  });
+
+  it('footer contains an RSS link to /rss.xml', () => {
+    const $ = loadHtml('index.html');
+    const rss = $('.footer__link').filter((_, el) => $(el).attr('href') === '/rss.xml');
+    expect(rss.length).toBe(1);
   });
 
   it('Mastodon footer link has rel containing "me"', () => {

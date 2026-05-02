@@ -24,6 +24,14 @@ const PHOTO_SLUGS = [
 
 const COLLECTION_SLUGS = ['paris-2026', 'immich-test'];
 
+const POST_SLUGS_SAMPLE = [
+  'review-weatherflow-tempest-weather-station',
+  'unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys',
+  'nextdns-caching-unifi-dream-machine',
+  'photo-backup-bakeoff-photoprism-vs-immich-review',
+  'simple-joys-static-sites',
+];
+
 let sitemapIndex = '';
 let sitemap0 = '';
 
@@ -76,9 +84,35 @@ describe('sitemap-0.xml', () => {
     );
   });
 
-  it('total <loc> count is 22', () => {
+  it('contains posts index loc', () => {
+    expect(sitemap0).toContain('<loc>https://mike.lapidak.is/posts/</loc>');
+  });
+
+  it('contains posts pagination locs (/posts/2/, /posts/3/)', () => {
+    expect(sitemap0).toContain('<loc>https://mike.lapidak.is/posts/2/</loc>');
+    expect(sitemap0).toContain('<loc>https://mike.lapidak.is/posts/3/</loc>');
+  });
+
+  it.each(POST_SLUGS_SAMPLE)('contains loc for post %s', (slug) => {
+    expect(sitemap0).toContain(
+      `<loc>https://mike.lapidak.is/posts/${slug}/</loc>`
+    );
+  });
+
+  it('does NOT contain rss.xml, llms.txt, or .md companion routes', () => {
+    expect(sitemap0).not.toContain('/rss.xml');
+    expect(sitemap0).not.toContain('/llms.txt');
+    expect(sitemap0).not.toMatch(/<loc>[^<]+\.md<\/loc>/);
+  });
+
+  it('total <loc> count is 49', () => {
+    // 5 top-level (/, /debug-nav/, /photography/, /posts/, /work/)
+    // + 17 photo details + 2 collection pages
+    // + 23 post details + 2 pagination pages (/posts/2/, /posts/3/)
+    // /debug-nav/ is the diagnostic page; remove it from the sitemap
+    // when the nav bug is fixed and bump this expected count to 48.
     const matches = sitemap0.match(/<loc>/g);
-    expect(matches?.length).toBe(22);
+    expect(matches?.length).toBe(49);
   });
 
   it('all <loc> entries start with https://mike.lapidak.is', () => {
