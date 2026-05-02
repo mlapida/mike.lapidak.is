@@ -1,86 +1,215 @@
 @import "tailwindcss";
 
 /* ============================================================
-   COLOR PALETTE — swap this block to retheme everything
+   BASE PALETTE — raw tokens, modern earth tones
+   ============================================================ */
+:root {
+  --paper-50:  #fcfaf6;
+  --paper-100: #f8f6f1;
+  --paper-200: #f1ede5;
+  --paper-300: #edeae3;
+  --paper-400: #d6d1c8;
+
+  --ink-900: #1a1814;
+  --ink-800: #1b1916;
+  --ink-700: #252320;
+  --ink-600: #37332d;
+  --ink-500: #545049;
+  --ink-400: #78716a;
+  --ink-300: #9e9890;
+  --ink-200: #d6d1c8;
+  --ink-100: #f0ede6;
+
+  --forest-900: #1f3527;
+  --forest-700: #2b4b36;
+  --forest-600: #3a6347;
+  --forest-500: #4a8a5c;
+  --forest-400: #5a9c6f;
+  --forest-200: #b7d3bf;
+  --forest-100: #dceadf;
+}
+
+/* ============================================================
+   SEMANTIC COLOR TOKENS — light theme (default)
    ============================================================ */
 :root {
   --nav-height: 3.25rem;
-  --color-bg: #f8f6f1;
-  --color-bg-glass: rgba(248, 246, 241, 0.88);
-  --color-surface: #edeae3;
-  --color-border: #d6d1c8;
-  --color-text: #1b1916;
-  --color-text-muted: #78716a;
-  --color-accent: #3a6347;
-  --color-accent-hover: #2b4b36;
-  --color-link: #3a6347;
-  --color-link-hover: #2b4b36;
+
+  --color-bg:           var(--paper-100);
+  --color-bg-glass:     rgba(248, 246, 241, 0.88);
+  --color-surface:      var(--paper-300);
+  --color-surface-alt:  var(--paper-200);
+  --color-border:       var(--paper-400);
+  --color-border-soft:  rgba(214, 209, 200, 0.55);
+
+  --color-text:         var(--ink-800);
+  --color-text-muted:   var(--ink-400);
+  --color-text-subtle:  rgba(120, 113, 106, 0.7);
+
+  --color-accent:       var(--forest-600);
+  --color-accent-hover: var(--forest-700);
+  --color-accent-soft:  rgba(58, 99, 71, 0.08);
+
+  --color-link:         var(--forest-600);
+  --color-link-hover:   var(--forest-700);
 }
 
 /* ============================================================
-   DARK MODE — explicit toggle
+   SEMANTIC COLOR TOKENS — dark theme
    ============================================================ */
 [data-theme="dark"] {
-  --color-bg:          #1a1814;
-  --color-bg-glass:    rgba(26, 24, 20, 0.88);
-  --color-surface:     #252320;
-  --color-border:      #37332d;
-  --color-text:        #f0ede6;
-  --color-text-muted:  #9e9890;
-  --color-accent:      #5a9c6f;
-  --color-accent-hover:#4a8a5c;
-  --color-link:        #5a9c6f;
-  --color-link-hover:  #4a8a5c;
+  --color-bg:           var(--ink-900);
+  --color-bg-glass:     rgba(26, 24, 20, 0.88);
+  --color-surface:      var(--ink-700);
+  --color-surface-alt:  #2d2a26;
+  --color-border:       var(--ink-600);
+  --color-border-soft:  rgba(55, 51, 45, 0.55);
+
+  --color-text:         var(--ink-100);
+  --color-text-muted:   var(--ink-300);
+  --color-text-subtle:  rgba(158, 152, 144, 0.7);
+
+  --color-accent:       var(--forest-400);
+  --color-accent-hover: var(--forest-500);
+  --color-accent-soft:  rgba(90, 156, 111, 0.10);
+
+  --color-link:         var(--forest-400);
+  --color-link-hover:   var(--forest-500);
 }
 
-/* DARK MODE — system preference (no stored override) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-bg:          #1a1814;
+    --color-bg:          var(--ink-900);
     --color-bg-glass:    rgba(26, 24, 20, 0.88);
-    --color-surface:     #252320;
-    --color-border:      #37332d;
-    --color-text:        #f0ede6;
-    --color-text-muted:  #9e9890;
-    --color-accent:      #5a9c6f;
-    --color-accent-hover:#4a8a5c;
-    --color-link:        #5a9c6f;
-    --color-link-hover:  #4a8a5c;
+    --color-surface:     var(--ink-700);
+    --color-surface-alt: #2d2a26;
+    --color-border:      var(--ink-600);
+    --color-text:        var(--ink-100);
+    --color-text-muted:  var(--ink-300);
+    --color-accent:      var(--forest-400);
+    --color-accent-hover:var(--forest-500);
+    --color-link:        var(--forest-400);
+    --color-link-hover:  var(--forest-500);
   }
 }
 
 /* ============================================================
-   FONTS — all via Adobe Fonts kit mjy4jau
-   - Display: Parisine Bold (parisine-std @ 700, upright) for headings
-   - Body: Parisine (parisine-std @ 400)
-   - Accent: Caslon Italic (adobe-caslon-pro) for italic accent text
-     (year labels, blockquotes, post lede, photo captions, etc.)
-   Caslon must be added to the kit for the accent role to render in
-   Caslon; until then it falls back to Georgia italic.
+   FONTS — both via Adobe Fonts kit mjy4jau
+   - Display & body: Parisine (humanist sans, designed for the
+     Paris Métro signage system). Used at 300/400/500/600/700.
+   - Italic accent: Adobe Caslon Pro Italic. Pull-quotes, year
+     labels, photo captions, the ML monogram. Never roman.
    ============================================================ */
 :root {
-  --font-display: 'parisine-std', system-ui, sans-serif;
-  --font-body: 'parisine-std', system-ui, sans-serif;
-  --font-accent: 'adobe-caslon-pro', Georgia, serif;
+  --font-display: 'parisine-std', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    'parisine-std', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-accent:  'adobe-caslon-pro', 'Big Caslon', 'Hoefler Text', Georgia, serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 /* ============================================================
-   KEYFRAMES
+   TYPE SCALE — fluid where it matters.
+   Middle of the scale has real, distinguishable steps:
+   0.95 -> 1.05 -> 1.35 -> 1.6.
    ============================================================ */
+:root {
+  --fs-xs:   0.7rem;
+  --fs-sm:   0.78rem;
+  --fs-base: 0.875rem;
+  --fs-md:   0.95rem;
+  --fs-lg:   1.05rem;
+  --fs-mid:  1.35rem;
+  --fs-2xl:  1.6rem;
+  --fs-3xl:  clamp(2rem, 4vw, 2.5rem);
+  --fs-4xl:  clamp(2.75rem, 6vw, 4.25rem);
+  --fs-5xl:  clamp(3rem, 7vw, 5rem);
+
+  --tracking-tight:   -0.025em;
+  --tracking-snug:    -0.01em;
+  --tracking-wide:    0.01em;
+  --tracking-eyebrow: 0.1em;
+
+  --leading-tight: 1.05;
+  --leading-snug:  1.2;
+  --leading-body:  1.6;
+  --leading-prose: 1.75;
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+}
+
+/* ============================================================
+   SPACING — 4px grid (Tailwind defaults)
+   ============================================================ */
+:root {
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+}
+
+/* ============================================================
+   RADIUS — pin to the role, not the size
+   ============================================================ */
+:root {
+  --radius-xs:   0.25rem;  /* thumbnails, brand mark */
+  --radius-sm:   0.3rem;   /* buttons, nav links */
+  --radius-md:   0.4rem;   /* cards */
+  --radius-lg:   0.5rem;   /* section cards */
+  --radius-pill: 2rem;     /* tags */
+  --radius-full: 9999px;
+}
+
+/* ============================================================
+   SHADOWS — three named roles, not a scale.
+   Most surfaces have NO shadow.
+   ============================================================ */
+:root {
+  --shadow-soft:  0 2px 12px rgba(0, 0, 0, 0.08);  /* profile photo, gentle lift */
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.07);  /* section card hover only */
+  --shadow-photo: 0 2px 8px rgba(0, 0, 0, 0.18);   /* polaroid stacks */
+}
+
+/* ============================================================
+   CONTAINERS
+   ============================================================ */
+:root {
+  --container-narrow: 900px;
+  --container-wide:   1200px;
+  --container-pad:    1.5rem;
+}
+
+/* ============================================================
+   MOTION
+   ============================================================ */
+:root {
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --dur-fast: 0.15s;
+  --dur-base: 0.2s;
+  --dur-slow: 0.5s;
+  --dur-fade: 0.65s;
+}
+
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fade-in {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 /* ============================================================
@@ -91,13 +220,14 @@ html {
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: var(--leading-body);
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Grain texture overlay */
+/* Grain texture overlay — the single most distinctive visual
+   signature. Subtle SVG fractal-noise at 3.2% opacity. */
 html::after {
   content: '';
   position: fixed;
@@ -113,14 +243,12 @@ html::after {
 body {
   min-height: 100vh;
   margin: 0;
-  /* No nav padding-top compensation — the nav uses position: sticky now,
-     so it lives in normal document flow and doesn't overlap content. */
 }
 
 a {
   color: var(--color-link);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color var(--dur-fast) ease;
 }
 
 a:hover {
@@ -134,44 +262,57 @@ img {
 }
 
 /* ============================================================
+   FOCUS — every interactive element gets a visible ring
+   ============================================================ */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* ============================================================
    TYPOGRAPHY
    ============================================================ */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-body);
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
   color: var(--color-text);
 }
 
 /* Display headings (page titles, hero name) — Parisine Bold, upright */
 .display {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   font-style: normal;
   font-optical-sizing: auto;
-  line-height: 1.05;
+  line-height: var(--leading-tight);
 }
 
 /* ============================================================
    LAYOUT UTILITIES
    ============================================================ */
 .container {
-  max-width: 900px;
+  max-width: var(--container-narrow);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 var(--container-pad);
 }
 
 .container--wide {
-  max-width: 1200px;
+  max-width: var(--container-wide);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 var(--container-pad);
 }
 
 /* ============================================================
    ANIMATION UTILITIES
    ============================================================ */
 .animate-fade-up {
-  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up var(--dur-fade) var(--ease-out-soft) both;
 }
 
 .animate-delay-1 { animation-delay: 80ms; }
@@ -181,9 +322,23 @@ h1, h2, h3, h4, h5, h6 {
 .animate-delay-5 { animation-delay: 460ms; }
 
 /* ============================================================
+   REDUCED MOTION — short-circuit all animation/transition
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
    LEAFLET OVERRIDES
    ============================================================ */
 .leaflet-container {
   font-family: var(--font-body);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-lg);
 }

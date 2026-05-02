@@ -415,33 +415,18 @@ const personJsonLd = {
     padding: 1.75rem 1.75rem 1.5rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
+    border-radius: var(--radius-lg);
     color: var(--color-text);
-    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color var(--dur-base) ease, transform var(--dur-base) ease, box-shadow var(--dur-base) ease;
     min-height: 180px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .section-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 60%, rgba(58, 99, 71, 0.06) 100%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
   }
 
   @media (hover: hover) {
     .section-card:hover {
       border-color: var(--color-accent);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+      box-shadow: var(--shadow-hover);
       color: var(--color-text);
-    }
-
-    .section-card:hover::before {
-      opacity: 1;
     }
   }
 
