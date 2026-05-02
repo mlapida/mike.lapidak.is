@@ -50,14 +50,18 @@
 }
 
 /* ============================================================
-   FONTS
-   When Acumin Pro Typekit is ready:
-   - Replace 'DM Sans' with 'acumin-pro' in --font-body
-   - Remove the Google Fonts link in Base.astro
+   FONTS — all via Adobe Fonts kit mjy4jau
+   - Display: Parisine Bold (parisine-std @ 700, upright) for headings
+   - Body: Parisine (parisine-std @ 400)
+   - Accent: Caslon Italic (adobe-caslon-pro) for italic accent text
+     (year labels, blockquotes, post lede, photo captions, etc.)
+   Caslon must be added to the kit for the accent role to render in
+   Caslon; until then it falls back to Georgia italic.
    ============================================================ */
 :root {
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'DM Sans', 'acumin-pro', system-ui, sans-serif;
+  --font-display: 'parisine-std', system-ui, sans-serif;
+  --font-body: 'parisine-std', system-ui, sans-serif;
+  --font-accent: 'adobe-caslon-pro', Georgia, serif;
 }
 
 /* ============================================================
@@ -139,10 +143,11 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text);
 }
 
-/* Display headings (page titles, hero name) use the serif display font */
+/* Display headings (page titles, hero name) — Parisine Bold, upright */
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 700;
+  font-style: normal;
   font-optical-sizing: auto;
   line-height: 1.05;
 }

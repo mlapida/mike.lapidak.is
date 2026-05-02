@@ -129,6 +129,10 @@ const articleJsonLd = {
     padding: 3rem 0 4rem;
   }
 
+  /* Detail pages use a tight editorial column (42rem) for everything —
+     hero, header, body, tags, pager. The narrower measure is intentional
+     for prose reading flow, even though it's narrower than the /posts/
+     index container. */
   .post__container {
     max-width: 42rem;
   }
@@ -185,8 +189,7 @@ const articleJsonLd = {
 
   .post__title {
     font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
+    font-weight: 700;
     font-size: clamp(2rem, 5vw, 3rem);
     line-height: 1.08;
     letter-spacing: -0.02em;
@@ -215,10 +218,9 @@ const articleJsonLd = {
 
   .post__body :global(h2) {
     font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 1.2;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.25;
     letter-spacing: -0.015em;
     margin: 2.5rem 0 0.75rem;
     color: var(--color-text);
@@ -251,6 +253,7 @@ const articleJsonLd = {
   }
 
   .post__body :global(em) {
+    font-family: var(--font-accent);
     font-style: italic;
   }
 
@@ -259,7 +262,9 @@ const articleJsonLd = {
     padding: 0 0 0 1rem;
     border-left: 2px solid var(--color-accent);
     color: var(--color-text-muted);
+    font-family: var(--font-accent);
     font-style: italic;
+    font-size: 1.1em;
   }
 
   .post__body :global(ul),
@@ -289,7 +294,8 @@ const articleJsonLd = {
   }
 
   .post__body :global(figcaption) {
-    font-size: 0.85rem;
+    font-family: var(--font-accent);
+    font-size: 0.95rem;
     color: var(--color-text-muted);
     text-align: center;
     margin-top: 0.5rem;
@@ -304,7 +310,8 @@ const articleJsonLd = {
   }
 
   .post__body :global(p:has(> img:only-child) + p) {
-    font-size: 0.875rem;
+    font-family: var(--font-accent);
+    font-size: 0.95rem;
     line-height: 1.5;
     color: var(--color-text-muted);
     text-align: center;
