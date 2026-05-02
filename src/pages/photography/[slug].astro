@@ -43,7 +43,7 @@ const exifFields = [
 
 const descParts = [location, dateFormatted];
 if (camera) descParts.push(camera);
-const description = `${title} — ${descParts.join(' · ')}`;
+const description = `${title} · ${descParts.join(' · ')}`;
 
 const siteUrl = 'https://mike.lapidak.is';
 const imageAbsolute = new URL(image, siteUrl).toString();
@@ -183,9 +183,13 @@ const jsonLd = {
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+      const accentColor = getComputedStyle(document.documentElement)
+        .getPropertyValue('--color-accent')
+        .trim() || '#3a6347';
+
       L.circleMarker([lat, lng], {
         radius: 6,
-        fillColor: '#3a6347',
+        fillColor: accentColor,
         fillOpacity: 1,
         color: '#fff',
         weight: 2,

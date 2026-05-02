@@ -111,6 +111,7 @@ const personJsonLd = {
                             year: 'numeric',
                             month: 'short',
                             day: 'numeric',
+                            timeZone: 'UTC',
                           })}
                         </time>
                         {tags.length > 0 && (
@@ -189,7 +190,7 @@ const personJsonLd = {
     object-fit: cover;
     background: var(--color-surface);
     border: 2px solid var(--color-border);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-soft);
   }
 
   .hero__name {

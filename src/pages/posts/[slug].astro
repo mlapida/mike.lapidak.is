@@ -28,6 +28,7 @@ const dateFormatted = publish_date!.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
   year: 'numeric',
+  timeZone: 'UTC',
 });
 const dateISO = publish_date!.toISOString().split('T')[0];
 const readMinutes = word_count ? Math.max(1, Math.round(word_count / 220)) : null;

@@ -85,7 +85,6 @@ These files contain site content and can be edited independently of the Astro te
 | `publish_date` | date | required for `published` posts; coerced from string |
 | `modified_date` | date | optional |
 | `slug` | string | required, kebab-case, used as the URL segment |
-| `source_url` | string (URL) | optional, points at the original empty.coffee URL when applicable |
 | `author` | string | defaults to `Mike Lapidakis` |
 | `word_count` | int | optional, used to compute read-time |
 | `feature_image` | string path | optional, e.g. `/post-images/<slug>/feature.jpg` |
@@ -94,7 +93,7 @@ These files contain site content and can be edited independently of the Astro te
 
 **Body images** live at `public/post-images/<slug>/<filename>`. **Feature/hero images** live at `public/post-images/<slug>/feature.<ext>`. The detail page renders the feature image at the top of the article (16:9, `object-fit: cover`) and uses it for OG/Twitter and Article JSON-LD `image`.
 
-**Slug note:** all post slugs are path-preserving from the original empty.coffee URLs **except** `nextdns-cacheing-unifi-dream-machine` → `nextdns-caching-unifi-dream-machine` (typo correction). The feature-image migration script has a remap table so it can still find the Ghost source.
+**Slug note:** all post slugs are path-preserving from the original empty.coffee URLs **except** `nextdns-cacheing-unifi-dream-machine` → `nextdns-caching-unifi-dream-machine` (typo correction). When configuring the empty.coffee → mike.lapidak.is 301 redirects, that one URL needs an explicit remap.
 
 ## Photo Sync Pipeline
 
@@ -145,9 +144,12 @@ The original feature/hero images were imported via a one-shot script (deleted af
 
 ## Fonts
 
-- **Display:** Fraunces (Google Fonts) · italic serif for headings
-- **Body:** DM Sans (Google Fonts) · `var(--font-body)`
-- **Adobe Fonts placeholder:** Uncomment `<link rel="stylesheet" href="https://use.typekit.net/YOURKITID.css" />` in `Base.astro` when kit ID is available
+Both ship via the Adobe Fonts kit `mjy4jau`:
+
+- **Display + body:** Parisine (`parisine-std`) — humanist sans designed for the Paris Métro signage system. Used at weights 300 / 400 / 500 / 600 / 700.
+- **Italic accent:** Adobe Caslon Pro Italic (`adobe-caslon-pro`). Pull-quotes, year labels, blockquotes, photo captions, the ML monogram. Never roman, never body. Falls back to `'Big Caslon', 'Hoefler Text', Georgia, serif` if the kit fails to load.
+
+Loaded via `<link rel="stylesheet" href="https://use.typekit.net/mjy4jau.css">` in `Base.astro`. CSS variables in `global.css`: `--font-display`, `--font-body`, `--font-accent`.
 
 ## Color System
 
@@ -217,7 +219,7 @@ Currently `position: sticky; top: 0` (after the prior session's six-attempt rebu
 
 ## Test Suite
 
-Run with `npx vitest run` (210 tests across 9 files). Tests require a completed `npm run build` first · build tests read from `dist/`.
+Run with `npx vitest run` (209 tests across 9 files). Tests require a completed `npm run build` first · build tests read from `dist/`.
 
 ### Unit tests (`tests/unit/`) · no build required
 
@@ -233,7 +235,7 @@ Run with `npx vitest run` (210 tests across 9 files). Tests require a completed 
 | File | What it covers |
 |------|---------------|
 | `routes.test.ts` | Top-level pages, all 17 photo detail routes, both collection routes; `/posts/` index + pagination (`/posts/2/`, `/posts/3/`); 23 published post detail dirs; every detail has a sibling `.md` companion; `/rss.xml` exists; post-detail hero image renders from `/post-images/<slug>/feature.*`; homepage Writing feed thumbnails reference `/post-images/<slug>/feature.*` |
-| `sitemap.test.ts` | `sitemap-index.xml` and `sitemap-0.xml` structure; total `<loc>` count is 49 (drops to 48 after `/debug-nav/` is removed); contains `/posts/`, `/posts/2/`, `/posts/3/`, sample post slugs, all photos and collections; does NOT contain `/rss.xml`, `/llms.txt`, or `.md` companions |
+| `sitemap.test.ts` | `sitemap-index.xml` and `sitemap-0.xml` structure; total `<loc>` count is 48; contains `/posts/`, `/posts/2/`, `/posts/3/`, sample post slugs, all photos and collections; does NOT contain `/rss.xml`, `/llms.txt`, or `.md` companions |
 | `meta.test.ts` | Page titles use `·` separator (no em-dash anywhere in any rendered `<title>`); OG/Twitter image fallback; canonical URLs; nav active state; footer has 7 links (6 socials + RSS, with RSS pointing to `/rss.xml`); RSS auto-discovery `<link rel="alternate">` on every page; Posts index titles for page 1 and page 2; post-detail og:image and twitter:image use the absolute feature image URL |
 | `json-ld.test.ts` | `schema.org/Person` JSON-LD on homepage; `schema.org/Photograph` JSON-LD on photo detail pages; `schema.org/Article` JSON-LD on post detail pages (headline, url, datePublished, image, author/publisher); sanity test for posts without a feature image |
 | `rss.test.ts` | `/rss.xml` is RSS 2.0; channel title contains "Mike Lapidakis" + "Writing" with no em-dash; ≥23 items; every link is `/posts/<slug>/`; every item has a feature-image `<enclosure>` with `image/jpeg` or `image/png` MIME; pubDates parse and are descending; drafts excluded; no `draft`/`published`/`empty-coffee` literal categories |
@@ -248,4 +250,3 @@ Run with `npx vitest run` (210 tests across 9 files). Tests require a completed 
 - Vault → repo posts sync script (so future writing flows from Obsidian without manual export)
 - Comments on post detail pages (Giscus or Isso, undecided)
 - Visual polish pass beyond the AI-default aesthetic (waiting on reference sites)
-- Delete `src/pages/debug-nav.astro` once the nav bug is resolved (also drops sitemap count from 49 → 48)

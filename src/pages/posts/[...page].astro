@@ -73,7 +73,7 @@ const isFirstPage = page.currentPage === 1;
                     <div class="posts__body">
                       <div class="posts__meta">
                         <time class="posts__date" datetime={post.data.publish_date!.toISOString().split('T')[0]}>
-                          {post.data.publish_date!.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                          {post.data.publish_date!.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })}
                         </time>
                         {tag && <span class="posts__tag">{tag}</span>}
                       </div>
