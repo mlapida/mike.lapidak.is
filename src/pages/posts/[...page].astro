@@ -33,11 +33,11 @@ const isFirstPage = page.currentPage === 1;
   <Nav />
 
   <main class="posts">
-    <div class="container">
-      <header class="posts__header">
-        <div class="posts__eyebrow-row">
-          <span class="posts__eyebrow">Writing</span>
-          <a href="/rss.xml" class="posts__rss" aria-label="Subscribe via RSS">
+    <section class="page-header">
+      <div class="container">
+        <div class="page-eyebrow-row">
+          <p class="page-eyebrow">Writing</p>
+          <a href="/rss.xml" class="page-rss" aria-label="Subscribe via RSS">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 11a9 9 0 0 1 9 9" />
               <path d="M4 4a16 16 0 0 1 16 16" />
@@ -46,12 +46,14 @@ const isFirstPage = page.currentPage === 1;
             <span>RSS</span>
           </a>
         </div>
-        <h1 class="posts__title display">What I'm working on, what I'm discovering</h1>
-        <p class="posts__lede">
-          Notes from the homelab, AWS, and the tools I'm using to think. Originally at <a href="https://empty.coffee" target="_blank" rel="noopener">empty.coffee</a>, now consolidated here.
+        <h1 class="page-title display">What I'm working on, what I'm discovering</h1>
+        <p class="page-desc">
+          Notes from the homelab, AWS, and the tools I'm using to think.
         </p>
-      </header>
+      </div>
+    </section>
 
+    <div class="container">
       {years.map(year => (
         <section class="posts__year-group">
           <h2 class="posts__year">{year}</h2>
@@ -111,71 +113,67 @@ const isFirstPage = page.currentPage === 1;
 
 <style>
   .posts {
-    padding: 4rem 0 5rem;
+    padding: 0 0 5rem;
   }
 
-  .posts__header {
-    max-width: 36rem;
-    margin: 0 0 4rem;
+  .page-header {
+    padding: 4.5rem 0 3rem;
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .posts__eyebrow-row {
+  .page-eyebrow-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin: 0 0 0.75rem;
   }
 
-  .posts__eyebrow {
-    display: inline-block;
-    font-size: 0.7rem;
+  .page-eyebrow {
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     color: var(--color-text-muted);
+    margin: 0;
   }
 
-  .posts__rss {
+  .page-rss {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     color: var(--color-accent);
     transition: color 0.15s ease;
   }
 
   @media (hover: hover) {
-    .posts__rss:hover {
+    .page-rss:hover {
       color: var(--color-accent-hover);
     }
   }
 
-  .posts__title {
+  .page-title {
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(2rem, 5vw, 3rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin: 0 0 1.25rem;
+    font-size: clamp(2.75rem, 6vw, 4.25rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0 0 1rem;
     color: var(--color-text);
   }
 
-  .posts__lede {
-    font-size: 1.05rem;
-    line-height: 1.65;
+  .page-desc {
+    font-size: 1rem;
     color: var(--color-text-muted);
+    max-width: 480px;
     margin: 0;
-  }
-
-  .posts__lede a {
-    color: var(--color-accent);
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 1px;
+    line-height: 1.65;
+    font-weight: 300;
   }
 
   .posts__year-group {
@@ -338,11 +336,11 @@ const isFirstPage = page.currentPage === 1;
 
   @media (max-width: 640px) {
     .posts {
-      padding: 2.5rem 0 3rem;
+      padding: 0 0 3rem;
     }
 
-    .posts__header {
-      margin-bottom: 2.5rem;
+    .page-header {
+      padding: 3rem 0 2rem;
     }
 
     .posts__link {
