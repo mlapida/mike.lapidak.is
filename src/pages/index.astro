@@ -249,7 +249,7 @@ const personJsonLd = {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--color-text-muted);
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
   }
 
   @media (hover: hover) {
@@ -305,7 +305,7 @@ const personJsonLd = {
     gap: 1rem;
     padding: 1rem 0;
     color: var(--color-text);
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
     align-items: start;
   }
 
@@ -322,7 +322,7 @@ const personJsonLd = {
   .post-thumb {
     width: 4.5rem;
     height: 4.5rem;
-    border-radius: 0.3rem;
+    border-radius: var(--radius-sm);
     overflow: hidden;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -334,7 +334,7 @@ const personJsonLd = {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.25s ease;
+    transition: transform var(--dur-base) ease;
   }
 
   .post-body {
@@ -382,7 +382,7 @@ const personJsonLd = {
     font-weight: 500;
     font-size: 0.925rem;
     line-height: 1.4;
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
     margin: 0;
   }
 
@@ -460,7 +460,7 @@ const personJsonLd = {
     font-size: 1rem;
     color: var(--color-accent);
     align-self: end;
-    transition: transform 0.2s ease;
+    transition: transform var(--dur-base) ease;
   }
 
   @media (hover: hover) {
@@ -482,7 +482,7 @@ const personJsonLd = {
     color: var(--color-accent);
     font-weight: 500;
     font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
   }
 
   @media (hover: hover) {

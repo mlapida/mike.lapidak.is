@@ -226,7 +226,7 @@ const jsonLd = {
     height: auto;
     object-fit: contain;
     display: block;
-    box-shadow: 0 8px 48px rgba(0, 0, 0, 0.18);
+    box-shadow: var(--shadow-photo);
   }
 
   /* ── Metadata panel ── */
@@ -250,7 +250,7 @@ const jsonLd = {
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
   }
 
   @media (hover: hover) {
@@ -316,7 +316,7 @@ const jsonLd = {
   /* Map */
   .photo-map {
     height: 200px;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid var(--color-border);
   }
@@ -348,7 +348,7 @@ const jsonLd = {
     font-size: 0.8rem;
     color: var(--color-text-muted);
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
     line-height: 1.4;
   }
 

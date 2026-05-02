@@ -171,7 +171,7 @@ const { name, photos } = Astro.props;
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
   }
 
   @media (hover: hover) {
@@ -207,7 +207,7 @@ const { name, photos } = Astro.props;
     height: 100%;
     display: block;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform var(--dur-slow) ease;
   }
 
   @media (hover: hover) {
@@ -225,7 +225,7 @@ const { name, photos } = Astro.props;
     justify-content: flex-end;
     padding: 1rem;
     opacity: 0;
-    transition: opacity 0.25s ease;
+    transition: opacity var(--dur-base) ease;
     pointer-events: none;
   }
 
