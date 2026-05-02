@@ -74,18 +74,14 @@ See `.env.example` for a full template.
 
 ## Post Image Migration
 
-Two idempotent scripts manage post images. Both are safe to re-run.
+Body images for imported posts are managed by an idempotent script (safe to re-run):
 
 ```bash
-node scripts/migrate-post-images.mjs              # body images: download from media.empty.coffee → public/post-images/<slug>/
+node scripts/migrate-post-images.mjs              # download from media.empty.coffee → public/post-images/<slug>/
 node scripts/migrate-post-images.mjs --dry-run
-
-node scripts/migrate-feature-images.mjs           # hero/feature images: pull from Ghost Content API → public/post-images/<slug>/feature.<ext>
-node scripts/migrate-feature-images.mjs --dry-run
-node scripts/migrate-feature-images.mjs --force   # re-download cached files
 ```
 
-The feature-image script reads Ghost credentials from `~/.config/empty-coffee-publish/content-api` (env-style file with `GHOST_CONTENT_URL` and `GHOST_CONTENT_KEY`) and updates each post's `feature_image` frontmatter field after download.
+Feature/hero images live at `public/post-images/<slug>/feature.<ext>` and are referenced from each post's `feature_image` frontmatter field.
 
 ## Editable Content
 
@@ -134,7 +130,6 @@ scripts/
   sync-immich.mjs                      # Immich → R2 + .md sync
   setup-sync.sh                        # one-time Docker sidecar setup
   migrate-post-images.mjs              # body images for posts
-  migrate-feature-images.mjs           # hero images for posts (Ghost Content API)
 public/
   favicon-16x16.png
   favicon-32x32.png

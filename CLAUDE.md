@@ -114,20 +114,9 @@ Collection name comes from album description field: `Title: Paris` → collectio
 
 ## Post Image Pipeline
 
-Two idempotent Node scripts manage post images. Both can be re-run safely; both skip work that's already done.
+`scripts/migrate-post-images.mjs` is the body-image migration tool: scans `src/content/posts/*.md` for markdown image references to `media.empty.coffee` or `storage.ghost.io`, downloads them to `public/post-images/<slug>/<filename>`, and rewrites the markdown URLs to the local path. Idempotent. Flags: `--dry-run`.
 
-**`scripts/migrate-post-images.mjs`** · body images.
-1. Scans `src/content/posts/*.md` for image markdown referencing `media.empty.coffee` or `storage.ghost.io`
-2. Downloads each to `public/post-images/<slug>/<filename>`
-3. Rewrites the markdown image URLs to the local path
-4. Flags: `--dry-run`
-
-**`scripts/migrate-feature-images.mjs`** · hero/feature images.
-1. Reads Ghost Content API credentials from `~/.config/empty-coffee-publish/content-api` (env-style file with `GHOST_CONTENT_URL` and `GHOST_CONTENT_KEY`)
-2. Fetches all Ghost posts (paginated)
-3. For each local post (matched by slug, with the `caching ↔ cacheing` remap), downloads `feature_image` to `public/post-images/<slug>/feature.<ext>`
-4. Inserts/updates `feature_image: /post-images/<slug>/feature.<ext>` in the post's frontmatter
-5. Flags: `--dry-run`, `--force` (re-download cached files)
+The original feature/hero images were imported via a one-shot script (deleted after use). Future post additions should commit feature images directly to `public/post-images/<slug>/feature.<ext>` and reference them via the `feature_image` frontmatter field.
 
 ## Photography Architecture
 
