@@ -309,6 +309,81 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================
+   PAGE HEADER — shared across /work/, /photography/, /posts/,
+   /photography/collection/<slug>/. Per-page scoped styles can
+   override individual rules (e.g. collection page's smaller
+   page-desc and accent-colored eyebrow).
+   ============================================================ */
+.page-header {
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-eyebrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.page-eyebrow {
+  font-size: 0.75rem;
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--color-text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.page-eyebrow-row .page-eyebrow {
+  margin: 0;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+  margin: 0 0 1rem;
+  color: var(--color-text);
+}
+
+.page-desc {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  font-weight: var(--weight-light);
+  line-height: 1.65;
+  max-width: 480px;
+  margin: 0;
+}
+
+.page-rss {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--color-accent);
+  transition: color var(--dur-fast) ease;
+}
+
+@media (hover: hover) {
+  .page-rss:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-header {
+    padding: 3rem 0 2rem;
+  }
+}
+
+/* ============================================================
    ANIMATION UTILITIES
    ============================================================ */
 .animate-fade-up {

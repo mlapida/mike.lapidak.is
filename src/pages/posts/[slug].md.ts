@@ -1,5 +1,6 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
+import { displayableTags } from '../../lib/posts';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection('posts');
@@ -25,9 +26,7 @@ export const GET: APIRoute = ({ props }) => {
   const dateISO = publish_date.toISOString().split('T')[0];
   const readMin = word_count ? Math.max(1, Math.round(word_count / 220)) : null;
 
-  const cleanTags = tags
-    .filter((t: string) => !['empty-coffee', 'published', 'draft', 'idea'].includes(t))
-    .map((t: string) => t.replace(/-/g, ' '));
+  const cleanTags = displayableTags(tags).map(t => t.replace(/-/g, ' '));
 
   const metaParts = [`Published ${dateISO}`];
   if (readMin) metaParts.push(`${readMin} min read`);

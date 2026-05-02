@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
+import { displayableTags } from '../../lib/posts';
 
 export async function getStaticPaths() {
   const all = await getCollection('posts');
@@ -95,13 +96,11 @@ const articleJsonLd = {
         <Content />
       </div>
 
-      {tags.length > 0 && (
+      {displayableTags(tags).length > 0 && (
         <ul class="post__tags" aria-label="tags">
-          {tags
-            .filter(t => !['empty-coffee', 'published', 'draft', 'idea'].includes(t))
-            .map(t => (
-              <li class="post__tag">{t.replace(/-/g, ' ')}</li>
-            ))}
+          {displayableTags(tags).map(t => (
+            <li class="post__tag">{t.replace(/-/g, ' ')}</li>
+          ))}
         </ul>
       )}
 
@@ -144,7 +143,7 @@ const articleJsonLd = {
 
   .post__hero {
     margin: 0;
-    border-radius: 0.4rem;
+    border-radius: var(--radius-md);
     overflow: hidden;
     background: var(--color-surface);
   }
@@ -175,7 +174,7 @@ const articleJsonLd = {
   .post__back {
     color: var(--color-accent);
     font-weight: 500;
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
   }
 
   @media (hover: hover) {
@@ -238,7 +237,7 @@ const articleJsonLd = {
   .post__body :global(a) {
     color: var(--color-accent);
     border-bottom: 1px solid color-mix(in oklab, var(--color-accent) 35%, transparent);
-    transition: border-color 0.15s ease, color 0.15s ease;
+    transition: border-color var(--dur-fast) ease, color var(--dur-fast) ease;
   }
 
   @media (hover: hover) {
@@ -287,7 +286,7 @@ const articleJsonLd = {
     max-width: 100%;
     height: auto;
     margin: 2rem auto;
-    border-radius: 0.25rem;
+    border-radius: var(--radius-xs);
   }
 
   .post__body :global(figure) {
@@ -333,14 +332,14 @@ const articleJsonLd = {
     font-size: 0.875em;
     background: var(--color-surface);
     padding: 0.1em 0.35em;
-    border-radius: 0.2rem;
+    border-radius: var(--radius-xs);
     border: 1px solid var(--color-border);
   }
 
   .post__body :global(pre) {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 0.4rem;
+    border-radius: var(--radius-md);
     padding: 1rem 1.25rem;
     margin: 1.5rem 0;
     overflow-x: auto;
@@ -416,9 +415,9 @@ const articleJsonLd = {
     padding: 1rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 0.4rem;
+    border-radius: var(--radius-md);
     color: var(--color-text);
-    transition: border-color 0.15s ease, transform 0.15s ease;
+    transition: border-color var(--dur-fast) ease, transform var(--dur-fast) ease;
   }
 
   .post__pager-link--next {

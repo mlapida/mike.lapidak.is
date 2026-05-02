@@ -4,6 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
+import { displayableTags } from '../../lib/posts';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const all = await getCollection('posts');
@@ -59,8 +60,7 @@ const isFirstPage = page.currentPage === 1;
           <h2 class="posts__year">{year}</h2>
           <ol class="posts__list">
             {byYear.get(year)!.map(post => {
-              const tag = post.data.tags
-                .filter(t => !['empty-coffee', 'published', 'draft', 'idea'].includes(t))
+              const tag = displayableTags(post.data.tags)
                 .map(t => t.replace(/-/g, ' '))[0];
               return (
                 <li class="posts__item">
@@ -116,65 +116,6 @@ const isFirstPage = page.currentPage === 1;
     padding: 0 0 5rem;
   }
 
-  .page-header {
-    padding: 4.5rem 0 3rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .page-eyebrow-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin: 0 0 0.75rem;
-  }
-
-  .page-eyebrow {
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-text-muted);
-    margin: 0;
-  }
-
-  .page-rss {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-    transition: color 0.15s ease;
-  }
-
-  @media (hover: hover) {
-    .page-rss:hover {
-      color: var(--color-accent-hover);
-    }
-  }
-
-  .page-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.75rem, 6vw, 4.25rem);
-    line-height: 1;
-    letter-spacing: -0.025em;
-    margin: 0 0 1rem;
-    color: var(--color-text);
-  }
-
-  .page-desc {
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    max-width: 480px;
-    margin: 0;
-    line-height: 1.65;
-    font-weight: 300;
-  }
-
   .posts__year-group {
     margin-top: 3rem;
   }
@@ -211,7 +152,7 @@ const isFirstPage = page.currentPage === 1;
     padding: 1rem 0;
     color: var(--color-text);
     align-items: start;
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
   }
 
   @media (hover: hover) {
@@ -227,7 +168,7 @@ const isFirstPage = page.currentPage === 1;
   .posts__thumb {
     width: 4.5rem;
     height: 4.5rem;
-    border-radius: 0.3rem;
+    border-radius: var(--radius-sm);
     overflow: hidden;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -239,7 +180,7 @@ const isFirstPage = page.currentPage === 1;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.25s ease;
+    transition: transform var(--dur-base) ease;
   }
 
   .posts__meta {
@@ -280,7 +221,7 @@ const isFirstPage = page.currentPage === 1;
     font-size: 1rem;
     line-height: 1.4;
     margin: 0 0 0.25rem;
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
     color: var(--color-text);
   }
 
@@ -316,7 +257,7 @@ const isFirstPage = page.currentPage === 1;
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--color-accent);
-    transition: color 0.15s ease;
+    transition: color var(--dur-fast) ease;
   }
 
   @media (hover: hover) {
@@ -336,10 +277,6 @@ const isFirstPage = page.currentPage === 1;
   @media (max-width: 640px) {
     .posts {
       padding: 0 0 3rem;
-    }
-
-    .page-header {
-      padding: 3rem 0 2rem;
     }
 
     .posts__link {
