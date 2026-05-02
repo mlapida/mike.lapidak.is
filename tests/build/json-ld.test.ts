@@ -102,3 +102,63 @@ describe('Photo pages each have exactly 1 Photograph JSON-LD block', () => {
     expect(photoBlocks.length).toBe(1);
   });
 });
+
+describe('Post detail Article JSON-LD (review-weatherflow-tempest-weather-station)', () => {
+  const path = 'posts/review-weatherflow-tempest-weather-station/index.html';
+
+  it('@type is Article', () => {
+    const blocks = extractJsonLd(path);
+    const article = blocks.find((b: any) => b['@type'] === 'Article') as any;
+    expect(article).toBeDefined();
+  });
+
+  it('headline matches the post title', () => {
+    const blocks = extractJsonLd(path);
+    const article = blocks.find((b: any) => b['@type'] === 'Article') as any;
+    expect(article.headline).toBe('A Month with the Tempest Weather Station');
+  });
+
+  it('url is the absolute post URL with trailing slash', () => {
+    const blocks = extractJsonLd(path);
+    const article = blocks.find((b: any) => b['@type'] === 'Article') as any;
+    expect(article.url).toBe(
+      'https://mike.lapidak.is/posts/review-weatherflow-tempest-weather-station/',
+    );
+  });
+
+  it('datePublished matches YYYY-MM-DD', () => {
+    const blocks = extractJsonLd(path);
+    const article = blocks.find((b: any) => b['@type'] === 'Article') as any;
+    expect(article.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  });
+
+  it('image is the absolute feature image URL', () => {
+    const blocks = extractJsonLd(path);
+    const article = blocks.find((b: any) => b['@type'] === 'Article') as any;
+    expect(article.image).toBe(
+      'https://mike.lapidak.is/post-images/review-weatherflow-tempest-weather-station/feature.jpeg',
+    );
+  });
+
+  it('author and publisher are Person Mike Lapidakis', () => {
+    const blocks = extractJsonLd(path);
+    const article = blocks.find((b: any) => b['@type'] === 'Article') as any;
+    expect(article.author['@type']).toBe('Person');
+    expect(article.author.name).toBe('Mike Lapidakis');
+    expect(article.publisher.name).toBe('Mike Lapidakis');
+  });
+});
+
+describe('Posts without feature_image still produce valid Article JSON-LD', () => {
+  // Sanity: the schema permits a missing feature image. Spot-check the
+  // first published post and verify Article validates either way.
+  const path = 'posts/an-ode-to-apples-hide-my-email/index.html';
+
+  it('Article block exists and has headline + datePublished', () => {
+    const blocks = extractJsonLd(path);
+    const article = blocks.find((b: any) => b['@type'] === 'Article') as any;
+    expect(article).toBeDefined();
+    expect(typeof article.headline).toBe('string');
+    expect(article.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  });
+});

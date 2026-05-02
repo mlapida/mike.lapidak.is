@@ -16,7 +16,7 @@ const {
 
 const siteUrl = site.url;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
-const pageTitle = title === 'Mike Lapidakis' ? title : `${title} — Mike Lapidakis`;
+const pageTitle = title === 'Mike Lapidakis' ? title : `${title} · Mike Lapidakis`;
 const ogImage = image
   ? new URL(image, siteUrl).toString()
   : `${siteUrl}/social-card.jpg`;
@@ -38,7 +38,7 @@ const ogImage = image
         if (meta) meta.setAttribute('content', colors[theme]);
       })();
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Primary meta -->
     <title>{pageTitle}</title>
@@ -46,6 +46,7 @@ const ogImage = image
     <meta name="author" content="Mike Lapidakis" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Mike Lapidakis · Writing" href="/rss.xml" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -63,17 +64,10 @@ const ogImage = image
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Fonts: Fraunces (display) + DM Sans (body) via Google Fonts -->
-    <!-- When Typekit kit is ready, replace DM Sans with acumin-pro and remove this link -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..500;1,9..40,300&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..500&display=swap"
-    />
-
-    <!-- Adobe Fonts (Acumin Pro) — uncomment and add kit ID when ready -->
-    <!-- <link rel="stylesheet" href="https://use.typekit.net/YOURKITID.css" /> -->
+    <!-- Fonts: Parisine (body + display) + Adobe Caslon Pro Italic (accent), via Adobe Fonts kit mjy4jau -->
+    <link rel="preconnect" href="https://use.typekit.net" />
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/mjy4jau.css" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

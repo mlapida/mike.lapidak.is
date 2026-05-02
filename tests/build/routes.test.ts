@@ -83,23 +83,57 @@ describe('static files', () => {
   });
 });
 
-describe('feed thumbnails', () => {
-  it('dist/feed-thumbs/ directory exists', () => {
-    expect(existsSync(distPath('feed-thumbs'))).toBe(true);
-  });
-
-  it('dist/feed-thumbs/ contains at least one feed-N.* file', () => {
-    const files = readdirSync(distPath('feed-thumbs'));
-    const thumbs = files.filter(f => /^feed-\d+\.\w+$/.test(f));
-    expect(thumbs.length).toBeGreaterThan(0);
-  });
-
-  it('homepage post thumbnails reference /feed-thumbs/ paths', () => {
+describe('homepage Writing feed thumbnails', () => {
+  it('homepage has at least 1 .post-thumb img with /post-images/.../feature.* src', () => {
     const $ = loadHtml('index.html');
     const thumbImgs = $('.post-thumb img');
     expect(thumbImgs.length).toBeGreaterThan(0);
     thumbImgs.each((_, el) => {
-      expect($(el).attr('src')).toMatch(/^\/feed-thumbs\/feed-\d+\./);
+      expect($(el).attr('src')).toMatch(/^\/post-images\/[^/]+\/feature\.(jpe?g|png)$/);
     });
+  });
+});
+
+describe('posts collection routes', () => {
+  it('dist/posts/index.html exists (page 1)', () => {
+    expect(existsSync(distPath('posts', 'index.html'))).toBe(true);
+  });
+
+  it('paginated pages exist (/posts/2/, /posts/3/)', () => {
+    expect(existsSync(distPath('posts', '2', 'index.html'))).toBe(true);
+    expect(existsSync(distPath('posts', '3', 'index.html'))).toBe(true);
+  });
+
+  it('exactly 23 published post detail directories under dist/posts/', () => {
+    const entries = readdirSync(distPath('posts'), { withFileTypes: true });
+    const dirs = entries
+      .filter(e => e.isDirectory())
+      .filter(e => !/^\d+$/.test(e.name)); // exclude pagination dirs
+    expect(dirs.length).toBe(23);
+  });
+
+  it('every post detail directory has a sibling .md companion route', () => {
+    const entries = readdirSync(distPath('posts'), { withFileTypes: true });
+    const slugs = entries
+      .filter(e => e.isDirectory() && !/^\d+$/.test(e.name))
+      .map(e => e.name);
+    for (const slug of slugs) {
+      expect(existsSync(distPath('posts', `${slug}.md`))).toBe(true);
+    }
+  });
+
+  it('dist/rss.xml exists', () => {
+    expect(existsSync(distPath('rss.xml'))).toBe(true);
+  });
+});
+
+describe('post detail markup (review-weatherflow-tempest-weather-station)', () => {
+  it('renders a hero image from /post-images/<slug>/feature.*', () => {
+    const $ = loadHtml('posts/review-weatherflow-tempest-weather-station/index.html');
+    const heroImg = $('.post__hero img');
+    expect(heroImg.length).toBe(1);
+    expect(heroImg.attr('src')).toMatch(
+      /^\/post-images\/review-weatherflow-tempest-weather-station\/feature\.jpe?g$/,
+    );
   });
 });

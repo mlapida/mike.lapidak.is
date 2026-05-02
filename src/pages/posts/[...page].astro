@@ -1,0 +1,364 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const all = await getCollection('posts');
+  const published = all
+    .filter(p => p.data.status === 'published' && p.data.publish_date)
+    .sort((a, b) => b.data.publish_date!.valueOf() - a.data.publish_date!.valueOf());
+  return paginate(published, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const byYear = new Map<number, typeof page.data>();
+for (const post of page.data) {
+  const year = post.data.publish_date!.getFullYear();
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+const isFirstPage = page.currentPage === 1;
+---
+
+<Base
+  title={isFirstPage ? 'Writing' : `Writing · page ${page.currentPage}`}
+  description="Long-form writing on homelab, self-hosted services, AWS, and the tools I'm using to think."
+>
+  <Nav />
+
+  <main class="posts">
+    <section class="page-header">
+      <div class="container">
+        <div class="page-eyebrow-row">
+          <p class="page-eyebrow">Writing</p>
+          <a href="/rss.xml" class="page-rss" aria-label="Subscribe via RSS">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 11a9 9 0 0 1 9 9" />
+              <path d="M4 4a16 16 0 0 1 16 16" />
+              <circle cx="5" cy="19" r="1" />
+            </svg>
+            <span>RSS</span>
+          </a>
+        </div>
+        <h1 class="page-title display">What I'm working on, what I'm discovering</h1>
+        <p class="page-desc">
+          Notes from the homelab, AWS, and the tools I'm using to think.
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+      {years.map(year => (
+        <section class="posts__year-group">
+          <h2 class="posts__year">{year}</h2>
+          <ol class="posts__list">
+            {byYear.get(year)!.map(post => {
+              const tag = post.data.tags
+                .filter(t => !['empty-coffee', 'published', 'draft', 'idea'].includes(t))
+                .map(t => t.replace(/-/g, ' '))[0];
+              return (
+                <li class="posts__item">
+                  <a href={`/posts/${post.data.slug}/`} class="posts__link">
+                    <div class="posts__thumb" aria-hidden="true">
+                      {post.data.feature_image && (
+                        <img src={post.data.feature_image} alt="" loading="lazy" decoding="async" />
+                      )}
+                    </div>
+                    <div class="posts__body">
+                      <div class="posts__meta">
+                        <time class="posts__date" datetime={post.data.publish_date!.toISOString().split('T')[0]}>
+                          {post.data.publish_date!.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })}
+                        </time>
+                        {tag && <span class="posts__tag">{tag}</span>}
+                      </div>
+                      <h3 class="posts__post-title">{post.data.title}</h3>
+                      {post.data.description && (
+                        <p class="posts__desc">{post.data.description}</p>
+                      )}
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      ))}
+
+      {page.lastPage > 1 && (
+        <nav class="posts__pager" aria-label="pagination">
+          <div class="posts__pager-side posts__pager-side--prev">
+            {page.url.prev && (
+              <a href={page.url.prev} class="posts__pager-link" rel="prev">&larr; Newer</a>
+            )}
+          </div>
+          <span class="posts__pager-counter">Page {page.currentPage} of {page.lastPage}</span>
+          <div class="posts__pager-side posts__pager-side--next">
+            {page.url.next && (
+              <a href={page.url.next} class="posts__pager-link" rel="next">Older &rarr;</a>
+            )}
+          </div>
+        </nav>
+      )}
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .posts {
+    padding: 0 0 5rem;
+  }
+
+  .page-header {
+    padding: 4.5rem 0 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-eyebrow-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .page-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .page-rss {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    transition: color 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .page-rss:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.75rem, 6vw, 4.25rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0 0 1rem;
+    color: var(--color-text);
+  }
+
+  .page-desc {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    max-width: 480px;
+    margin: 0;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .posts__year-group {
+    margin-top: 3rem;
+  }
+
+  .posts__year {
+    font-family: var(--font-accent);
+    font-weight: 400;
+    font-size: 1.05rem;
+    font-style: italic;
+    letter-spacing: 0.01em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.5rem;
+    text-transform: lowercase;
+  }
+
+  .posts__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .posts__item {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .posts__item:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .posts__link {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1.25rem;
+    padding: 1rem 0;
+    color: var(--color-text);
+    align-items: start;
+    transition: color 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .posts__link:hover .posts__post-title {
+      color: var(--color-accent);
+    }
+
+    .posts__link:hover .posts__thumb img {
+      transform: scale(1.04);
+    }
+  }
+
+  .posts__thumb {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .posts__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+  }
+
+  .posts__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .posts__date {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .posts__tag {
+    font-size: 0.7rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    padding: 0.1rem 0.5rem;
+    border-radius: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  .posts__body {
+    min-width: 0;
+  }
+
+  .posts__post-title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0 0 0.25rem;
+    transition: color 0.15s ease;
+    color: var(--color-text);
+  }
+
+  .posts__desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ---- Pager ---- */
+  .posts__pager {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .posts__pager-side {
+    display: flex;
+  }
+
+  .posts__pager-side--prev {
+    justify-content: flex-start;
+  }
+
+  .posts__pager-side--next {
+    justify-content: flex-end;
+  }
+
+  .posts__pager-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    transition: color 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .posts__pager-link:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+
+  .posts__pager-counter {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .posts {
+      padding: 0 0 3rem;
+    }
+
+    .page-header {
+      padding: 3rem 0 2rem;
+    }
+
+    .posts__link {
+      grid-template-columns: 3.75rem 1fr;
+      gap: 0.875rem;
+    }
+
+    .posts__thumb {
+      width: 3.75rem;
+      height: 3.75rem;
+    }
+
+    .posts__pager {
+      grid-template-columns: auto 1fr auto;
+      gap: 0.75rem;
+    }
+
+    .posts__pager-link {
+      font-size: 0.8rem;
+    }
+  }
+</style>

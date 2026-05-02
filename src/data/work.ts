@@ -2,7 +2,7 @@ export const spotlight = [
   {
     type: 'AWS Publication',
     title: 'Generative AI Security Scoping Matrix',
-    desc: 'A five-scope framework that gives security teams a common language for categorizing generative AI deployments — from consuming third-party apps to training foundation models — each mapped to distinct security responsibilities and controls.',
+    desc: 'A five-scope framework that gives security teams a common language for categorizing generative AI deployments, from consuming third-party apps to training foundation models, each mapped to distinct security responsibilities and controls.',
     meta: 'AWS Security Blog · re:Inforce 2024',
     links: [
       { label: 'Read', href: 'https://aws.amazon.com/blogs/security/securing-generative-ai-an-introduction-to-the-generative-ai-security-scoping-matrix/' },
@@ -12,7 +12,7 @@ export const spotlight = [
   {
     type: 'AWS Publication',
     title: 'Agentic AI Security Scoping Matrix',
-    desc: 'Extends the GenAI framework to autonomous systems, categorizing agentic AI across four scopes by level of agency and autonomy — from read-only, human-initiated tasks through self-initiating systems with minimal human oversight.',
+    desc: 'Extends the GenAI framework to autonomous systems, categorizing agentic AI across four scopes by level of agency and autonomy, from read-only, human-initiated tasks through self-initiating systems with minimal human oversight.',
     meta: 'AWS Security Blog · November 2025',
     links: [
       { label: 'Read', href: 'https://aws.amazon.com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/' },
@@ -45,7 +45,7 @@ export const experience = [
     role: 'Senior Manager, Specialist Solutions Architects',
     period: '2020 – 2025',
     location: 'Denver, CO',
-    description: 'Spent five years building specialist SA teams across Security, Networking, Resilience, Migration, and Generative AI for AWS\'s largest enterprise accounts. Grew the org from 7 to over 35, hiring across multiple technical domains. Stepped in as interim leader for a 50-person organization during a director transition — kept things moving while filling 8 open roles. Co-led the Generative AI Security Scoping Matrix, which became an AWS product at re:Inforce 2024. Promoted three times; tried to pay it forward and promoted six team members along the way. Amazon Bar Raiser.',
+    description: 'Spent five years building specialist SA teams across Security, Networking, Resilience, Migration, and Generative AI for AWS\'s largest enterprise accounts. Grew the org from 7 to over 35, hiring across multiple technical domains. Stepped in as interim leader for a 50-person organization during a director transition, keeping things moving while filling 8 open roles. Co-led the Generative AI Security Scoping Matrix, which became an AWS product at re:Inforce 2024. Promoted three times; tried to pay it forward and promoted six team members along the way. Amazon Bar Raiser.',
     tags: ['Org Design', 'Hiring & Development', 'Security', 'Networking', 'GenAI', 'Bar Raiser'],
   },
   {
@@ -107,7 +107,7 @@ export const talks: { type: string; title: string; event: string; year: string; 
     title: 'Lessons Learned from a Large-Scale Legacy Migration with Sysco (STG311)',
     event: 'AWS re:Invent',
     year: '2018',
-    desc: 'Presented alongside Sysco — a Fortune 50 company — on migrating mission-critical legacy business systems to AWS. Covered the ten commandments of enterprise migration and the results: 60% decrease in run costs, 30% improvement in performance, and 3× improvement in user accessibility.',
+    desc: 'Presented alongside Sysco (a Fortune 50 company) on migrating mission-critical legacy business systems to AWS. Covered the ten commandments of enterprise migration and the results: 60% decrease in run costs, 30% improvement in performance, and 3× improvement in user accessibility.',
     links: [{ label: 'Watch', href: 'https://www.youtube.com/watch?v=naPWVBDuuqw' }],
   },
   {

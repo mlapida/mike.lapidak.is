@@ -1,0 +1,11 @@
+# noindex on the .md companion routes — they duplicate /posts/<slug>/ HTML
+# pages and would split link equity if indexed. Crawlers and LLMs that
+# explicitly fetch them still get the content; search engines drop them.
+/posts/*.md
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=3600
+
+# llms.txt and any future llms-* files: text-format LLM hints.
+/llms.txt
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=3600

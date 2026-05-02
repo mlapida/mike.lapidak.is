@@ -31,7 +31,7 @@ const collections = [...collectionMap.entries()].sort(
 
 <Base
   title="Photography"
-  description="Photos by Mike Lapidakis — street, travel, and landscape."
+  description="Photos by Mike Lapidakis · street, travel, and landscape."
 >
   <Nav />
 
@@ -49,7 +49,7 @@ const collections = [...collectionMap.entries()].sort(
 
     {allPhotos.length === 0 ? (
       <div class="container">
-        <p class="empty-state">No photos yet — add some in <code>src/content/photos/</code>.</p>
+        <p class="empty-state">No photos yet. Add some in <code>src/content/photos/</code>.</p>
       </div>
     ) : (
       <div class="gallery-wrapper">
@@ -219,8 +219,7 @@ const collections = [...collectionMap.entries()].sort(
 
   .page-title {
     font-size: clamp(2.75rem, 6vw, 4.25rem);
-    font-weight: 300;
-    font-style: italic;
+    font-weight: 700;
     margin: 0 0 1rem;
     letter-spacing: -0.025em;
     line-height: 1;
@@ -284,7 +283,7 @@ const collections = [...collectionMap.entries()].sort(
   @media (hover: hover) {
     .collection-card:hover {
       border-color: var(--color-accent);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+      box-shadow: var(--shadow-hover);
     }
   }
 
@@ -303,7 +302,7 @@ const collections = [...collectionMap.entries()].sort(
     height: 100%;
     object-fit: cover;
     border: 2px solid #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    box-shadow: var(--shadow-photo);
     transform-origin: center bottom;
   }
 
@@ -334,9 +333,8 @@ const collections = [...collectionMap.entries()].sort(
   }
 
   .card-title {
-    font-size: 1.2rem;
-    font-weight: 400;
-    font-style: italic;
+    font-size: var(--fs-mid);
+    font-weight: var(--weight-semibold);
     letter-spacing: -0.02em;
     color: var(--color-text);
     margin: 0;

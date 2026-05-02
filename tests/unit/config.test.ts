@@ -55,16 +55,20 @@ describe('socials', () => {
 });
 
 describe('heroSocials', () => {
-  it('has exactly 4 entries', () => {
-    expect(heroSocials).toHaveLength(4);
+  it('has exactly 3 entries', () => {
+    expect(heroSocials).toHaveLength(3);
   });
 
-  it('contains LinkedIn, GitHub, glass.photo, empty.coffee', () => {
+  it('contains LinkedIn, GitHub, glass.photo', () => {
     const labels = heroSocials.map(s => s.label);
     expect(labels).toContain('LinkedIn');
     expect(labels).toContain('GitHub');
     expect(labels).toContain('glass.photo');
-    expect(labels).toContain('empty.coffee');
+  });
+
+  it('does not contain empty.coffee', () => {
+    const labels = heroSocials.map(s => s.label);
+    expect(labels).not.toContain('empty.coffee');
   });
 
   it('does not contain Threads or Mastodon', () => {

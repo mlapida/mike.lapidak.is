@@ -1,6 +1,7 @@
 ---
 const links = [
   { href: '/', label: 'Home' },
+  { href: '/posts', label: 'Writing' },
   { href: '/photography', label: 'Photography' },
   { href: '/work', label: 'Work' },
 ];
@@ -8,8 +9,6 @@ const links = [
 const current = Astro.url.pathname;
 ---
 <nav class="nav">
-  <div class="nav__safe-fill"></div>
-  <div class="nav__bar">
   <div class="container">
     <div class="nav__inner">
       <a href="/" class="nav__brand" aria-label="Mike Lapidakis — home">
@@ -48,7 +47,6 @@ const current = Astro.url.pathname;
       </button>
     </div>
   </div>
-  </div>
 </nav>
 
 <script>
@@ -82,30 +80,17 @@ const current = Astro.url.pathname;
 </script>
 
 <style>
+  /* Sticky nav. Stays at the top of the viewport on scroll. No
+     position: fixed (which required body padding-top + safe-area math
+     and led to a parade of iOS rendering bugs). No env(safe-area-...)
+     usage. iOS handles the chrome region above the nav via the
+     <meta name="theme-color"> in Base.astro. */
   .nav {
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 100;
-    /* Solid fallback so the safe area is always opaque even if
-       nav__safe-fill collapses (e.g. env() resolves to 0). */
     background-color: var(--color-bg);
-  }
-
-  /* Solid fill for the safe-area inset (beside Dynamic Island / notch).
-     Kept as a real element — separate from the blurred glass layer below
-     so backdrop-filter cannot bleed page content through it. */
-  .nav__safe-fill {
-    height: env(safe-area-inset-top, 0px);
-    background-color: var(--color-bg);
-  }
-
-  .nav__bar {
-    background-color: var(--color-bg-glass);
     border-bottom: 1px solid var(--color-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
   }
 
   .nav__inner {
@@ -125,10 +110,10 @@ const current = Astro.url.pathname;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-display);
+    font-family: var(--font-accent);
     font-weight: 400;
     font-style: italic;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     letter-spacing: -0.01em;
     font-optical-sizing: auto;
     color: var(--color-bg);

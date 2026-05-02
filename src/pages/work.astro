@@ -7,7 +7,7 @@ import { spotlight, experience, talks, skillGroups } from '../data/work';
 
 <Base
   title="Work"
-  description="Mike Lapidakis — engineering leader, AWS, distributed systems."
+  description="Mike Lapidakis · engineering leader, AWS, distributed systems."
 >
   <Nav />
 
@@ -17,7 +17,7 @@ import { spotlight, experience, talks, skillGroups } from '../data/work';
         <p class="page-eyebrow">Background</p>
         <h1 class="page-title display">Work</h1>
         <p class="page-desc">
-          I've spent the last decade building and leading specialist teams at AWS —
+          I've spent the last decade building and leading specialist teams at AWS:
           growing organizations, stepping in during leadership transitions, and
           developing frameworks that outlast the moment. Currently leading Security
           &amp; Networking SAs across North America.
@@ -184,8 +184,7 @@ import { spotlight, experience, talks, skillGroups } from '../data/work';
 
   .page-title {
     font-size: clamp(2.75rem, 6vw, 4.25rem);
-    font-weight: 300;
-    font-style: italic;
+    font-weight: 700;
     margin: 0 0 1rem;
     letter-spacing: -0.025em;
     line-height: 1;
@@ -456,9 +455,8 @@ import { spotlight, experience, talks, skillGroups } from '../data/work';
   }
 
   .spotlight-title {
-    font-size: 1.05rem;
-    font-weight: 400;
-    font-style: italic;
+    font-size: var(--fs-mid);
+    font-weight: var(--weight-semibold);
     letter-spacing: -0.02em;
     line-height: 1.2;
     margin: 0;

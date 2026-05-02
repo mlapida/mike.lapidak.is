@@ -17,6 +17,7 @@
     "test:ci": "npm run build && vitest run"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.1",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^6.0.4",
