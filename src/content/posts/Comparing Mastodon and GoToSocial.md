@@ -5,22 +5,15 @@ title: "Comparing Mastodon and GoToSocial"
 description: "A brief comparison of Mastodon and GoToSocial from a systems administrator"
 publish_date: 2022-12-24
 modified_date: 2023-08-03
-source_url: https://empty.coffee/mastodon-vs-gotosocial/
 feature_image: /post-images/mastodon-vs-gotosocial/feature.png
 slug: mastodon-vs-gotosocial
 author: Mike Lapidakis
 word_count: 879
 tags:
-  - empty-coffee
-  - published
   - journal
   - mastodon
   - social
 ---
-
-# Comparing Mastodon and GoToSocial
-
-> A brief comparison of Mastodon and GoToSocial from a systems administrator
 
 With the Fediverse having its moment, there's a growing group of enthusiasts, myself included, who are looking for the most efficient way to run a server. Mastodon has emerged as the strong front-runner for small and large servers alike, though it isn't without its sharp edges.
 

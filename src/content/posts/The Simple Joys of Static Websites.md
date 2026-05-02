@@ -5,24 +5,17 @@ title: "The Simple Joys of Static Websites"
 description: "Learning to embrace simplicity and bask in the speed of static websites with Gatsby"
 publish_date: 2021-02-14
 modified_date: 2022-12-10
-source_url: https://empty.coffee/simple-joys-static-sites/
 feature_image: /post-images/simple-joys-static-sites/feature.jpg
 slug: simple-joys-static-sites
 author: Mike Lapidakis
 word_count: 1368
 tags:
-  - empty-coffee
-  - published
   - guide
   - serverless
   - gatsby
   - aws
   - website
 ---
-
-# The Simple Joys of Static Websites
-
-> Learning to embrace simplicity and bask in the speed of static websites with Gatsby
 
 I’ve maintained a website for nearly fifteen years. These sites started as slow WordPress blogs on shared servers and progressed over the years to managed solutions like Squarespace. I don’t update my site often, and never loved the idea of paying for dynamic websites that relied on relational databases to serve something that receives as little traffic, and changes as infrequently as my personal site.
 

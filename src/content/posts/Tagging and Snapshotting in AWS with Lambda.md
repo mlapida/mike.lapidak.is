@@ -5,22 +5,15 @@ title: "Tagging and Snapshotting in AWS with Lambda"
 description: "Two Lambda functions for AWS housekeeping: propagating EC2 instance tags to attached EBS volumes, ENIs, and snapshots, plus daily volume snapshots with automatic cleanup."
 publish_date: 2016-01-16
 modified_date: 2022-12-10
-source_url: https://empty.coffee/tagging-and-snapshotting-with-lambda/
 feature_image: /post-images/tagging-and-snapshotting-with-lambda/feature.jpeg
 slug: tagging-and-snapshotting-with-lambda
 author: Mike Lapidakis
 word_count: 897
 tags:
-  - empty-coffee
-  - published
   - guide
   - development
   - aws
 ---
-
-# Tagging and Snapshotting in AWS with Lambda
-
-> Two Lambda functions for AWS housekeeping: propagating EC2 instance tags to attached EBS volumes, ENIs, and snapshots, plus daily volume snapshots with automatic cleanup.
 
 *Update \[February 10, 2021\]: The Github community has actively contributed to the below code snippets over the past five years. I’d recommend reading the comments [on the Gist page before](https://gist.github.com/mlapida/931c03cce1e9e43f147b#file-ec2-tag-assets-lambda-py) proceeding with this post. Thank you, Github community!*
 

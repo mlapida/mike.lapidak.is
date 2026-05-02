@@ -5,22 +5,15 @@ title: "Levels First Impressions: Tracking Metabolic Health"
 description: "Initial impressions of Levels Health continuous glucose monitoring to improve metabolic health"
 publish_date: 2021-02-07
 modified_date: 2022-12-10
-source_url: https://empty.coffee/levels-health-first-impressions/
 feature_image: /post-images/levels-health-first-impressions/feature.jpg
 slug: levels-health-first-impressions
 author: Mike Lapidakis
 word_count: 1313
 tags:
-  - empty-coffee
-  - published
   - review
   - health
   - quantified-self
 ---
-
-# Levels First Impressions: Tracking Metabolic Health
-
-> Initial impressions of Levels Health continuous glucose monitoring to improve metabolic health
 
 The pandemic has proven to be the perfect environment to track and experiment with personal health. It’s provided the ultimate control, no travel, and more time to focus on cooking, bedtime routines, fasting, meditating, and more. During this time, I’ve picked up an [Oura Ring](https://ouraring.com/) to measure my sleep, doubled down on [Gyroscope](https://gyrosco.pe/) to track and correlate various data sources, and joined club [Peloton](https://www.onepeloton.com/) with the Bike+, creating a new morning routine. My most recent experiment is using [Levels](https://www.levelshealth.com/), a new service that provides a continuous glucose monitor and fantastic app to help you better understand how your body processes foods.
 

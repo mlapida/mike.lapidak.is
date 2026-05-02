@@ -5,23 +5,16 @@ title: "Microsoft and the Xbox-as-a-Service"
 description: "Microsoft is lowering the barrier to entry for the next generation of its gaming console. How does this compare to previous programs and the subsided cell phone industry of the early 2000s?"
 publish_date: 2020-09-27
 modified_date: 2022-12-10
-source_url: https://empty.coffee/microsoft-and-the-xbox-as-a-service/
 feature_image: /post-images/microsoft-and-the-xbox-as-a-service/feature.jpeg
 slug: microsoft-and-the-xbox-as-a-service
 author: Mike Lapidakis
 word_count: 671
 tags:
-  - empty-coffee
-  - published
   - business
   - gaming
   - microsoft
   - xbox
 ---
-
-# Microsoft and the Xbox-as-a-Service
-
-> Microsoft is lowering the barrier to entry for the next generation of its gaming console. How does this compare to previous programs and the subsided cell phone industry of the early 2000s?
 
 With the next generation of Xbox, the Xbox Series X|S, Microsoft has announced a new way to purchase the gaming console. [Xbox All Access](https://www.xbox.com/en-US/xbox-all-access/) is a monthly subscription that includes Xbox Game Pass Ultimate and the cost of the console for $34.99|$24.99 a month for two years respectively. With this new purchasing model, Microsoft is looking to lower the barrier to entry for new Xbox gamers this generation and reduce the burden of a $499|$399 upfront investment to enter.
 

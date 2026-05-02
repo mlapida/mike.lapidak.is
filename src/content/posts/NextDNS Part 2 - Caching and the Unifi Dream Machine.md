@@ -5,24 +5,17 @@ title: "NextDNS Part 2: Caching and the Unifi Dream Machine"
 description: "A year later, and NextDNS is faster and quicker to set up"
 publish_date: 2021-01-22
 modified_date: 2022-12-10
-source_url: https://empty.coffee/nextdns-cacheing-unifi-dream-machine/
 feature_image: /post-images/nextdns-caching-unifi-dream-machine/feature.jpg
 slug: nextdns-caching-unifi-dream-machine
 author: Mike Lapidakis
 word_count: 500
 tags:
-  - empty-coffee
-  - published
   - guide
   - nextdns
   - networking
   - dns
   - security
 ---
-
-# NextDNS Part 2: Caching and the Unifi Dream Machine
-
-> A year later, and NextDNS is faster and quicker to set up
 
 [Last year, I wrote](https://github.com/mlapida/empty-coffee-v2/blob/master/replacing-pi-hole-with-nextdns) about replacing Pi-Hole with [NextDNS](https://nextdns.io/?from=vysg25gu) on my home network. At the time, the [NextDNS CLI](https://github.com/nextdns/nextdns) was incompatible with the Unifi Dream Machine Pro and required an external server to handle the requests. I also mentioned that, due to the location of the closest NextDNS resolver, I was taking a slight hit on performance by switching from CloudFlare’s DNS.
 

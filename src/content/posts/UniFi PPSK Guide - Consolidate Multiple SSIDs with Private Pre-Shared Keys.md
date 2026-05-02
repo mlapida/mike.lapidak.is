@@ -5,23 +5,16 @@ title: "UniFi PPSK Guide: Consolidate Multiple SSIDs with Private Pre-Shared Key
 description: "Tired of broadcasting multiple WiFi networks for IoT devices? I used UniFi’s Private Pre-Shared Keys (PPSKs) to consolidate four SSIDs down to two - one password per VLAN, same network name. Perfect for managing trusted Matter devices alongside untrusted IoT gadgets without the clutter."
 publish_date: 2025-11-09
 modified_date: 2025-11-09
-source_url: https://empty.coffee/unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys/
 feature_image: /post-images/unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys/feature.jpeg
 slug: unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys
 author: Mike Lapidakis
 word_count: 437
 tags:
-  - empty-coffee
-  - published
   - guide
   - networking
   - unifi
   - smart-home
 ---
-
-# UniFi PPSK Guide: Consolidate Multiple SSIDs with Private Pre-Shared Keys
-
-> Tired of broadcasting multiple WiFi networks for IoT devices? I used UniFi’s Private Pre-Shared Keys (PPSKs) to consolidate four SSIDs down to two - one password per VLAN, same network name. Perfect for managing trusted Matter devices alongside untrusted IoT gadgets without the clutter.
 
 Continuing on my endless quest to perfect my home network, while overbuilding and overcomplicating at every turn, this week I decided to take on the age-old issue of WiFi SSID confusion.
 

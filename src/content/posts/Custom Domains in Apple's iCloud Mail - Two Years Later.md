@@ -5,23 +5,16 @@ title: "Custom Domains in Apple's iCloud Mail: Two Years Later"
 description: "Revisiting the state of Custom Domains on iCloud Mail two years after launch."
 publish_date: 2023-08-03
 modified_date: 2023-08-03
-source_url: https://empty.coffee/custom-domains-in-apples-icloud-mail-two-years-later/
 feature_image: /post-images/custom-domains-in-apples-icloud-mail-two-years-later/feature.jpg
 slug: custom-domains-in-apples-icloud-mail-two-years-later
 author: Mike Lapidakis
 word_count: 741
 tags:
-  - empty-coffee
-  - published
   - services
   - apple
   - microsoft
   - email
 ---
-
-# Custom Domains in Apple's iCloud Mail: Two Years Later
-
-> Revisiting the state of Custom Domains on iCloud Mail two years after launch.
 
 Nearly two years ago, I [wrote about my experience switching my personal email to iCloud Mail](https://empty.coffee/thoughts-on-custom-domains-in-apple-icloud-mail/) with their custom domain feature. My experience was mixed, and I've since received numerous comments asking if I'm using iCloud Mail, and how things are going.
 

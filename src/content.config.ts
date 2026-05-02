@@ -37,7 +37,6 @@ const posts = defineCollection({
     publish_date: z.coerce.date().optional(),
     modified_date: z.coerce.date().optional(),
     slug: z.string(),
-    source_url: z.string().url().optional(),
     author: z.string().default('Mike Lapidakis'),
     word_count: z.number().int().nonnegative().optional(),
     feature_image: z.string().optional(),

@@ -6,15 +6,11 @@ description: "How I set up a dedicated Proxmox VM for OpenClaw, with sensible ha
 slug: my-openclaw-setup
 author: Mike Lapidakis
 tags:
-  - empty-coffee
-  - draft
   - openclaw
   - proxmox
   - homelab
   - obsidian
 ---
-
-# My OpenClaw Setup: Proxmox VM, Hardened Defaults, and Obsidian as the Brain
 
 *Draft - work in progress*
 

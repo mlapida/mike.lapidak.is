@@ -5,23 +5,16 @@ title: "Sending Mastodon Bookmarks to Readwise"
 description: "A guide on using Zapier to pull bookmarks in from Mastodon and send them to Readwise Reader."
 publish_date: 2023-01-08
 modified_date: 2023-01-08
-source_url: https://empty.coffee/sending-mastodon-bookmarks-to-readwise-zapier/
 feature_image: /post-images/sending-mastodon-bookmarks-to-readwise-zapier/feature.png
 slug: sending-mastodon-bookmarks-to-readwise-zapier
 author: Mike Lapidakis
 word_count: 885
 tags:
-  - empty-coffee
-  - published
   - guide
   - mastodon
   - automation
   - productivity
 ---
-
-# Sending Mastodon Bookmarks to Readwise
-
-> A guide on using Zapier to pull bookmarks in from Mastodon and send them to Readwise Reader.
 
 One of the features I miss the most from Twitter is the [Readwise](https://readwise.io/) integration. It's dead simple to send any tweets you'd like to save for later to Readwise, by either replying to a tweet including the Readwise handle or sending the Readwise account a direct message with a link to the tweet. I've used the content capture and review service for years, and I rely on it for recalling meaningful content across all the mediums I consume. With their launch of [Readwise Reader](https://readwise.io/read), the service's importance to my workflow has been further solidified.
 

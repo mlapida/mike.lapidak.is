@@ -16,7 +16,6 @@ interface PostData {
     publish_date?: unknown;
     modified_date?: unknown;
     slug?: unknown;
-    source_url?: unknown;
     author?: unknown;
     word_count?: unknown;
     feature_image?: unknown;
@@ -98,13 +97,6 @@ describe('content/posts', () => {
     }
   });
 
-  it('source_url when present is an https:// URL', () => {
-    for (const p of posts) {
-      if (p.data.source_url !== undefined) {
-        expect(p.data.source_url as string).toMatch(/^https:\/\//);
-      }
-    }
-  });
 });
 
 describe('content/posts: published posts', () => {

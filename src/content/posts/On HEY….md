@@ -5,24 +5,17 @@ title: "On HEY…"
 description: "My overview and thoughts on HEY, a new and opinionated email service from the creators of Basecamp."
 publish_date: 2020-07-22
 modified_date: 2022-12-10
-source_url: https://empty.coffee/on-hey-email/
 feature_image: /post-images/on-hey-email/feature.jpg
 slug: on-hey-email
 author: Mike Lapidakis
 word_count: 1359
 tags:
-  - empty-coffee
-  - published
   - review
   - email
   - hey
   - fastmail
   - services
 ---
-
-# On HEY…
-
-> My overview and thoughts on HEY, a new and opinionated email service from the creators of Basecamp.
 
 Since its launch last month, I’ve been swooning over [HEY](https://hey.com/), the new email service from the creators of Basecamp. The service bills itself as an alternative to the data-reaping free email provided by Google and other big-tech companies. It’s opinionated and costly, two things that generally stand in the way of broader adoption, but by all accounts is doing quite well.
 

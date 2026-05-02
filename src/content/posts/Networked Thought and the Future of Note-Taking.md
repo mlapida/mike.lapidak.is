@@ -5,22 +5,15 @@ title: "Networked Thought and the Future of Note-Taking"
 description: "Roam Research has changed the way I take notes through networked thought"
 publish_date: 2021-03-20
 modified_date: 2022-12-10
-source_url: https://empty.coffee/networked-notes-roam-research-future/
 feature_image: /post-images/networked-notes-roam-research-future/feature.jpeg
 slug: networked-notes-roam-research-future
 author: Mike Lapidakis
 word_count: 841
 tags:
-  - empty-coffee
-  - published
   - guide
   - productivity
   - roam-research
 ---
-
-# Networked Thought and the Future of Note-Taking
-
-> Roam Research has changed the way I take notes through networked thought
 
 I've spent the better part of my adult life searching for and switching up various note-taking apps. From [Notion](https://www.notion.so/) to [Workflowy](https://workflowy.com/), and [OneNote](https://www.onenote.com/), I've saved meeting notes, web clippings, and random thoughts in a plethora of tools and services across the web. Since joining [Evernote](https://evernote.com/) in 2008, I've found it impossible to find the perfect note-taking app. The allure of "remembering everything" consistently clashed with clunky interfaces, poor privacy policies, confusing organizational systems, and limited feature sets.
 

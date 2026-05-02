@@ -5,24 +5,17 @@ title: "Thoughts on Custom Domains in Apple’s iCloud Mail"
 description: "Insights on Apple's iCloud Mail Custom Domains after three months of heavy use."
 publish_date: 2021-11-06
 modified_date: 2023-08-03
-source_url: https://empty.coffee/thoughts-on-custom-domains-in-apple-icloud-mail/
 feature_image: /post-images/thoughts-on-custom-domains-in-apple-icloud-mail/feature.jpg
 slug: thoughts-on-custom-domains-in-apple-icloud-mail
 author: Mike Lapidakis
 word_count: 1311
 tags:
-  - empty-coffee
-  - published
   - services
   - apple
   - email
   - fastmail
   - hey
 ---
-
-# Thoughts on Custom Domains in Apple’s iCloud Mail
-
-> Insights on Apple's iCloud Mail Custom Domains after three months of heavy use.
 
 💡
 

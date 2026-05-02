@@ -5,22 +5,15 @@ title: "Notes on Standing Up a Mastodon Server"
 description: "A compilation of lessons learned while installing and tuning a small Mastodon server on AWS."
 publish_date: 2022-12-11
 modified_date: 2023-01-01
-source_url: https://empty.coffee/notes-on-standing-up-a-mastodon-server-aws/
 feature_image: /post-images/notes-on-standing-up-a-mastodon-server-aws/feature.jpg
 slug: notes-on-standing-up-a-mastodon-server-aws
 author: Mike Lapidakis
 word_count: 1495
 tags:
-  - empty-coffee
-  - published
   - guide
   - aws
   - mastodon
 ---
-
-# Notes on Standing Up a Mastodon Server
-
-> A compilation of lessons learned while installing and tuning a small Mastodon server on AWS.
 
 In mid-November, numerous folks I follow on Twitter, primarily those in the cybersecurity space, began to flee. This push created a snowball of like-minded tech folks into the [Fediverse](https://fediverse.party/), primarily onto Mastodon servers.
 

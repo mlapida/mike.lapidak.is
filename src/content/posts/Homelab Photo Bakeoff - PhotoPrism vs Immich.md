@@ -5,24 +5,17 @@ title: "Photo Backup Bakeoff: PhotoPrism vs Immich"
 description: "Which self-hosted photo and video platform is right for you? PhotoPrism and Immich both offer robust open source options for backing up, searching, and sharing your photographs on your own hardware. This is a review of the two options, from first hand experience."
 publish_date: 2023-11-21
 modified_date: 2023-11-22
-source_url: https://empty.coffee/photo-backup-bakeoff-photoprism-vs-immich-review/
 feature_image: /post-images/photo-backup-bakeoff-photoprism-vs-immich-review/feature.png
 slug: photo-backup-bakeoff-photoprism-vs-immich-review
 author: Mike Lapidakis
 word_count: 2579
 tags:
-  - empty-coffee
-  - published
   - review
   - photography
   - homelab
   - immich
   - photoprism
 ---
-
-# Photo Backup Bakeoff: PhotoPrism vs Immich
-
-> Which self-hosted photo and video platform is right for you? PhotoPrism and Immich both offer robust open source options for backing up, searching, and sharing your photographs on your own hardware. This is a review of the two options, from first hand experience.
 
 I enjoy taking photos. Whether of my family, the places I visit, or outdoor activities; capturing memories is one of my favorite past times. So much so, in fact, that I've accumulated nearly 100,000 photos and videos taking up nearly 1.6 TB of storage space. This footprint makes moving photos around challenging, and makes data loss a top concern for me. These photos and videos are one of my most prized possessions.
 

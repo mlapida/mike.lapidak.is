@@ -5,22 +5,15 @@ title: "A Month with the Tempest Weather Station"
 description: "The personal weather station market is full of ugly, complicated contraptions. WeatherFlow's Tempest is a smart, connected, and sleek breath of fresh air."
 publish_date: 2022-04-17
 modified_date: 2022-12-11
-source_url: https://empty.coffee/review-weatherflow-tempest-weather-station/
 feature_image: /post-images/review-weatherflow-tempest-weather-station/feature.jpeg
 slug: review-weatherflow-tempest-weather-station
 author: Mike Lapidakis
 word_count: 908
 tags:
-  - empty-coffee
-  - published
   - review
   - weather
   - services
 ---
-
-# A Month with the Tempest Weather Station
-
-> The personal weather station market is full of ugly, complicated contraptions. WeatherFlow's Tempest is a smart, connected, and sleek breath of fresh air.
 
 I live at the top of a small hill in the front range of the Rocky Mountains. Since moving here three years ago, I’ve been underwhelmed with the local forecasts, especially the current conditions. It’ll often be 10 degrees off, or it’s raining when it’s not, or it’s sunny when it’s not. This microclimate throws local forecasts for a loop.
 

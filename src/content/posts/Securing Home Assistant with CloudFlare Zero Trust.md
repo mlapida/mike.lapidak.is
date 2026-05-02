@@ -5,24 +5,17 @@ title: "Securing Home Assistant with Cloudflare Zero Trust"
 description: "A guide for setting up Cloudflare Zero Trust with Home Assistant for secure remote access"
 publish_date: 2022-10-17
 modified_date: 2022-12-11
-source_url: https://empty.coffee/home-assistant-cloudflare-zero-trust-setup/
 feature_image: /post-images/home-assistant-cloudflare-zero-trust-setup/feature.png
 slug: home-assistant-cloudflare-zero-trust-setup
 author: Mike Lapidakis
 word_count: 1346
 tags:
-  - empty-coffee
-  - published
   - guide
   - smart-home
   - dns
   - networking
   - security
 ---
-
-# Securing Home Assistant with Cloudflare Zero Trust
-
-> A guide for setting up Cloudflare Zero Trust with Home Assistant for secure remote access
 
 The rise of the smart home, and the endless closed platforms that came with it, has excited and frustrated tinkers for over a decade. The launched of [Home Assistant](https://www.home-assistant.io/), an open-source management and automation platform for smart home enthusiasts, was a considerable win for those looking to break down the silos between these products.
 

@@ -5,22 +5,15 @@ title: "Lightroom CC + Fujifilm XT-2: A New Amateur Workflow"
 description: "Creating a workflow for importing RAW photos from a Fuji X-T2 to an Apple iPad"
 publish_date: 2018-01-28
 modified_date: 2022-12-10
-source_url: https://empty.coffee/lightroom-fujifilm-xt-2-workflow/
 feature_image: /post-images/lightroom-fujifilm-xt-2-workflow/feature.png
 slug: lightroom-fujifilm-xt-2-workflow
 author: Mike Lapidakis
 word_count: 898
 tags:
-  - empty-coffee
-  - published
   - guide
   - photography
   - lightroom
 ---
-
-# Lightroom CC + Fujifilm XT-2: A New Amateur Workflow
-
-> Creating a workflow for importing RAW photos from a Fuji X-T2 to an Apple iPad
 
 When it comes to photography, I fall squarely in the amateur class. I have good gear and enjoy the craft, but I’ve never been paid for my work, nor do I aspire to be. I devote a sliver of my week to learning new techniques and tools. I’m historically a fan of Adobe Lightroom and all the power that it gives amateurs like me to correct an exposure miscalibration, but I also find value in more consumer focused services such as *Apple Photos* and *Google Photos*.
 

@@ -5,24 +5,17 @@ title: "Replacing Pi-hole with NextDNS"
 description: "A how-to guide on setting up NextDNS on a RaspberryPi for your home network."
 publish_date: 2019-12-09
 modified_date: 2022-12-10
-source_url: https://empty.coffee/replacing-pi-hole-with-nextdns/
 feature_image: /post-images/replacing-pi-hole-with-nextdns/feature.jpg
 slug: replacing-pi-hole-with-nextdns
 author: Mike Lapidakis
 word_count: 1163
 tags:
-  - empty-coffee
-  - published
   - guide
   - networking
   - dns
   - nextdns
   - security
 ---
-
-# Replacing Pi-hole with NextDNS
-
-> A how-to guide on setting up NextDNS on a RaspberryPi for your home network.
 
 **January 23, 2021:** [*I’ve posted an update to this guide*](https://github.com/mlapida/empty-coffee-v2/blob/master/nextdns-cacheing-unifi-dream-machine)*, outlining some of the new performance related features and a brief guide to installing NextDNS on an Unifi Dream Machine Pro.*
 

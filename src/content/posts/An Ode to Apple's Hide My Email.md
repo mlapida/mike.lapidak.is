@@ -5,24 +5,17 @@ title: "An Ode to Apple's Hide My Email"
 description: "Apple's Hide My Email feature is one of the most under-rated privacy launches of the past year, and here's why."
 publish_date: 2022-03-31
 modified_date: 2022-12-11
-source_url: https://empty.coffee/an-ode-to-apples-hide-my-email/
 feature_image: /post-images/an-ode-to-apples-hide-my-email/feature.png
 slug: an-ode-to-apples-hide-my-email
 author: Mike Lapidakis
 word_count: 664
 tags:
-  - empty-coffee
-  - published
   - services
   - apple
   - email
   - security
   - privacy
 ---
-
-# An Ode to Apple's Hide My Email
-
-> Apple's Hide My Email feature is one of the most under-rated privacy launches of the past year, and here's why.
 
 ***April 10, 2022:** Check out the discussion on [Hacker News](https://news.ycombinator.com/item?id=30979563)*
 

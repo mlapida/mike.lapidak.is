@@ -5,24 +5,17 @@ title: "Why I switched from an Apple Watch to Garmin"
 description: "My impressions of the Garmin Epix after seven years with an Apple Watch"
 publish_date: 2022-06-19
 modified_date: 2022-12-10
-source_url: https://empty.coffee/switch-apple-watch-garmin-epix-watch/
 feature_image: /post-images/switch-apple-watch-garmin-epix-watch/feature.jpeg
 slug: switch-apple-watch-garmin-epix-watch
 author: Mike Lapidakis
 word_count: 884
 tags:
-  - empty-coffee
-  - published
   - review
   - fitness
   - wearable
   - apple
   - garmin
 ---
-
-# Why I switched from an Apple Watch to Garmin
-
-> My impressions of the Garmin Epix after seven years with an Apple Watch
 
 In 2010 I bought my first wearable fitness device. *Fitbit*, a young hardware startup, created a connected step counter that you wore on your hip. The small plastic clip had a screen to tell you the progress toward your daily step goal and required me to plug it in each day to sync it to their servers. Since those early days of connected health and fitness, I’ve tried just about every wearable on the market. That is, until 2015, when I bought my first [Apple Watch](https://www.apple.com/watch/).
 

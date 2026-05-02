@@ -5,24 +5,17 @@ title: "HEY for Work: Getting Personal"
 description: "Sharing the experience of using HEY for Work for a personal, custom domain name."
 publish_date: 2021-02-27
 modified_date: 2022-12-10
-source_url: https://empty.coffee/hey-for-work-personal/
 feature_image: /post-images/hey-for-work-personal/feature.jpg
 slug: hey-for-work-personal
 author: Mike Lapidakis
 word_count: 938
 tags:
-  - empty-coffee
-  - published
   - review
   - services
   - email
   - hey
   - fastmail
 ---
-
-# HEY for Work: Getting Personal
-
-> Sharing the experience of using HEY for Work for a personal, custom domain name.
 
 Last summer I [wrote up some of my initial thoughts about HEY](https://empty.coffee/on-hey-email/), a new email service from the creators of Basecamp. I concluded that, while I enjoyed the interface and workflow, I didn’t love that I had to forward in emails from a custom domain provider or switch to their @hey.com email address. At the time, the HEY team promised custom domain support within a year.
 

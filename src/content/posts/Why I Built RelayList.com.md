@@ -5,22 +5,15 @@ title: "Why I Built RelayList.com"
 description: "Why I set out to build a trusted source for up-to-date information on Fediverse relays"
 publish_date: 2022-12-18
 modified_date: 2022-12-18
-source_url: https://empty.coffee/why-i-built-relaylist-mastodon/
 feature_image: /post-images/why-i-built-relaylist-mastodon/feature.png
 slug: why-i-built-relaylist-mastodon
 author: Mike Lapidakis
 word_count: 633
 tags:
-  - empty-coffee
-  - published
   - journal
   - mastodon
   - aws
 ---
-
-# Why I Built RelayList.com
-
-> Why I set out to build a trusted source for up-to-date information on Fediverse relays
 
 Like many folks, I've recently dived into [Mastodon](https://empty.coffee/tag/mastodon/). I took the route of standing up my own server, and in the process noticed that it can feel a little lonely. Things like tags and the federated feed don't work all that well without a lively local population following others and posting often.
 
