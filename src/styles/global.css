@@ -226,23 +226,29 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Grain texture overlay — the single most distinctive visual
-   signature. Subtle SVG fractal-noise at 3.2% opacity. */
-html::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.032;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 250px 250px;
-}
+/* Grain texture is now part of the body background (above) rather
+   than a separate fixed pseudo-element, so it stays inside the
+   layer iOS samples for safe-area painting. Don't reintroduce a
+   fixed inset:0 pseudo here — that's what caused the Dynamic Island
+   bleed. */
 
 body {
   min-height: 100vh;
   margin: 0;
+  /* iOS Safari paints the safe-area zone (above the layout viewport
+     when viewport-fit is the default, not cover) using BODY's
+     background-color, not HTML's. Without this, Safari samples the
+     rasterised page content during scroll and the hero photo bleeds
+     into the dynamic-island zone.
+     The grain texture is baked into this body background as a fixed
+     attachment (rather than a fixed-position pseudo-element) so it
+     paints on the same layer iOS samples for the safe-area zone.
+     See WebKit "Designing Websites for iPhone X" and Zulip #37367. */
+  background-color: var(--color-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 250px 250px;
+  background-attachment: fixed;
 }
 
 a {
