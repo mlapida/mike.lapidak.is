@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { resolveTarget } from '../../workers/empty-coffee-redirects/src/redirect';
+import { resolveTarget, ROBOTS_TXT } from '../../workers/empty-coffee-redirects/src/redirect';
 
 const SITE = 'https://mike.lapidak.is';
 
@@ -71,6 +71,32 @@ describe('empty.coffee redirect resolution', () => {
         expect(resolveTarget(path)).toBe(`${SITE}/rss.xml`);
       },
     );
+  });
+
+  describe('sitemap paths', () => {
+    it.each(['/sitemap.xml', '/sitemap-index.xml', '/sitemap-0.xml'])(
+      '%s → /sitemap-index.xml',
+      (path) => {
+        expect(resolveTarget(path)).toBe(`${SITE}/sitemap-index.xml`);
+      },
+    );
+  });
+
+  describe('favicon / apple-touch-icon', () => {
+    it('/favicon.ico → /favicon.ico (path preserved, not wrapped as /posts/)', () => {
+      expect(resolveTarget('/favicon.ico')).toBe(`${SITE}/favicon.ico`);
+    });
+    it('/apple-touch-icon.png → /apple-touch-icon.png', () => {
+      expect(resolveTarget('/apple-touch-icon.png')).toBe(`${SITE}/apple-touch-icon.png`);
+    });
+  });
+
+  describe('robots.txt content', () => {
+    it('allows crawling and points at the canonical sitemap', () => {
+      expect(ROBOTS_TXT).toContain('User-agent: *');
+      expect(ROBOTS_TXT).toContain('Allow: /');
+      expect(ROBOTS_TXT).toContain(`Sitemap: ${SITE}/sitemap-index.xml`);
+    });
   });
 
   describe('multi-segment paths fall back to the posts index', () => {
