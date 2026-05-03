@@ -34,7 +34,7 @@ const personJsonLd = {
 
 <Base
   title="Mike Lapidakis"
-  description="10 years at AWS building and leading specialist teams across security, networking, and generative AI. Based in Denver, CO."
+  description={site.description}
 >
   <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
   <Nav />
