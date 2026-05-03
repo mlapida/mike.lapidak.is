@@ -1,9 +1,9 @@
 export const site = {
   name: 'Mike Lapidakis',
   url: 'https://mike.lapidak.is',
-  description: 'Engineering leader, photographer, and tinkerer based in the Pacific Northwest.',
+  description: 'Builder, photographer, dad of two boys in Denver. Writing on homelab, self-hosted services, and the tools I use to think.',
   role: 'Security & Networking SA Leader · AWS · Denver, CO',
-  bio: "I've spent 10 years at AWS, the last 6 building and leading specialist teams across security, networking, and generative AI. I still get into the weeds when it matters, and I build things meant to last. Dad, photographer, perpetual tinkerer.",
+  bio: "Builder, photographer, dad of two boys. I tinker with software and the homelab, ride gravel when I can, and write about what I'm making. Denver. Day job at AWS.",
 };
 
 export const socials = [

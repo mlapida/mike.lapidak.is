@@ -3,13 +3,52 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { spotlight, experience, talks, skillGroups } from '../data/work';
+import { socials } from '../config/site';
+
+const profileJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Mike Lapidakis',
+    url: 'https://mike.lapidak.is/work',
+    jobTitle: 'Senior Manager, Security & Networking Specialist Solutions Architects',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Amazon Web Services',
+      url: 'https://aws.amazon.com',
+    },
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'University of Toledo',
+      url: 'https://www.utoledo.edu',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Denver',
+      addressRegion: 'CO',
+      addressCountry: 'US',
+    },
+    knowsAbout: [
+      'Cloud Security Architecture',
+      'Network Architecture',
+      'Generative AI Security',
+      'Enterprise Cloud Migration',
+      'Solutions Architecture Leadership',
+      'Amazon Web Services',
+    ],
+    sameAs: socials.map(s => s.href),
+  },
+};
 ---
 
 <Base
   title="Work"
-  description="Mike Lapidakis · engineering leader, AWS, distributed systems."
+  description="Mike Lapidakis · Senior Manager of Security & Networking Specialist SAs at AWS. Background, talks, writing, and ways to get in touch."
 >
   <Nav />
+
+  <script type="application/ld+json" set:html={JSON.stringify(profileJsonLd)} />
 
   <main>
     <section class="page-header">
@@ -17,10 +56,10 @@ import { spotlight, experience, talks, skillGroups } from '../data/work';
         <p class="page-eyebrow">Background</p>
         <h1 class="page-title display">Work</h1>
         <p class="page-desc">
-          I've spent the last decade building and leading specialist teams at AWS:
-          growing organizations, stepping in during leadership transitions, and
-          developing frameworks that outlast the moment. Currently leading Security
-          &amp; Networking SAs across North America.
+          I lead a team of specialist solutions architects at AWS covering Security
+          and Networking for our largest customers. Most days are some mix of team
+          development, untangling customer architecture decisions, and figuring out
+          where the org should invest next. Builder by inclination.
         </p>
       </div>
     </section>

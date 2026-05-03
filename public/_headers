@@ -5,6 +5,10 @@
   X-Robots-Tag: noindex
   Cache-Control: public, max-age=3600
 
+/work.md
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=3600
+
 # llms.txt and any future llms-* files: text-format LLM hints.
 /llms.txt
   X-Robots-Tag: noindex

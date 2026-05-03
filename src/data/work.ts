@@ -37,7 +37,7 @@ export const experience = [
     role: 'Senior Manager, Security & Networking Specialist SAs',
     period: '2025 – present',
     location: 'Denver, CO',
-    description: 'Leading a team of 19 Security and Networking Specialist Solutions Architects across North America, including one manager. Split between team development, helping customers work through complex architecture decisions, and partnering across AWS on how we go to market in security and networking.',
+    description: 'Lead a team of Security and Networking specialist solutions architects for AWS\'s Global Accounts. Team is distributed across the US and Canada, densest in Seattle. Days are split between team development, helping customers work through complex architecture decisions, and partnering across AWS on how we go to market in these domains.',
     tags: ['Security', 'Networking', 'Team Leadership'],
   },
   {
@@ -45,7 +45,7 @@ export const experience = [
     role: 'Senior Manager, Specialist Solutions Architects',
     period: '2020 – 2025',
     location: 'Denver, CO',
-    description: 'Spent five years building specialist SA teams across Security, Networking, Resilience, Migration, and Generative AI for AWS\'s largest enterprise accounts. Grew the org from 7 to over 35, hiring across multiple technical domains. Stepped in as interim leader for a 50-person organization during a director transition, keeping things moving while filling 8 open roles. Co-led the Generative AI Security Scoping Matrix, which became an AWS product at re:Inforce 2024. Promoted three times; tried to pay it forward and promoted six team members along the way. Amazon Bar Raiser.',
+    description: 'Spent five years building specialist SA teams across Security, Networking, Resilience, Migration, and Generative AI for AWS\'s largest enterprise accounts. Grew the org from 7 to over 35, hiring across multiple technical domains. Stepped in as interim leader for the broader organization during a leadership transition. Co-authored the Generative AI Security Scoping Matrix, which became an AWS product at re:Inforce 2024 and the basis of the field enablement curriculum on GenAI scoping. Promoted three times; promoted six team members along the way. Amazon Bar Raiser.',
     tags: ['Org Design', 'Hiring & Development', 'Security', 'Networking', 'GenAI', 'Bar Raiser'],
   },
   {
@@ -53,7 +53,7 @@ export const experience = [
     role: 'Senior Solutions Architect, Global Accounts',
     period: '2019 – 2020',
     location: 'Denver, CO',
-    description: 'Mentored emerging Solutions Architects and pioneered the Migration SA specialty role within Global Accounts, establishing repeatable migration frameworks for AWS\'s largest enterprise customers. Led technical enablement for major telecommunications providers and oversaw large-scale server migration programs spanning 70+ global clients.',
+    description: 'Mentored emerging solutions architects and pioneered the Migration SA specialty within Global Accounts, building repeatable migration frameworks for AWS\'s largest enterprise customers. Led technical enablement across major telecommunications and life-sciences customers; oversaw large-scale enterprise migration programs across 70+ global clients.',
     tags: ['Enterprise Migrations', 'Telecommunications', 'Technical Enablement', 'Mentorship'],
   },
   {
@@ -61,7 +61,7 @@ export const experience = [
     role: 'Senior Solutions Architect, Enterprise Accounts',
     period: '2016 – 2019',
     location: 'Houston, TX',
-    description: 'Architected enterprise data lake solutions on Amazon Redshift and drove AWS adoption across the Houston enterprise market. Grew AWS revenue 400% at a primary account within two years through deep technical enablement. Presented at AWS re:Invent in 2017 and 2018. Organized and led the AWS Houston Area User Group.',
+    description: 'Architected enterprise data lake solutions on Amazon Redshift and grew AWS adoption across the Houston enterprise market. Hit 400% revenue growth at a primary account within two years through hands-on technical enablement. Presented at AWS re:Invent in 2017 and 2018. Organized and led the AWS Houston Area User Group.',
     tags: ['Enterprise Architecture', 'Data & Analytics', 'Pre-Sales', 'Community Leadership'],
   },
   {

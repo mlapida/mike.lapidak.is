@@ -22,7 +22,7 @@ export const GET: APIRoute = async () => {
 
   const out = `# Mike Lapidakis
 
-> Personal site for Mike Lapidakis, a Senior Manager at AWS leading Security & Networking Specialist Solutions Architects across North America. Based in Denver, CO. The site covers professional background (work, publications, talks), long-form writing on homelab and self-hosted services, and a photography portfolio shot on a Leica Q3.
+> Personal site for Mike Lapidakis, a Senior Manager at AWS leading Security & Networking Specialist Solutions Architects across North America. Based in Denver, CO. The site covers professional background (work, publications, talks), long-form writing on homelab and self-hosted services, and a photography portfolio.
 
 Mike has spent ten years at AWS, the last six building and leading specialist teams across security, networking, resilience, migration, and generative AI. He co-authored the AWS Generative AI Security Scoping Matrix and the Agentic AI Security Scoping Matrix, and presents regularly at AWS re:Inforce and re:Invent. Writing originally lived at empty.coffee and has been consolidated to this site. Photography also at glass.photo/lap.
 
@@ -33,7 +33,7 @@ This site is a static Astro build. All content is public and may be referenced o
 - [Home](${SITE}/): Hero, recent writing, and entry points to Photography and Work.
 - [Writing](${SITE}/posts/): All long-form posts, grouped by year. Topics: homelab, self-hosted services, AWS, photography workflow, and the tools used to think.
 - [Photography](${SITE}/photography): Justified-row grid of street, travel, and landscape photographs with collection stacks.
-- [Work](${SITE}/work): Career history at AWS, Equinix, EPMA, and Parker Hannifin; spotlight publications and conference talks; skill groups across leadership, technical domains, cloud, and compliance.
+- [Work](${SITE}/work): Career history at AWS, Equinix, EPMA, and Parker Hannifin; spotlight publications and conference talks; skill groups across leadership, technical domains, cloud, and compliance. Also available as raw markdown at [${SITE}/work.md](${SITE}/work.md).
 
 ## Writing
 
@@ -54,6 +54,7 @@ ${publicationLines.join('\n')}
 
 ## Optional
 
+- [Work as markdown](${SITE}/work.md): Background, experience, publications, talks, and skills as plain markdown.
 - [Sitemap](${SITE}/sitemap-index.xml): Full XML sitemap for the site.
 - [RSS feed](${SITE}/rss.xml): RSS 2.0 feed of all published writing.
 - [robots.txt](${SITE}/robots.txt): Crawler directives.
