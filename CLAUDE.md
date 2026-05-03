@@ -2,6 +2,8 @@
 
 Personal/professional site for Mike Lapidakis. Static Astro 6 site deployed to Cloudflare Pages.
 
+> **Design rules:** Before adding a component, writing copy, or making a visual change, read `docs/design.md`. It documents voice/tone, type/color/spacing/shadow conventions, hover patterns, the polaroid one-off rule, iconography limits, the iOS Safari safe-area pitfalls, and the no-em-dash rule. Tokens live in `src/styles/global.css`; design *decisions* live in `docs/design.md`.
+
 ## Stack
 
 - **Astro 6** (static output, no adapter)
@@ -27,7 +29,7 @@ Accessible via Tailscale at port 4321. `vite.server.allowedHosts: ['.ts.net']` i
 | `src/styles/global.css` | CSS custom properties palette · retheme by editing `:root {}` block |
 | `src/layouts/Base.astro` | Base layout, OG/Twitter meta, JSON-LD slot, RSS auto-discovery `<link rel="alternate">`, Google Fonts |
 | `src/config/site.ts` | Single source of truth: site metadata, `socials`, `heroSocials`, `footerSocials` |
-| `src/components/Nav.astro` | Sticky nav (currently `position: sticky; top: 0`), backdrop blur, active page dot, ML monogram mark |
+| `src/components/Nav.astro` | Sticky nav (`position: sticky; top: 0`), solid paper background, active page dot, ML monogram mark |
 | `src/components/Footer.astro` | Social links from `footerSocials`, RSS link, copyright |
 | `src/pages/index.astro` | Homepage: hero + Writing feed (latest 5 from local posts collection, square thumbnails) + section cards |
 | `src/pages/photography.astro` | Justified-row photo grid + collection stack cards |
@@ -154,7 +156,7 @@ Loaded via `<link rel="stylesheet" href="https://use.typekit.net/mjy4jau.css">` 
 ## Color System
 
 All colors are CSS custom properties in `src/styles/global.css`:
-- `--color-bg` / `--color-bg-glass` · page background / nav blur background
+- `--color-bg` · page background (also painted by iOS Safari into the safe-area zone above the layout viewport — body must keep its background-color set, see the Nav section)
 - `--color-surface` / `--color-border` · cards, dividers
 - `--color-text` / `--color-text-muted`
 - `--color-accent` / `--color-accent-hover` · forest green `#3a6347`
@@ -211,7 +213,14 @@ All `:hover` rules are wrapped in `@media (hover: hover)` sitewide to prevent do
 
 ## Nav
 
-Currently `position: sticky; top: 0` (after the prior session's six-attempt rebuild). The Dynamic Island bleed bug is still open · see `SESSION-HANDOFF.md` for the full attempt history. `env(safe-area-inset-top)` returns `0px` on Mike's iPhone (iOS 18.7 / Safari 26.4), so env-based approaches don't work. Don't ship blind fixes · drive Brave DevTools mobile emulation against the preview URL first.
+`position: sticky; top: 0`, solid `var(--color-bg)` background, hairline border-bottom. Plain — no `viewport-fit=cover`, no env-based padding, no JS measurement.
+
+The long-running Dynamic Island bleed bug (page content rendering above the nav, into the safe-area zone) is fixed. The fix is NOT in `Nav.astro` — it's in `global.css`:
+
+1. **`body { background-color: var(--color-bg) }`** — iOS Safari paints the safe-area zone above the layout viewport using **body's** background-color, not html's. Without this, Safari samples rasterised page content during scroll and the bleed appears.
+2. **The grain texture lives on `body`'s `background-image` with `background-attachment: fixed`** — NOT as a `position: fixed; inset: 0` pseudo-element. Any fixed-position overlay covering the layout viewport defeats iOS's safe-area paint sampling, which is what made earlier attempts fail.
+
+Don't reintroduce `html::after { position: fixed; inset: 0 }` for any reason. Don't add `viewport-fit=cover` unless you're prepared to handle every safe-area inset yourself; the default is correct here. `env(safe-area-inset-top)` returns 0 on iOS 18.x devices with a Dynamic Island, so don't depend on it. Refs: WebKit "Designing Websites for iPhone X"; zulip/zulip#37367 / #37515 (the Zulip team rediscovered the body-bg requirement). Verified clean on iOS 18.7 + iPhone 17 Pro simulator (iOS 26.4).
 
 ## Favicons
 
@@ -244,7 +253,6 @@ Run with `npx vitest run` (209 tests across 9 files). Tests require a completed 
 
 ## Pending
 
-- **Nav bar / Dynamic Island bleed** · open, six fix attempts logged in `SESSION-HANDOFF.md`. Drive Brave DevTools mobile emulation before iterating again.
 - CDN cache purge in sync script after R2 upload (currently manual / wait 4h)
 - 301 redirects from empty.coffee to mike.lapidak.is/posts (with `cacheing → caching` remap for one URL)
 - Vault → repo posts sync script (so future writing flows from Obsidian without manual export)
