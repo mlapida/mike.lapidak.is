@@ -36,7 +36,6 @@
   --nav-height: 3.25rem;
 
   --color-bg:           var(--paper-100);
-  --color-bg-glass:     rgba(248, 246, 241, 0.88);
   --color-surface:      var(--paper-300);
   --color-surface-alt:  var(--paper-200);
   --color-border:       var(--paper-400);
@@ -59,7 +58,6 @@
    ============================================================ */
 [data-theme="dark"] {
   --color-bg:           var(--ink-900);
-  --color-bg-glass:     rgba(26, 24, 20, 0.88);
   --color-surface:      var(--ink-700);
   --color-surface-alt:  #2d2a26;
   --color-border:       var(--ink-600);
@@ -80,7 +78,6 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --color-bg:          var(--ink-900);
-    --color-bg-glass:    rgba(26, 24, 20, 0.88);
     --color-surface:     var(--ink-700);
     --color-surface-alt: #2d2a26;
     --color-border:      var(--ink-600);

@@ -1,0 +1,11 @@
+name = "empty-coffee-redirects"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+# Bound to both apex and www to catch any inbound link variant.
+# empty.coffee must be on a Cloudflare zone for these routes to take
+# effect; the dashboard or `wrangler triggers deploy` confirms binding.
+routes = [
+  { pattern = "empty.coffee/*", zone_name = "empty.coffee" },
+  { pattern = "www.empty.coffee/*", zone_name = "empty.coffee" },
+]
