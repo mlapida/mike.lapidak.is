@@ -256,5 +256,5 @@ Run with `npx vitest run` (209 tests across 9 files). Tests require a completed 
 - CDN cache purge in sync script after R2 upload (currently manual / wait 4h)
 - 301 redirects from empty.coffee to mike.lapidak.is/posts (with `cacheing → caching` remap for one URL)
 - Vault → repo posts sync script (so future writing flows from Obsidian without manual export)
-- Comments on post detail pages (Giscus or Isso, undecided)
+- Custom Giscus theme CSS (paper/ink palette parity inside the iframe) — currently using giscus's built-in `light` / `dark`. To wire a custom theme: host CSS at `/public/giscus-{light,dark}.css`, point `themeLight`/`themeDark` in `src/config/site.ts` at absolute URLs, and re-add `security.allowedDomains: [{ hostname: 'giscus.app', protocol: 'https' }]` in `astro.config.mjs` so Astro's dev `secFetchMiddleware` doesn't 403 the cross-origin stylesheet fetch.
 - Visual polish pass beyond the AI-default aesthetic (waiting on reference sites)

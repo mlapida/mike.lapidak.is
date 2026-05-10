@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import Comments from '../../components/Comments.astro';
 import { getCollection, render } from 'astro:content';
 import { displayableTags } from '../../lib/posts';
 
@@ -118,6 +119,8 @@ const articleJsonLd = {
           </a>
         ) : <span />}
       </nav>
+
+      <Comments />
     </div>
   </article>
 
