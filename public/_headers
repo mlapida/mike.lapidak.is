@@ -12,8 +12,13 @@
 #     Adobe Fonts kit (CSS + font payloads).
 #   - R2 image origin is the personalhomepage bucket public URL.
 #   - *.tile.openstreetmap.org covers the photo-detail Leaflet map.
+#   - https://giscus.app covers the Giscus comment client (script +
+#     iframe). Giscus uses GitHub's avatars (avatars.githubusercontent.com)
+#     and may load user-uploaded images from github.com inside its iframe;
+#     those are loaded from inside the giscus.app frame, not from our
+#     origin, so they don't need to be in img-src here.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://use.typekit.net; font-src 'self' https://use.typekit.net https://p.typekit.net; img-src 'self' data: https://pub-1925a6f6efeb4b71bc918d8041c946c6.r2.dev https://*.tile.openstreetmap.org; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app; style-src 'self' 'unsafe-inline' https://use.typekit.net; font-src 'self' https://use.typekit.net https://p.typekit.net; img-src 'self' data: https://pub-1925a6f6efeb4b71bc918d8041c946c6.r2.dev https://*.tile.openstreetmap.org; connect-src 'self'; frame-src https://giscus.app; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=()
 

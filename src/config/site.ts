@@ -25,3 +25,29 @@ export const heroSocials = socials.filter(s =>
 export const footerSocials = socials.filter(s =>
   ['LinkedIn', 'Threads', 'Mastodon', 'Bluesky', 'GitHub', 'glass.photo'].includes(s.label)
 );
+
+// Giscus comments configuration. Driven by GitHub Discussions on the
+// repo backing this site. repoId / categoryId come from the GitHub
+// GraphQL API; everything else is rendered as data-* on the giscus
+// script tag (see src/components/Comments.astro).
+//
+// To rotate to a different repo or category, fetch new IDs with:
+//   gh api graphql -f query='query { repository(owner:"...", name:"...") { id discussionCategories(first:25) { nodes { id name } } } }'
+export const giscus = {
+  repo: 'mlapida/mike.lapidak.is',
+  repoId: 'R_kgDOILEDxA',
+  category: 'Comments',
+  categoryId: 'DIC_kwDOILEDxM4C8qSx',
+  mapping: 'pathname',
+  strict: '1',
+  reactionsEnabled: '1',
+  emitMetadata: '0',
+  inputPosition: 'top',
+  // Built-in giscus themes — cleanest default for now. A future
+  // pass can swap these to URLs pointing at custom CSS files for
+  // paper/ink palette parity (see "Pending" in CLAUDE.md).
+  themeLight: 'light',
+  themeDark: 'dark',
+  lang: 'en',
+  loading: 'lazy',
+} as const;

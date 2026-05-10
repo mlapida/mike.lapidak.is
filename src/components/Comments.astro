@@ -1,0 +1,175 @@
+---
+// Giscus-backed comments. Renders a mount node + the giscus client
+// script with config-driven data-* attrs. Giscus injects an iframe
+// from giscus.app into .giscus on load.
+//
+// CSP: requires script-src https://giscus.app and frame-src
+// https://giscus.app (see public/_headers).
+//
+// Theme: uses giscus's built-in `light` / `dark` themes. The script
+// below keeps the iframe in sync with the resolved page theme via
+// setConfig postMessage — both at first load and live, when the
+// user toggles the Nav theme button (which mutates html[data-theme])
+// or when the system preference flips for auto-themed visitors.
+import { giscus } from '../config/site';
+---
+
+<section class="comments" aria-labelledby="comments-heading">
+  <hr class="comments__divider" aria-hidden="true" />
+
+  <h2 id="comments-heading" class="comments__heading display">Comments</h2>
+
+  <p class="comments__note">
+    <em class="comments__ps">p.s.</em> <span class="comments__sep" aria-hidden="true">·</span> Have something to add? Sign in with GitHub to share it. Threads live in <a href={`https://github.com/${giscus.repo}/discussions/categories/${giscus.category.toLowerCase()}`} rel="noopener">GitHub Discussions</a>.
+  </p>
+
+  <div
+    class="comments__frame"
+    data-theme-light={giscus.themeLight}
+    data-theme-dark={giscus.themeDark}
+  >
+    <div class="giscus"></div>
+    <script
+      src="https://giscus.app/client.js"
+      data-repo={giscus.repo}
+      data-repo-id={giscus.repoId}
+      data-category={giscus.category}
+      data-category-id={giscus.categoryId}
+      data-mapping={giscus.mapping}
+      data-strict={giscus.strict}
+      data-reactions-enabled={giscus.reactionsEnabled}
+      data-emit-metadata={giscus.emitMetadata}
+      data-input-position={giscus.inputPosition}
+      data-theme={giscus.themeLight}
+      data-lang={giscus.lang}
+      data-loading={giscus.loading}
+      crossorigin="anonymous"
+      async
+    ></script>
+  </div>
+</section>
+
+<script>
+  const html = document.documentElement;
+  const frame = document.querySelector<HTMLElement>('.comments__frame');
+  if (frame) {
+    const lightTheme = frame.dataset.themeLight!;
+    const darkTheme = frame.dataset.themeDark!;
+
+    function resolved(): string {
+      const explicit = html.getAttribute('data-theme');
+      if (explicit === 'dark') return darkTheme;
+      if (explicit === 'light') return lightTheme;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : lightTheme;
+    }
+
+    function postTheme(theme: string) {
+      const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+      if (!iframe?.contentWindow) return;
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        'https://giscus.app',
+      );
+    }
+
+    // Sync once giscus's iframe is mounted and emits its first message.
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'https://giscus.app') return;
+      if (typeof event.data !== 'object' || !event.data?.giscus) return;
+      postTheme(resolved());
+    });
+
+    // Live sync when the user toggles the Nav theme button.
+    new MutationObserver(() => postTheme(resolved())).observe(html, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    // Re-sync when the system preference flips for users on auto.
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (!html.hasAttribute('data-theme')) postTheme(resolved());
+    });
+  }
+</script>
+
+<style>
+  .comments {
+    margin-top: 4rem;
+  }
+
+  /* Centered short rule — same visual language as the post body's <hr>.
+     Reads as "end of editorial, start of conversation" rather than
+     adding a third stacked full-width separator after tags + pager. */
+  .comments__divider {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    width: 6rem;
+    margin: 0 auto 2rem;
+  }
+
+  .comments__heading {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: 1.5rem;
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-snug);
+    margin: 0 0 0.6rem;
+    color: var(--color-text);
+  }
+
+  .comments__note {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    font-weight: var(--weight-light);
+    margin: 0 0 1.75rem;
+    text-wrap: pretty;
+  }
+
+  /* Italic Caslon flourish — the system reserves this font for
+     pull-quotes, year labels, blockquotes, photo captions, the ML
+     monogram. The "p.s." prefix here is a postscript label,
+     stylistically a sibling of those uses. */
+  .comments__ps {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--color-accent);
+  }
+
+  .comments__sep {
+    color: var(--color-border);
+  }
+
+  .comments__note a {
+    color: var(--color-accent);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-accent) 35%, transparent);
+    transition: border-color var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+
+  @media (hover: hover) {
+    .comments__note a:hover {
+      color: var(--color-accent-hover);
+      border-bottom-color: var(--color-accent);
+    }
+  }
+
+  .comments :global(.giscus),
+  .comments :global(.giscus-frame) {
+    width: 100%;
+  }
+
+  .comments :global(.giscus-frame) {
+    display: block;
+  }
+
+  @media (max-width: 640px) {
+    .comments {
+      margin-top: 3rem;
+    }
+    .comments__divider {
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>
