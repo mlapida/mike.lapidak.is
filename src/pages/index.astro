@@ -65,7 +65,7 @@ const personJsonLd = {
 
           <div class="hero__content">
             <h1 class="hero__name display">
-              Mike Lapidakis
+              Mike<br/>Lapidakis
             </h1>
 
             <p class="hero__role">
@@ -217,30 +217,13 @@ const personJsonLd = {
     box-shadow: var(--shadow-soft);
   }
 
-  /* Name set as an enamel station plate: Parisine bold reversed out of
-     ink, double hairline inset frame, squared corners. Same language as
-     the ML monogram in the nav, scaled up. Inverts cleanly in dark mode
-     (text token becomes the plate, bg token becomes the letters). */
   .hero__name {
-    display: inline-block;
-    max-width: 100%;
-    background: var(--color-text);
-    color: var(--color-bg);
-    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-size: clamp(3rem, 7vw, 5rem);
     font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin: 0 0 1.5rem;
-    padding: 1.1rem 1.5rem 1.2rem;
-    position: relative;
-  }
-
-  .hero__name::after {
-    content: '';
-    position: absolute;
-    inset: 0.5rem;
-    border: 1px solid color-mix(in oklab, var(--color-bg) 60%, transparent);
-    pointer-events: none;
+    margin: 0 0 1.25rem;
+    letter-spacing: -0.025em;
+    color: var(--color-text);
+    line-height: 0.95;
   }
 
   .hero__role {
@@ -585,12 +568,7 @@ const personJsonLd = {
     }
 
     .hero__name {
-      font-size: clamp(1.6rem, 7.5vw, 2.5rem);
-      padding: 0.9rem 1.1rem 1rem;
-    }
-
-    .hero__name::after {
-      inset: 0.4rem;
+      font-size: clamp(2.5rem, 12vw, 4rem);
     }
 
     .section-cards {

@@ -94,9 +94,13 @@ monogram in the nav: ink ground, paper letters, squared corners, a
 hairline frame inset (the double-edge of a RATP plate). Used by:
 
 - The nav monogram (the origin of the language)
-- The hero name plate on the homepage (Parisine bold reversed,
-  hairline inset via `::after`)
 - Favicons and the default OG card
+
+**Keep plates small.** A full-size hero name plate was tried and
+rejected: at heading scale the box reads as a UI element, not
+signage, and it breaks the heading-size relationship between the
+homepage and the page headers. The hero name stays large open type
+(`clamp(3rem, 7vw, 5rem)`, bigger than any `.page-title`).
 
 Cards share the squared-corner half of this language: section cards,
 collection cards, spotlight cards, talk items, and post pager plates
