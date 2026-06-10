@@ -75,7 +75,7 @@ const jsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <Nav />
 
-  <main class="photo-detail">
+  <main id="main" class="photo-detail">
     <div class="photo-detail__layout">
       <!-- Photo panel -->
       <div class="photo-panel">
@@ -91,8 +91,9 @@ const jsonLd = {
         />
       </div>
 
-      <!-- Metadata panel -->
-      <aside class="meta-panel animate-fade-up">
+      <!-- Metadata panel (split-pane column, not complementary content,
+           so it must not be an <aside>: the page h1 lives here) -->
+      <div class="meta-panel animate-fade-up">
         <!-- Breadcrumb -->
         <nav class="breadcrumb" aria-label="Back">
           <a
@@ -133,6 +134,7 @@ const jsonLd = {
             class="photo-map"
             data-lat={String(gps.lat)}
             data-lng={String(gps.lng)}
+            role="img"
             aria-label={`Map of ${location}`}
           ></div>
         )}
@@ -156,7 +158,7 @@ const jsonLd = {
             )}
           </div>
         </nav>
-      </aside>
+      </div>
     </div>
   </main>
 
@@ -373,10 +375,6 @@ const jsonLd = {
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
-    .photo-detail {
-      padding-top: 56px;
-    }
-
     .photo-detail__layout {
       grid-template-columns: 1fr;
       min-height: auto;
@@ -384,7 +382,6 @@ const jsonLd = {
 
     .photo-panel {
       padding: 1rem;
-      background: #000;
     }
 
     .photo-detail__img {

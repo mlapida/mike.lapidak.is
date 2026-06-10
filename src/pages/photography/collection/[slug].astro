@@ -38,7 +38,7 @@ const { name, photos } = Astro.props;
 >
   <Nav />
 
-  <main>
+  <main id="main">
     <section class="page-header">
       <div class="container">
         <nav class="breadcrumb">
@@ -233,6 +233,17 @@ const { name, photos } = Astro.props;
     .photo-item:hover .photo-overlay {
       opacity: 1;
     }
+  }
+
+  /* Touch devices: captions visible at rest, nothing is hover-gated */
+  @media (hover: none) {
+    .photo-overlay {
+      opacity: 1;
+    }
+  }
+
+  .photo-item:focus-visible .photo-overlay {
+    opacity: 1;
   }
 
   .photo-title {

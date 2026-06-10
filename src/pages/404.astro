@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base
+  title="Page not found"
+  description="This page does not exist, or it moved somewhere new."
+>
+  <Nav />
+
+  <main id="main">
+    <section class="terminus">
+      <div class="container">
+        <p class="page-eyebrow">Terminus</p>
+        <h1 class="terminus__code display">404</h1>
+        <p class="terminus__note">End of the line.</p>
+        <p class="terminus__desc">
+          This page doesn't exist, or it moved somewhere new.
+        </p>
+        <nav class="terminus__links" aria-label="Suggested destinations">
+          <a href="/" class="terminus__link"><span aria-hidden="true">&larr;</span> Home</a>
+          <a href="/posts/" class="terminus__link">Writing <span aria-hidden="true">&rarr;</span></a>
+          <a href="/photography" class="terminus__link">Photography <span aria-hidden="true">&rarr;</span></a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .terminus {
+    padding: 6rem 0 4rem;
+  }
+
+  .terminus__code {
+    font-size: var(--fs-5xl);
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 0.5rem;
+    color: var(--color-text);
+  }
+
+  .terminus__note {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--color-text-muted);
+    margin: 0 0 1.5rem;
+  }
+
+  .terminus__desc {
+    font-size: 1rem;
+    font-weight: var(--weight-light);
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    max-width: 480px;
+    margin: 0 0 2.5rem;
+  }
+
+  .terminus__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.25rem;
+  }
+
+  .terminus__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    transition: color var(--dur-fast) ease;
+  }
+
+  @media (hover: hover) {
+    .terminus__link:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+</style>

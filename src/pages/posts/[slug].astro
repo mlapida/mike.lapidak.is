@@ -64,6 +64,7 @@ const articleJsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <Nav />
 
+  <main id="main">
   <article class="post">
     {feature_image && (
       <div class="post__hero-wrap">
@@ -123,6 +124,7 @@ const articleJsonLd = {
       <Comments />
     </div>
   </article>
+  </main>
 
   <Footer />
 </Base>
@@ -253,11 +255,6 @@ const articleJsonLd = {
   .post__body :global(strong) {
     font-weight: 600;
     color: var(--color-text);
-  }
-
-  .post__body :global(em) {
-    font-family: var(--font-accent);
-    font-style: italic;
   }
 
   .post__body :global(blockquote) {

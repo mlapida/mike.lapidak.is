@@ -15,6 +15,7 @@
   --ink-700: #252320;
   --ink-600: #37332d;
   --ink-500: #545049;
+  --ink-450: #6e6760; /* muted text on paper · 5.15:1 on bg, 4.63:1 on surface (AA) */
   --ink-400: #78716a;
   --ink-300: #9e9890;
   --ink-200: #d6d1c8;
@@ -42,8 +43,8 @@
   --color-border-soft:  rgba(214, 209, 200, 0.55);
 
   --color-text:         var(--ink-800);
-  --color-text-muted:   var(--ink-400);
-  --color-text-subtle:  rgba(120, 113, 106, 0.7);
+  --color-text-muted:   var(--ink-450);
+  --color-text-subtle:  rgba(120, 113, 106, 0.7); /* decorative separators only, never text */
 
   --color-accent:       var(--forest-600);
   --color-accent-hover: var(--forest-700);
@@ -118,7 +119,7 @@
   --fs-mid:  1.35rem;
   --fs-2xl:  1.6rem;
   --fs-3xl:  clamp(2rem, 4vw, 2.5rem);
-  --fs-4xl:  clamp(2.75rem, 6vw, 4.25rem);
+  --fs-4xl:  clamp(2.25rem, 7vw, 4.25rem);
   --fs-5xl:  clamp(3rem, 7vw, 5rem);
 
   --tracking-tight:   -0.025em;
@@ -265,6 +266,28 @@ img {
 }
 
 /* ============================================================
+   SKIP LINK — visually hidden until keyboard-focused
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 0.5rem 0.9rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus-visible {
+  left: 0.75rem;
+  top: 0.65rem;
+}
+
+/* ============================================================
    FOCUS — every interactive element gets a visible ring
    ============================================================ */
 :focus {
@@ -348,7 +371,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: var(--fs-4xl);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-tight);
-  line-height: 1;
+  line-height: 1.08;
   margin: 0 0 1rem;
   color: var(--color-text);
 }
@@ -410,6 +433,41 @@ h1, h2, h3, h4, h5, h6 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   PRINT — paper site, real paper. Force light ink-on-white
+   regardless of theme (browsers strip backgrounds when printing,
+   so dark-mode text tokens would print near-white on white).
+   ============================================================ */
+@media print {
+  html, body {
+    background: #fff !important;
+    background-image: none !important;
+    color: #1a1814 !important;
+  }
+
+  body * {
+    color: inherit;
+  }
+
+  .nav,
+  .footer,
+  .skip-link,
+  .post__pager,
+  .post__tags,
+  .comments,
+  .giscus {
+    display: none !important;
+  }
+
+  .post__container {
+    max-width: 100% !important;
+  }
+
+  a {
+    color: inherit;
   }
 }
 

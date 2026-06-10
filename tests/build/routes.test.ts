@@ -36,6 +36,10 @@ describe('top-level routes', () => {
     expect(existsSync(distPath('work', 'index.html'))).toBe(true);
   });
 
+  it('dist/404.html exists so Cloudflare Pages serves real 404s', () => {
+    expect(existsSync(distPath('404.html'))).toBe(true);
+  });
+
   it('dist/photography/index.html exists', () => {
     expect(existsSync(distPath('photography', 'index.html'))).toBe(true);
   });
@@ -104,12 +108,12 @@ describe('posts collection routes', () => {
     expect(existsSync(distPath('posts', '3', 'index.html'))).toBe(true);
   });
 
-  it('exactly 23 published post detail directories under dist/posts/', () => {
+  it('exactly 24 published post detail directories under dist/posts/', () => {
     const entries = readdirSync(distPath('posts'), { withFileTypes: true });
     const dirs = entries
       .filter(e => e.isDirectory())
       .filter(e => !/^\d+$/.test(e.name)); // exclude pagination dirs
-    expect(dirs.length).toBe(23);
+    expect(dirs.length).toBe(24);
   });
 
   it('every post detail directory has a sibling .md companion route', () => {

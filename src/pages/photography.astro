@@ -35,7 +35,7 @@ const collections = [...collectionMap.entries()].sort(
 >
   <Nav />
 
-  <main>
+  <main id="main">
     <section class="page-header">
       <div class="container">
         <p class="page-eyebrow">Portfolio</p>
@@ -59,7 +59,7 @@ const collections = [...collectionMap.entries()].sort(
           <section class="gallery-section">
             <div class="container--wide">
               <div class="section-label">
-                <span class="section-eyebrow">Collections</span>
+                <h2 class="section-eyebrow">Collections</h2>
               </div>
               <div class="collection-cards">
                 {collections.map(([name, photos]) => {
@@ -104,7 +104,7 @@ const collections = [...collectionMap.entries()].sort(
             <div class="container--wide">
               {collections.length > 0 && (
                 <div class="section-label">
-                  <span class="section-eyebrow">Singles</span>
+                  <h2 class="section-eyebrow">Singles</h2>
                 </div>
               )}
               <div class="photo-grid">
@@ -224,11 +224,12 @@ const collections = [...collectionMap.entries()].sort(
   }
 
   .section-eyebrow {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-accent);
+    margin: 0;
   }
 
   /* ── Collection cards ── */
@@ -332,6 +333,19 @@ const collections = [...collectionMap.entries()].sort(
     }
   }
 
+  /* Touch devices get the affordance at rest; keyboard users get it on focus */
+  @media (hover: none) {
+    .card-arrow {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .collection-card:focus-visible .card-arrow {
+    opacity: 1;
+    transform: none;
+  }
+
   /* ── Justified row grid ── */
   .photo-grid {
     display: flex;
@@ -382,6 +396,17 @@ const collections = [...collectionMap.entries()].sort(
     .photo-item:hover .photo-overlay {
       opacity: 1;
     }
+  }
+
+  /* Touch devices: captions visible at rest, nothing is hover-gated */
+  @media (hover: none) {
+    .photo-overlay {
+      opacity: 1;
+    }
+  }
+
+  .photo-item:focus-visible .photo-overlay {
+    opacity: 1;
   }
 
   .photo-title {

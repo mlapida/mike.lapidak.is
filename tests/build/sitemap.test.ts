@@ -105,12 +105,12 @@ describe('sitemap-0.xml', () => {
     expect(sitemap0).not.toMatch(/<loc>[^<]+\.md<\/loc>/);
   });
 
-  it('total <loc> count is 48', () => {
+  it('total <loc> count is 49', () => {
     // 4 top-level (/, /photography/, /posts/, /work/)
     // + 17 photo details + 2 collection pages
-    // + 23 post details + 2 pagination pages (/posts/2/, /posts/3/)
+    // + 24 post details + 2 pagination pages (/posts/2/, /posts/3/)
     const matches = sitemap0.match(/<loc>/g);
-    expect(matches?.length).toBe(48);
+    expect(matches?.length).toBe(49);
   });
 
   it('all <loc> entries start with https://mike.lapidak.is', () => {

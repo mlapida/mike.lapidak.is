@@ -39,7 +39,7 @@ const personJsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
   <Nav />
 
-  <main>
+  <main id="main">
     <!-- Hero -->
     <section class="hero">
       <div class="container">
@@ -51,6 +51,7 @@ const personJsonLd = {
               width={224}
               height={224}
               quality={95}
+              loading="eager"
               class="hero__photo"
               onerror="this.style.display='none'"
             />

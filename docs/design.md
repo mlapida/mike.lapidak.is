@@ -182,8 +182,11 @@ Refs: WebKit "Designing Websites for iPhone X"; zulip/zulip#37367.
 
 ## Accessibility floor
 
-- Contrast: all text-token pairs hit WCAG AA. Muted text on paper bg
-  reads at 4.7:1.
+- Contrast: all text-token pairs hit WCAG AA. Muted text (`--ink-450`
+  `#6e6760`) measures 5.15:1 on the paper bg and 4.63:1 on surface.
+  Never stack `opacity` on muted text to make it quieter; that's how
+  the old 2.6:1 footer happened. If a token reads too loud, darken or
+  lighten the token.
 - Focus: `:focus-visible` rings on every interactive element.
 - Reduced motion: collapses all animations to 0.01ms.
 - `<img>` alt text required. Decorative images use `alt=""` explicitly.
