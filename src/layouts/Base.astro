@@ -6,12 +6,16 @@ export interface Props {
   title?: string;
   description?: string;
   image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
 }
 
 const {
   title = site.name,
   description = site.description,
   image,
+  type = 'website',
+  publishedTime,
 } = Astro.props;
 
 const siteUrl = site.url;
@@ -50,7 +54,13 @@ const ogImage = image
     <link rel="alternate" type="application/rss+xml" title="Mike Lapidakis · Writing" href="/rss.xml" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
+    {type === 'article' && publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {type === 'article' && (
+      <meta property="article:author" content="Mike Lapidakis" />
+    )}
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />

@@ -265,10 +265,8 @@ const jsonLd = {
     display: inline-flex;
     align-items: center;
     gap: 0.4em;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
     color: var(--color-text-muted);
     text-decoration: none;
     transition: color var(--dur-fast) ease;
@@ -290,9 +288,12 @@ const jsonLd = {
     color: var(--color-text);
   }
 
-  /* Location */
+  /* Location: Caslon italic, the print-margin caption under the title.
+     Photo captions are accent-face territory (design.md). */
   .meta-location {
-    font-size: 0.9rem;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1rem;
     color: var(--color-text-muted);
     margin: 0;
     display: flex;
@@ -320,8 +321,10 @@ const jsonLd = {
     gap: 0.2rem;
   }
 
+  /* EXIF keeps uppercase: it reads as camera-plate engraving here,
+     but respects the 0.75rem microtext floor. */
   .exif-label {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1em;

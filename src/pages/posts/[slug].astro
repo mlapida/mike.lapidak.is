@@ -69,7 +69,7 @@ const articleJsonLd = {
 };
 ---
 
-<Base title={title} description={description ?? title} image={ogImage}>
+<Base title={title} description={description ?? title} image={ogImage} type="article" publishedTime={dateISO}>
   <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <Nav />
 
@@ -127,14 +127,20 @@ const articleJsonLd = {
       <nav class="post__pager" aria-label="post navigation">
         {prev ? (
           <a href={`/posts/${prev.data.slug}/`} class="post__pager-link post__pager-link--prev">
-            <span class="post__pager-eyebrow">Newer</span>
-            <span class="post__pager-title">{prev.data.title}</span>
+            <span class="post__pager-arrow" aria-hidden="true">&larr;</span>
+            <span class="post__pager-text">
+              <span class="post__pager-eyebrow">newer</span>
+              <span class="post__pager-title">{prev.data.title}</span>
+            </span>
           </a>
         ) : <span />}
         {next ? (
           <a href={`/posts/${next.data.slug}/`} class="post__pager-link post__pager-link--next">
-            <span class="post__pager-eyebrow">Older</span>
-            <span class="post__pager-title">{next.data.title}</span>
+            <span class="post__pager-text">
+              <span class="post__pager-eyebrow">older</span>
+              <span class="post__pager-title">{next.data.title}</span>
+            </span>
+            <span class="post__pager-arrow" aria-hidden="true">&rarr;</span>
           </a>
         ) : <span />}
       </nav>
@@ -220,12 +226,16 @@ const articleJsonLd = {
     color: var(--color-text);
   }
 
+  /* Lede in Caslon italic: a calm ≤3-sentence context, sibling of the
+     pull-quote role the accent face already owns. */
   .post__lede {
-    font-size: 1.15rem;
-    line-height: 1.55;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
     color: var(--color-text-muted);
     margin: 0;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   /* ---- Body typography ---- */
@@ -252,7 +262,7 @@ const articleJsonLd = {
   .post__body :global(h3) {
     font-family: var(--font-body);
     font-weight: 600;
-    font-size: 1.075rem;
+    font-size: 1.2rem;
     margin: 2rem 0 0.5rem;
     color: var(--color-text);
   }
@@ -426,34 +436,61 @@ const articleJsonLd = {
     border-top: 1px solid var(--color-border);
   }
 
+  /* Direction plates: squared wayfinding panels with the arrow set
+     large at the plate edge, the one place Parisine gets to do what
+     it was drawn for. */
   .post__pager-link {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 1rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.15rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     color: var(--color-text);
-    transition: border-color var(--dur-fast) ease, transform var(--dur-fast) ease;
+    transition: border-color var(--dur-fast) ease;
   }
 
   .post__pager-link--next {
     text-align: right;
+    justify-content: flex-end;
+  }
+
+  .post__pager-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .post__pager-arrow {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    transition: transform var(--dur-base) var(--ease-out-soft);
   }
 
   @media (hover: hover) {
     .post__pager-link:hover {
       border-color: var(--color-accent);
     }
+
+    .post__pager-link--prev:hover .post__pager-arrow {
+      transform: translateX(-4px);
+    }
+
+    .post__pager-link--next:hover .post__pager-arrow {
+      transform: translateX(4px);
+    }
   }
 
   .post__pager-eyebrow {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 0.9rem;
+    text-transform: lowercase;
     color: var(--color-text-muted);
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .post__pager-title {

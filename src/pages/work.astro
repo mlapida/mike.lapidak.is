@@ -67,7 +67,7 @@ const profileJsonLd = {
     <!-- Spotlight -->
     <section class="work-section">
       <div class="container">
-        <h2 class="section-label">Spotlight</h2>
+        <h2 class="section-label"><span class="line-disc" aria-hidden="true">1</span>Spotlight</h2>
         <div class="spotlight-grid">
           {spotlight.map(item => (
             <div class="spotlight-card">
@@ -93,7 +93,7 @@ const profileJsonLd = {
     <!-- Experience -->
     <section class="work-section">
       <div class="container">
-        <h2 class="section-label">Experience</h2>
+        <h2 class="section-label"><span class="line-disc" aria-hidden="true">2</span>Experience</h2>
         <div class="experience-list">
           {experience.map(job => (
             <div class="job">
@@ -122,7 +122,7 @@ const profileJsonLd = {
     <!-- Skills -->
     <section class="work-section">
       <div class="container">
-        <h2 class="section-label">Skills &amp; Tools</h2>
+        <h2 class="section-label"><span class="line-disc" aria-hidden="true">3</span>Skills &amp; Tools</h2>
         <div class="skill-groups">
           {skillGroups.map(group => (
             <div class="skill-group">
@@ -141,7 +141,7 @@ const profileJsonLd = {
     {talks.length > 0 && (
       <section class="work-section">
         <div class="container">
-          <h2 class="section-label">Talks &amp; Writing</h2>
+          <h2 class="section-label"><span class="line-disc" aria-hidden="true">4</span>Talks &amp; Writing</h2>
           <div class="talks-list">
             {talks.map(talk => (
               <div class="talk-item">
@@ -170,7 +170,7 @@ const profileJsonLd = {
     <!-- Education -->
     <section class="work-section">
       <div class="container">
-        <h2 class="section-label">Education</h2>
+        <h2 class="section-label"><span class="line-disc" aria-hidden="true">5</span>Education</h2>
         <div class="job">
           <div class="job__header">
             <div>
@@ -185,7 +185,7 @@ const profileJsonLd = {
     <!-- Contact -->
     <section class="work-section work-section--last">
       <div class="container">
-        <h2 class="section-label">Get in Touch</h2>
+        <h2 class="section-label"><span class="line-disc" aria-hidden="true">6</span>Get in Touch</h2>
         <p class="contact-text">
           Open to interesting conversations about cloud architecture, security,
           generative AI, and team leadership.
@@ -216,12 +216,16 @@ const profileJsonLd = {
     border-bottom: none;
   }
 
+  /* Numbered Métro line discs replace the uppercase eyebrow monoculture:
+     the label reads as wayfinding (1 Spotlight, 2 Experience, ...) */
   .section-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: -0.01em;
+    color: var(--color-text);
     margin: 0 0 1.75rem;
   }
 
@@ -317,10 +321,12 @@ const profileJsonLd = {
   }
 
   .skill-group__label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1rem;
+    text-transform: lowercase;
+    letter-spacing: 0.01em;
     color: var(--color-text-muted);
     margin: 0 0 0.5rem;
   }
@@ -348,14 +354,15 @@ const profileJsonLd = {
     color: var(--color-text);
     padding: 1.1rem 1.25rem;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
   }
 
   .talk-type {
-    font-size: 0.65rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-transform: lowercase;
+    letter-spacing: 0.01em;
     color: var(--color-accent);
   }
 
@@ -436,6 +443,8 @@ const profileJsonLd = {
     gap: 1rem;
   }
 
+  /* Quiet card: not clickable as a whole (links live in the footer row),
+     so no hover affordance. Squared corners per the plate language. */
   .spotlight-card {
     display: flex;
     flex-direction: column;
@@ -443,19 +452,19 @@ const profileJsonLd = {
     padding: 1.5rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     color: var(--color-text);
     text-decoration: none;
-    transition: border-color var(--dur-base) ease, box-shadow var(--dur-base) ease;
     position: relative;
   }
 
 
   .spotlight-type {
-    font-size: 0.65rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-transform: lowercase;
+    letter-spacing: 0.01em;
     color: var(--color-accent);
   }
 
@@ -502,7 +511,7 @@ const profileJsonLd = {
   }
 
   .spotlight-link {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: var(--color-accent);
     white-space: nowrap;

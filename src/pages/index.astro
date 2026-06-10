@@ -15,6 +15,11 @@ const recentPosts = allPosts
   .sort((a, b) => b.data.publish_date!.valueOf() - a.data.publish_date!.valueOf())
   .slice(0, 5);
 
+// "Recently shot" polaroid stack (pre-approved one-off, docs/design.md)
+const recentPhotos = (await getCollection('photos'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -44,8 +49,8 @@ const personJsonLd = {
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <div class="hero__inner">
-          <div class="hero__avatar animate-fade-up">
+        <div class="hero__inner animate-fade-up">
+          <div class="hero__avatar">
             <Image
               src={profileImg}
               alt="Mike Lapidakis"
@@ -59,19 +64,19 @@ const personJsonLd = {
           </div>
 
           <div class="hero__content">
-            <h1 class="hero__name display animate-fade-up animate-delay-1">
-              Mike<br/>Lapidakis
+            <h1 class="hero__name display">
+              Mike Lapidakis
             </h1>
 
-            <p class="hero__role animate-fade-up animate-delay-2">
+            <p class="hero__role">
               {site.role}
             </p>
 
-            <p class="hero__bio animate-fade-up animate-delay-3">
+            <p class="hero__bio">
               {site.bio}
             </p>
 
-            <ul class="hero__links animate-fade-up animate-delay-4">
+            <ul class="hero__links">
               {heroSocials.map(link => (
                 <li>
                   <a href={link.href} target="_blank" rel={`noopener${link.rel ? ` ${link.rel}` : ''}`} class="hero__link">
@@ -90,7 +95,7 @@ const personJsonLd = {
       <section class="writing">
         <div class="container">
           <div class="section-header">
-            <h2 class="section-label">Writing</h2>
+            <h2 class="section-label label-script">writing</h2>
             <a href="/posts/" class="section-more">All writing &rarr;</a>
           </div>
           <ol class="post-list">
@@ -141,16 +146,32 @@ const personJsonLd = {
     <section class="sections-nav">
       <div class="container">
         <div class="section-cards">
-          <a href="/photography" class="section-card">
-            <span class="section-card__eyebrow">Explore</span>
-            <span class="section-card__label">Photography</span>
-            <span class="section-card__desc">
-              Street, travel, and landscape, shot on a Leica Q3. Also on glass.photo/lap.
+          <a href="/photography" class="section-card section-card--photos">
+            <span class="stack-wrap" aria-hidden="true">
+              {recentPhotos.slice().reverse().map((photo, i) => (
+                <Image
+                  src={photo.data.image}
+                  alt=""
+                  class={`stack-img stack-img--${i}`}
+                  width={360}
+                  height={Math.round(360 / ((photo.data.imgWidth ?? 4) / (photo.data.imgHeight ?? 3)))}
+                  loading="lazy"
+                  decoding="async"
+                  quality={80}
+                />
+              ))}
             </span>
-            <span class="section-card__arrow" aria-hidden="true">&rarr;</span>
+            <span class="section-card__body">
+              <span class="section-card__script label-script">recently shot</span>
+              <span class="section-card__label">Photography</span>
+              <span class="section-card__desc">
+                Street, travel, and landscape, shot on a Leica Q3. Also on glass.photo/lap.
+              </span>
+              <span class="section-card__arrow" aria-hidden="true">&rarr;</span>
+            </span>
           </a>
           <a href="/work" class="section-card">
-            <span class="section-card__eyebrow">Background</span>
+            <span class="section-card__script label-script">background</span>
             <span class="section-card__label">Work</span>
             <span class="section-card__desc">
               10+ years building specialist teams at AWS. Security, networking, resilience, and generative AI at enterprise scale.
@@ -196,21 +217,39 @@ const personJsonLd = {
     box-shadow: var(--shadow-soft);
   }
 
+  /* Name set as an enamel station plate: Parisine bold reversed out of
+     ink, double hairline inset frame, squared corners. Same language as
+     the ML monogram in the nav, scaled up. Inverts cleanly in dark mode
+     (text token becomes the plate, bg token becomes the letters). */
   .hero__name {
-    font-size: clamp(3rem, 7vw, 5rem);
+    display: inline-block;
+    max-width: 100%;
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
     font-weight: 700;
-    margin: 0 0 1.25rem;
-    letter-spacing: -0.025em;
-    color: var(--color-text);
-    line-height: 0.95;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 1.5rem;
+    padding: 1.1rem 1.5rem 1.2rem;
+    position: relative;
+  }
+
+  .hero__name::after {
+    content: '';
+    position: absolute;
+    inset: 0.5rem;
+    border: 1px solid color-mix(in oklab, var(--color-bg) 60%, transparent);
+    pointer-events: none;
   }
 
   .hero__role {
-    font-size: 0.875rem;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.05rem;
     color: var(--color-text-muted);
     margin: 0 0 1.5rem;
     font-weight: 400;
-    letter-spacing: 0.01em;
   }
 
   .hero__bio {
@@ -275,11 +314,6 @@ const personJsonLd = {
   }
 
   .section-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-text-muted);
     margin: 0;
   }
 
@@ -371,7 +405,7 @@ const personJsonLd = {
   }
 
   .post-cat {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     color: var(--color-text-muted);
@@ -381,16 +415,17 @@ const personJsonLd = {
     letter-spacing: 0.01em;
   }
 
+  /* Same row spec as /posts/ so the two list surfaces read identically */
   .post-title {
     font-weight: 500;
-    font-size: 0.925rem;
+    font-size: 1rem;
     line-height: 1.4;
     transition: color var(--dur-fast) ease;
     margin: 0;
   }
 
   .post-desc {
-    font-size: 0.82rem;
+    font-size: 0.875rem;
     color: var(--color-text-muted);
     margin: 0;
     line-height: 1.5;
@@ -412,6 +447,8 @@ const personJsonLd = {
     gap: 1rem;
   }
 
+  /* Squared corners: the plate/print language (same family as the
+     collection cards and the hero plate), not the rounded default. */
   .section-card {
     display: grid;
     grid-template-rows: auto auto 1fr auto;
@@ -419,7 +456,6 @@ const personJsonLd = {
     padding: 1.75rem 1.75rem 1.5rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
     color: var(--color-text);
     transition: border-color var(--dur-base) ease, transform var(--dur-base) ease, box-shadow var(--dur-base) ease;
     min-height: 180px;
@@ -434,12 +470,51 @@ const personJsonLd = {
     }
   }
 
-  .section-card__eyebrow {
-    font-size: 0.7rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-text-muted);
+  /* "Recently shot" variant: polaroid stack beside the card body */
+  .section-card--photos {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .section-card__body {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0.4rem;
+    align-self: stretch;
+    min-width: 0;
+  }
+
+  .stack-wrap {
+    position: relative;
+    width: 120px;
+    height: 86px;
+    flex-shrink: 0;
+  }
+
+  .stack-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: var(--shadow-photo);
+    transform-origin: center bottom;
+  }
+
+  .stack-img--0 { transform: rotate(-5deg) translate(-6px, -3px); z-index: 1; }
+  .stack-img--1 { transform: rotate(-2deg) translate(-2px, -1px); z-index: 2; }
+  .stack-img--2 { transform: rotate(0deg);                        z-index: 3; }
+
+  @media (hover: hover) {
+    .section-card--photos:hover .stack-img--0 { transform: rotate(-8deg) translate(-10px, -2px); }
+    .section-card--photos:hover .stack-img--1 { transform: rotate(-3deg) translate(-4px, -1px); }
+    .section-card--photos:hover .stack-img--2 { transform: rotate(1deg); }
+  }
+
+  .section-card__script {
+    font-size: 0.95rem;
   }
 
   .section-card__label {
@@ -510,7 +585,12 @@ const personJsonLd = {
     }
 
     .hero__name {
-      font-size: clamp(2.5rem, 12vw, 4rem);
+      font-size: clamp(1.6rem, 7.5vw, 2.5rem);
+      padding: 0.9rem 1.1rem 1rem;
+    }
+
+    .hero__name::after {
+      inset: 0.4rem;
     }
 
     .section-cards {
