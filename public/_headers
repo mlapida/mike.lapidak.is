@@ -21,11 +21,11 @@
 #     those are loaded from inside the giscus.app frame, not from our
 #     origin, so they don't need to be in img-src here.
 #   - Cloudflare auto-injects Web Analytics (static.cloudflareinsights.com
-#     for the beacon script, cloudflareinsights.com for the RUM POST) and
-#     Rocket Loader (ajax.cloudflare.com) at the edge. Both need to be
-#     allowed in script-src; the analytics beacon also needs connect-src.
+#     for the beacon script, cloudflareinsights.com for the RUM POST) at
+#     the edge; the beacon needs script-src and connect-src. Rocket Loader
+#     is disabled for the zone, so ajax.cloudflare.com is not allowed.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app https://static.cloudflareinsights.com https://ajax.cloudflare.com; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net; font-src 'self' https://use.typekit.net https://p.typekit.net; img-src 'self' data: https://pub-1925a6f6efeb4b71bc918d8041c946c6.r2.dev https://*.tile.openstreetmap.org; connect-src 'self' https://cloudflareinsights.com; frame-src https://giscus.app; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net; font-src 'self' https://use.typekit.net https://p.typekit.net; img-src 'self' data: https://pub-1925a6f6efeb4b71bc918d8041c946c6.r2.dev https://*.tile.openstreetmap.org; connect-src 'self' https://cloudflareinsights.com; frame-src https://giscus.app; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=()
 
