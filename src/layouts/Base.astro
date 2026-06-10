@@ -25,9 +25,10 @@ const ogImage = image
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <!-- theme-color must be before the init script so the script can update it before first paint -->
+    <!-- theme-color must be before the init script so the script can update it before first paint.
+         data-cfasync=false keeps Rocket Loader from deferring the theme bootstrap past first paint. -->
     <meta name="theme-color" id="theme-color-meta" content="#f8f6f1" />
-    <script is:inline>
+    <script is:inline data-cfasync="false">
       (function () {
         var colors = { light: '#f8f6f1', dark: '#1a1814' };
         var stored = localStorage.getItem('theme-preference');

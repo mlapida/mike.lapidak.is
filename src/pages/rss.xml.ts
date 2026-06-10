@@ -1,7 +1,9 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
 import { site } from '../config/site';
 import { displayableTags } from '../lib/posts';
+import { featureAsset } from '../lib/feature-images';
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async (context) => {
@@ -16,13 +18,19 @@ export const GET: APIRoute = async (context) => {
     title: `${site.name} · Writing`,
     description: 'Notes from the homelab, AWS, and the tools I\'m using to think.',
     site: context.site ?? site.url,
-    items: published.map(post => {
+    items: await Promise.all(published.map(async post => {
       const link = `/posts/${post.data.slug}/`;
-      const enclosure = post.data.feature_image
+      // Same transform as the post page's OG image, so the two share
+      // one generated file in dist.
+      const asset = featureAsset(post.data.feature_image);
+      const optimized = asset
+        ? await getImage({ src: asset, width: 1200, format: 'jpeg', quality: 80 })
+        : undefined;
+      const enclosure = optimized
         ? {
-            url: new URL(post.data.feature_image, siteUrl).toString(),
+            url: new URL(optimized.src, siteUrl).toString(),
             length: 0,
-            type: post.data.feature_image.endsWith('.png') ? 'image/png' : 'image/jpeg',
+            type: 'image/jpeg',
           }
         : undefined;
       return {
@@ -34,7 +42,7 @@ export const GET: APIRoute = async (context) => {
         categories: displayableTags(post.data.tags),
         ...(enclosure ? { enclosure } : {}),
       };
-    }),
+    })),
     customData: '<language>en-us</language>',
     stylesheet: false,
   });

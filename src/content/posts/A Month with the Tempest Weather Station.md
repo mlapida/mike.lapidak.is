@@ -31,7 +31,7 @@ After installing the Tempest, I set up the base station and the app, and the dat
 
 ## Daily Use/App
 
-![The Tempest App](/post-images/review-weatherflow-tempest-weather-station/CleanShot-2022-04-17-at-18.56.08@2x.png)
+![The Tempest App](/post-images/review-weatherflow-tempest-weather-station/CleanShot-2022-04-17-at-18.56.08@2x.webp)
 
 Screenshots from the Tempest app
 
@@ -43,7 +43,7 @@ In its first month in service, I’ve had no issues with connectivity or accurac
 
 ## Forecast
 
-![A view of the forecast from the web](/post-images/review-weatherflow-tempest-weather-station/CleanShot-2022-04-17-at-19.20.49@2x.png)
+![A view of the forecast from the web](/post-images/review-weatherflow-tempest-weather-station/CleanShot-2022-04-17-at-19.20.49@2x.webp)
 
 The Tempest webpage
 
@@ -53,7 +53,7 @@ I’ll update this after a season of use and share observations.
 
 ## Integration
 
-![The Tempest on Weather Underground](/post-images/review-weatherflow-tempest-weather-station/CleanShot-2022-04-17-at-19.11.49@2x.png)
+![The Tempest on Weather Underground](/post-images/review-weatherflow-tempest-weather-station/CleanShot-2022-04-17-at-19.11.49@2x.webp)
 
 Viewing the Tempest data in The Weather Underground
 

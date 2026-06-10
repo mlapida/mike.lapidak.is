@@ -5,7 +5,6 @@ import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import { collectionSlug } from './collection/[slug].astro';
-import 'leaflet/dist/leaflet.css';
 
 export async function getStaticPaths() {
   const allPhotos = (await getCollection('photos')).sort(
@@ -85,9 +84,12 @@ const jsonLd = {
           class="photo-detail__img"
           width={imgWidth ?? 2000}
           height={imgHeight ?? 1333}
+          widths={[640, 1080, 1600, 2200]}
+          sizes="(max-width: 768px) 100vw, 60vw"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
-          quality={90}
+          quality={85}
         />
       </div>
 
@@ -165,14 +167,21 @@ const jsonLd = {
   <Footer />
 
   <script>
-    import L from 'leaflet';
-
+    // Leaflet is ~44 KB gzipped for a deliberately inert 200px map, so
+    // it loads on demand: only on pages with GPS data (the #photo-map
+    // node exists), and only once the map scrolls near the viewport.
     const mapEl = document.getElementById('photo-map') as HTMLDivElement | null;
-    if (mapEl) {
-      const lat = parseFloat(mapEl.dataset.lat ?? '0');
-      const lng = parseFloat(mapEl.dataset.lng ?? '0');
 
-      const map = L.map(mapEl, {
+    async function initMap(el: HTMLDivElement) {
+      const [{ default: L }] = await Promise.all([
+        import('leaflet'),
+        import('leaflet/dist/leaflet.css'),
+      ]);
+
+      const lat = parseFloat(el.dataset.lat ?? '0');
+      const lng = parseFloat(el.dataset.lng ?? '0');
+
+      const map = L.map(el, {
         zoomControl: false,
         scrollWheelZoom: false,
         dragging: false,
@@ -197,6 +206,15 @@ const jsonLd = {
         color: '#fff',
         weight: 2,
       }).addTo(map);
+    }
+
+    if (mapEl) {
+      const io = new IntersectionObserver((entries) => {
+        if (!entries.some(e => e.isIntersecting)) return;
+        io.disconnect();
+        initMap(mapEl);
+      }, { rootMargin: '300px' });
+      io.observe(mapEl);
     }
   </script>
 </Base>

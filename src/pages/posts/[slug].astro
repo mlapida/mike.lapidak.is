@@ -4,7 +4,9 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import Comments from '../../components/Comments.astro';
 import { getCollection, render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
 import { displayableTags } from '../../lib/posts';
+import { featureAsset } from '../../lib/feature-images';
 
 export async function getStaticPaths() {
   const all = await getCollection('posts');
@@ -38,6 +40,13 @@ const readMinutes = word_count ? Math.max(1, Math.round(word_count / 220)) : nul
 const siteUrl = 'https://mike.lapidak.is';
 const pageUrl = new URL(`/posts/${post.data.slug}/`, siteUrl).toString();
 
+// Hero runs through the image pipeline; OG/JSON-LD get a wide JPEG
+// (some link scrapers still choke on WebP).
+const heroAsset = featureAsset(feature_image);
+const ogImage = heroAsset
+  ? (await getImage({ src: heroAsset, width: 1200, format: 'jpeg', quality: 80 })).src
+  : undefined;
+
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -46,7 +55,7 @@ const articleJsonLd = {
   url: pageUrl,
   datePublished: dateISO,
   dateModified: modified_date ? modified_date.toISOString().split('T')[0] : dateISO,
-  ...(feature_image ? { image: new URL(feature_image, siteUrl).toString() } : {}),
+  ...(ogImage ? { image: new URL(ogImage, siteUrl).toString() } : {}),
   author: {
     '@type': 'Person',
     name: author,
@@ -60,17 +69,26 @@ const articleJsonLd = {
 };
 ---
 
-<Base title={title} description={description ?? title} image={feature_image}>
+<Base title={title} description={description ?? title} image={ogImage}>
   <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <Nav />
 
   <main id="main">
   <article class="post">
-    {feature_image && (
+    {heroAsset && (
       <div class="post__hero-wrap">
         <div class="container post__container">
           <figure class="post__hero">
-            <img src={feature_image} alt="" loading="eager" decoding="async" />
+            <Image
+              src={heroAsset}
+              alt=""
+              widths={[680, 1024, 1360]}
+              sizes="(max-width: 720px) 100vw, 672px"
+              quality={82}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
           </figure>
         </div>
       </div>

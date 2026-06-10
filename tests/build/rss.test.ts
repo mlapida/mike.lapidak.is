@@ -57,7 +57,7 @@ describe('rss.xml items', () => {
     const items = [...rss.matchAll(/<item>[\s\S]*?<\/item>/g)].map(m => m[0]);
     for (const item of items) {
       expect(item).toMatch(
-        /<enclosure url="https:\/\/mike\.lapidak\.is\/post-images\/[^/]+\/feature\.(jpe?g|png)"[^>]*\/>/,
+        /<enclosure url="https:\/\/mike\.lapidak\.is\/_astro\/feature\.[^"]+\.jpe?g"[^>]*\/>/,
       );
     }
   });

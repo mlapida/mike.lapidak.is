@@ -53,7 +53,7 @@ Sharing the good stuff up front, as this is a long one.
 
 ## PhotoPrism Review
 
-![A screenshot of PhotoPrism](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-09.33.03@2x.png)
+![A screenshot of PhotoPrism](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-09.33.03@2x.webp)
 
 The PhotoPrism homepage
 
@@ -79,7 +79,7 @@ PhotoPrism bills itself as “AI-drive”, though in my experience I've found th
 
 ### Security
 
-![A screenshot of the PhotoPrism login screen](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-09.30.41@2x.png)
+![A screenshot of the PhotoPrism login screen](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-09.30.41@2x.webp)
 
 The PhotoPrism login page
 
@@ -95,7 +95,7 @@ Before running it on the NUC server, I tried to run PhotoPrism from a container 
 
 ### Sharing
 
-![A screenshot of an album in PhotoPrism](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-10.12.27@2x.png)
+![A screenshot of an album in PhotoPrism](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-10.12.27@2x.webp)
 
 An album view in PhotoPrism
 
@@ -121,7 +121,7 @@ Wheat PhotoPrism lacks in AI capabilities, it makes up for in its standards-driv
 
 ## Immich Review
 
-![A screenshot of the main Immich timeline](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-10.02.21@2x.png)
+![A screenshot of the main Immich timeline](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-10.02.21@2x.webp)
 
 The Immich photo timeline
 
@@ -137,7 +137,7 @@ I was able to bulk load ~40k assets from the NAS using the CLI. This process was
 
 ### Organization
 
-![A screenshot of the admin panel in Immich](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-12-at-17.57.14@2x.png)
+![A screenshot of the admin panel in Immich](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-12-at-17.57.14@2x.webp)
 
 A peek at the administrative settings
 
@@ -151,7 +151,7 @@ One downside I’ve observed is the lack of RAW photo stacking. When uploading R
 
 ### Security
 
-![A screenshot of the Immich login page with Authentik OIDC configured](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-09.31.20@2x.png)
+![A screenshot of the Immich login page with Authentik OIDC configured](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-09.31.20@2x.webp)
 
 The Immich login page with OIDC configured
 
@@ -165,7 +165,7 @@ I’ve noticed that there is no configuration option for storing thumbnails, as 
 
 ### Sharing
 
-![A screenshot of an album in Immich](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-10.08.26@2x.png)
+![A screenshot of an album in Immich](/post-images/photo-backup-bakeoff-photoprism-vs-immich-review/CleanShot-2023-11-21-at-10.08.26@2x.webp)
 
 An album in Immich - looks like Google Photos to me
 

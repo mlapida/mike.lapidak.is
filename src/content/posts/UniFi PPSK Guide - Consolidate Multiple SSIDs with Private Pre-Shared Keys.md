@@ -22,7 +22,7 @@ Coming into this project, my UniFi network broadcasted four WiFi names — a mai
 
 As a brief aside, Matter really threw things into chaos. Before Matter, all IoT connections were considered untrusted, and isolated on the network. A route was punched from trusted to untrusted for Home Assistant to communicate with them. [Matter doesn’t work well with subnet isolation](https://community.home-assistant.io/t/thread-matter-router-rules-and-firewalls/583774), though. Still, WiFi Matter devices prefer the 2.4 GHz channels, and wouldn’t always play nice with the dual 2.4 GHz and 5 GHz channels. Hence, the creation of the second, “trusted”, IoT SSID.
 
-![](/post-images/unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys/image.png)
+![](/post-images/unifi-ppsk-guide-consolidate-multiple-ssids-with-private-pre-shared-keys/image.webp)
 
 A screenshot of the UniFi Network console showing the WiFi setup
 

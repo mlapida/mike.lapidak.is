@@ -143,10 +143,10 @@ describe('Post detail meta tags (review-weatherflow-tempest-weather-station)', (
     expect($('title').text()).toBe('A Month with the Tempest Weather Station · Mike Lapidakis');
   });
 
-  it('og:image is the absolute feature image URL', () => {
+  it('og:image is an absolute pipeline-generated JPEG of the feature image', () => {
     const $ = loadHtml(path);
-    expect($('meta[property="og:image"]').attr('content')).toBe(
-      'https://mike.lapidak.is/post-images/review-weatherflow-tempest-weather-station/feature.jpeg',
+    expect($('meta[property="og:image"]').attr('content')).toMatch(
+      /^https:\/\/mike\.lapidak\.is\/_astro\/feature\.[^/]+\.jpe?g$/,
     );
   });
 

@@ -132,11 +132,11 @@ describe('Post detail Article JSON-LD (review-weatherflow-tempest-weather-statio
     expect(article.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 
-  it('image is the absolute feature image URL', () => {
+  it('image is an absolute pipeline-generated feature image URL', () => {
     const blocks = extractJsonLd(path);
     const article = blocks.find((b: any) => b['@type'] === 'Article') as any;
-    expect(article.image).toBe(
-      'https://mike.lapidak.is/post-images/review-weatherflow-tempest-weather-station/feature.jpeg',
+    expect(article.image).toMatch(
+      /^https:\/\/mike\.lapidak\.is\/_astro\/feature\.[^/]+\.jpe?g$/,
     );
   });
 

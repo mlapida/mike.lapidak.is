@@ -88,12 +88,13 @@ describe('static files', () => {
 });
 
 describe('homepage Writing feed thumbnails', () => {
-  it('homepage has at least 1 .post-thumb img with /post-images/.../feature.* src', () => {
+  it('homepage has at least 1 .post-thumb img served from the image pipeline', () => {
     const $ = loadHtml('index.html');
     const thumbImgs = $('.post-thumb img');
     expect(thumbImgs.length).toBeGreaterThan(0);
     thumbImgs.each((_, el) => {
-      expect($(el).attr('src')).toMatch(/^\/post-images\/[^/]+\/feature\.(jpe?g|png)$/);
+      expect($(el).attr('src')).toMatch(/^\/_astro\/feature\.[^/]+\.webp$/);
+      expect($(el).attr('width')).toBe('144');
     });
   });
 });
@@ -132,12 +133,12 @@ describe('posts collection routes', () => {
 });
 
 describe('post detail markup (review-weatherflow-tempest-weather-station)', () => {
-  it('renders a hero image from /post-images/<slug>/feature.*', () => {
+  it('renders a hero image from the image pipeline with responsive srcset', () => {
     const $ = loadHtml('posts/review-weatherflow-tempest-weather-station/index.html');
     const heroImg = $('.post__hero img');
     expect(heroImg.length).toBe(1);
-    expect(heroImg.attr('src')).toMatch(
-      /^\/post-images\/review-weatherflow-tempest-weather-station\/feature\.jpe?g$/,
-    );
+    expect(heroImg.attr('src')).toMatch(/^\/_astro\/feature\.[^/]+\.webp$/);
+    expect(heroImg.attr('srcset')).toContain('680w');
+    expect(heroImg.attr('fetchpriority')).toBe('high');
   });
 });

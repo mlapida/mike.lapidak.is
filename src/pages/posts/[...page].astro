@@ -5,6 +5,8 @@ import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import { displayableTags } from '../../lib/posts';
+import { featureAsset } from '../../lib/feature-images';
+import { Image } from 'astro:assets';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const all = await getCollection('posts');
@@ -62,12 +64,13 @@ const isFirstPage = page.currentPage === 1;
             {byYear.get(year)!.map(post => {
               const tag = displayableTags(post.data.tags)
                 .map(t => t.replace(/-/g, ' '))[0];
+              const thumb = featureAsset(post.data.feature_image);
               return (
                 <li class="posts__item">
                   <a href={`/posts/${post.data.slug}/`} class="posts__link">
                     <div class="posts__thumb" aria-hidden="true">
-                      {post.data.feature_image && (
-                        <img src={post.data.feature_image} alt="" loading="lazy" decoding="async" />
+                      {thumb && (
+                        <Image src={thumb} alt="" width={144} height={144} quality={80} loading="lazy" decoding="async" />
                       )}
                     </div>
                     <div class="posts__body">

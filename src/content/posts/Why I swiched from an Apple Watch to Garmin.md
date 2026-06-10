@@ -31,7 +31,7 @@ The Garmin Epix has an AMOLED touch screen comparable in crispness and brightnes
 
 ## Garmin First Impression
 
-![Garmin Connect Dashboard](/post-images/switch-apple-watch-garmin-epix-watch/CleanShot-2022-06-19-at-07.57.18@2x.png)
+![Garmin Connect Dashboard](/post-images/switch-apple-watch-garmin-epix-watch/CleanShot-2022-06-19-at-07.57.18@2x.webp)
 
 Garmin Connect Dashboard
 
@@ -43,7 +43,7 @@ The sheer amount of data can be overwhelming. Luckily, Garmin has created featur
 
 ## Three Months Later
 
-![Garmin Connect post-ride screen](/post-images/switch-apple-watch-garmin-epix-watch/CleanShot-2022-06-19-at-07.54.48@2x.png)
+![Garmin Connect post-ride screen](/post-images/switch-apple-watch-garmin-epix-watch/CleanShot-2022-06-19-at-07.54.48@2x.webp)
 
 Garmin Connect post-ride screen
 

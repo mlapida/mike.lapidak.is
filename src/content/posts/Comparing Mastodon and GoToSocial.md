@@ -29,7 +29,7 @@ Alpha status not withstanding, I decided to [stand up a server](https://gts.lapi
 
 ## Cost
 
-![](/post-images/mastodon-vs-gotosocial/CleanShot-2022-12-24-at-09.41.42@2x.png)
+![](/post-images/mastodon-vs-gotosocial/CleanShot-2022-12-24-at-09.41.42@2x.webp)
 
 With a server half the size of the one I use for Mastodon, GoToSocial has 42% of available memory free
 
@@ -39,7 +39,7 @@ In comparison, GoToSocial requires far less resources. With a SQLite database, n
 
 ## Features
 
-![](/post-images/mastodon-vs-gotosocial/CleanShot-2022-12-24-at-09.18.02@2x.png)
+![](/post-images/mastodon-vs-gotosocial/CleanShot-2022-12-24-at-09.18.02@2x.webp)
 
 The GoToSocial admin interface
 
@@ -62,7 +62,7 @@ One feature built into GoToSocial that I really enjoy [is the ability to use a d
 
 ## Compatibility
 
-![](/post-images/mastodon-vs-gotosocial/CleanShot-2022-12-24-at-10.11.50@2x.png)
+![](/post-images/mastodon-vs-gotosocial/CleanShot-2022-12-24-at-10.11.50@2x.webp)
 
 My GoToSocial profile page
 

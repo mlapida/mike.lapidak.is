@@ -34,7 +34,7 @@ A quick hit list of lessons learned:
 
 ## Compute Setup
 
-![A Datadog dashboard of my server, lap.social](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2022-12-10-at-17.12.43@2x.png)
+![A Datadog dashboard of my server, lap.social](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2022-12-10-at-17.12.43@2x.webp)
 
 A Datadog dashboard of my server, lap.social
 
@@ -48,7 +48,7 @@ For storage, since most of the media will be hosted on S3, I'm opting for a 30 G
 
 With AWS selected as the cloud provider, and the initial server online, I decided to configure media storage on S3 and CloudFront. This reduces the load on my small server and improves performance. I found [a solid blog post](https://stanislas.blog/2018/05/moving-mastodon-media-files-to-wasabi-object-storage/) on how to migrate to S3 after initial setup.
 
-![](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2023-01-01-at-09.17.15@2x.png)
+![](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2023-01-01-at-09.17.15@2x.webp)
 
 CloudFront data transfer over 30 days
 
@@ -66,7 +66,7 @@ S3 Storage
 
 There's a direct correlation between the number of relays added and the people you follow, with the storage used. With a [fairly active relay server](https://relay.fedi.tools/app/) added to my setup, and a 3-day retention period for media configured, S3 averages 55 GB of media files stored.
 
-![A screenshot of the media retention settings in Mastodon 4.x](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2022-12-10-at-10.14.42@2x.png)
+![A screenshot of the media retention settings in Mastodon 4.x](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2022-12-10-at-10.14.42@2x.webp)
 
 The media retention setting found in Mastodon 4.x
 
@@ -111,7 +111,7 @@ An example IAM policy for least privileged access to an S3 bucket
 
 Second, lock down the server. Use [Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html), along with the IAM instance profile, to manage the server. With this setup, you won't need port 22 open on the security group and have one less surface to attack.
 
-![A screenshot of the Cloudflare analytics dashboard](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2022-12-10-at-17.29.32@2x.png)
+![A screenshot of the Cloudflare analytics dashboard](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2022-12-10-at-17.29.32@2x.webp)
 
 A screenshot of the Cloudflare analytics dashboard
 
@@ -129,7 +129,7 @@ A relay acts as a gateway to other servers. If you subscribe to a relay, all of 
 
 The more active a relay, or the more relays added, the more active the federated feed will be on your server. The risk is that not all relays moderate who can subscribe and participate. This means that you may find content in your federated feed, and subsequently stored in your S3 bucket, that is not pleasant.
 
-![](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2022-12-10-at-12.23.27@2x.png)
+![](/post-images/notes-on-standing-up-a-mastodon-server-aws/CleanShot-2022-12-10-at-12.23.27@2x.webp)
 
 The Mastodon setting for blocking a server
 

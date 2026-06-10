@@ -45,7 +45,7 @@ I’ve used iCloud Mail with Custom Domains for my primary personal email since 
 
 ## The SPAM and the Ugly
 
-![](/post-images/thoughts-on-custom-domains-in-apple-icloud-mail/dkim-alignment.png)
+![](/post-images/thoughts-on-custom-domains-in-apple-icloud-mail/dkim-alignment.webp)
 
 DKIM Alignment Report
 

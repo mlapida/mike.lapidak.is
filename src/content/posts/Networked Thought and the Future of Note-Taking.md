@@ -23,7 +23,7 @@ Enter networked note-taking. Networked note-taking replaces those tags and folde
 
 Several networked note-taking apps have sprung up over the past year, with some tried and true services adding the functionality. From Notion to [Bear](https://bear.app/), and [Obsidian](https://obsidian.md/), I've tried many of these services and their interpretation of networked notes. Each has taken its own twist on the concept, with varying degrees of success.
 
-![Roam Research Screen Shot](/post-images/networked-notes-roam-research-future/roam.png)
+![Roam Research Screen Shot](/post-images/networked-notes-roam-research-future/roam.webp)
 
 Roam Research Screen Shot
 

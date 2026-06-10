@@ -28,7 +28,7 @@ As a note, I've had my Zapier account for a long time, and I'm grandfathered int
 
 To get started, you'll need to create an Application in Mastodon and write down the access token. You'll need to do the same for Readwise.
 
-![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.13.48@2x.png)
+![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.13.48@2x.webp)
 
 The new application page in Mastodon. This information is secret! Don't share it (I've deleted this app already).
 
@@ -36,7 +36,7 @@ The new application page in Mastodon. This information is secret! Don't share it
 2. Create a new application with only the `read:bookmarks` scope selected. Name it Zapier, or something else memorable.
 3. Take note of the contents of “Your access token”.
 4. Next, navigate to [readwise.io/access\_token](https://readwise.io/access_token) and select “Get Access Token”. Copy the contents.
-![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.16.01@2x.png)
+![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.16.01@2x.webp)
 
 The Readwise Access Token page
 
@@ -46,14 +46,14 @@ At this point, you should have the URL of your Mastodon instance, the Mastodon a
 
 It's now time to create the Zapier integration. First, create a [Zapier](https://zapier.com/) account if you don't have one already.
 
-![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.20.30@2x.png)
+![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.20.30@2x.webp)
 
 A sample data set read by the Mastodon API
 
 1. From the upper left, create a new “Zap”. Select Webhooks for the first step and set the Event to “Retrieve Poll”. With this integration type, Zapier will periodically poll the endpoint and action based on the new content found.
 2. The URL will be `https://<your mastodon url>/api/v1/bookmarks`. In the Headers section, enter `Authorization` for the key and `Bearer <your Mastodon access token>` for the value.
 3. Click continue, and test the webhook integration. If successful, you will see a sample of the data that Zapier pulls from this API.
-![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.24.06@2x.png)
+![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.24.06@2x.webp)
 
 A sample data set read by the Mastodon API
 
@@ -61,7 +61,7 @@ A sample data set read by the Mastodon API
 
 Next, we'll configure another webhook, this time for Readwise. A note on the Readwise API; there are currently two active APIs, the [classic Readwise highlight API](https://readwise.io/api_deets) (v2) and the [new Readwise Reader API](https://readwise.io/reader_api) (v3). For this, I'm using the new API (v3), as it's a bit more flexible with the types of data that it will accept.
 
-![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.31.48@2x.png)
+![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.31.48@2x.webp)
 
 The contents of a Mastodon post displayed in Readwise Reader
 
@@ -70,7 +70,7 @@ The contents of a Mastodon post displayed in Readwise Reader
 3. For the data fields, we have options. I've chosen to send the post HTML content to Readwise directly. I'm doing this because, in my experience, Readwise Reader doesn't do the best job of parsing Mastodon URLs yet. Furthermore, I've seen it bring in a random text from around the post, and it gets a bit messy. Another option would be sending the URL of the embedded card/link, if there's one present in the bookmark. This would be a better option for those that use bookmarks to save links, rather than post content. You can see the acceptable fields in the [Readwise API documentation](https://readwise.io/reader_api), and select which approach would be best for you.
 4. Finally, for the headers section, add `Authorization` to the key and `Token <your Readwise access token>` to the value. The remaining values can stay the same.
 5. With that, you can test your action and make sure the data is sent to Readwise Reader the way you would like. If you log into Readwise Reader, you should see the newly bookmarked Mastodon post on your home page.
-![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.38.58@2x.png)
+![](/post-images/sending-mastodon-bookmarks-to-readwise-zapier/CleanShot-2023-01-08-at-09.38.58@2x.webp)
 
 The contents of a Mastodon post displayed in Readwise Reader
 
