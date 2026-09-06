@@ -1,10 +1,10 @@
 # mike.lapidak.is
 
-Personal site for Mike Lapidakis, Security & Networking SA Leader at AWS. Built with Astro 6, deployed to Cloudflare Pages.
+Personal site for Mike Lapidakis, Security & Networking SA Leader at AWS. Built with Astro 7, deployed to Cloudflare Pages.
 
 ## Stack
 
-- **Astro 6** · static output, no adapter
+- **Astro 7** · static output, no adapter; unified Markdown processor preserves the rehype image plugin
 - **Tailwind CSS v4** via `@tailwindcss/vite`
 - **@astrojs/sitemap** · auto-generated `sitemap-index.xml` + `sitemap-0.xml`
 - **@astrojs/rss** · RSS 2.0 feed at `/rss.xml`
@@ -19,7 +19,7 @@ npm install
 npm run dev          # http://localhost:4321
 npm run build        # production build → dist/
 npm run preview      # preview built output locally
-npx vitest run       # 210 tests across 9 files (build tests need a dist/ first)
+npx vitest run       # 237 tests across 10 files (build tests need a dist/ first)
 ```
 
 ## Routes
@@ -152,4 +152,4 @@ Cloudflare Pages · auto-deploys on push to `main`. Every pushed branch also get
 
 - Build command: `npm run build`
 - Output directory: `dist`
-- Node version: 22
+- Node version: 22.12.0 or newer

@@ -1,12 +1,12 @@
 # mike.lapidak.is · Claude Context
 
-Personal/professional site for Mike Lapidakis. Static Astro 6 site deployed to Cloudflare Pages.
+Personal/professional site for Mike Lapidakis. Static Astro 7 site deployed to Cloudflare Pages.
 
 > **Design rules:** Before adding a component, writing copy, or making a visual change, read `docs/design.md`. It documents voice/tone, type/color/spacing/shadow conventions, hover patterns, the polaroid one-off rule, iconography limits, the iOS Safari safe-area pitfalls, and the no-em-dash rule. Tokens live in `src/styles/global.css`; design *decisions* live in `docs/design.md`.
 
 ## Stack
 
-- **Astro 6** (static output, no adapter)
+- **Astro 7** (static output, no adapter). Uses `unified()` from `@astrojs/markdown-remark` for the rehype image plugin and `compressHTML: true` to preserve HTML-aware inline spacing.
 - **Tailwind CSS v4** via `@tailwindcss/vite` Vite plugin
 - **@astrojs/sitemap** · auto-generates `sitemap-index.xml` + `sitemap-0.xml` at build
 - **@astrojs/rss** · generates `/rss.xml` from the posts content collection at build
@@ -195,7 +195,7 @@ All colors are CSS custom properties in `src/styles/global.css`:
 ## Deployment
 
 - Build: `npm run build` → output: `./dist`
-- Cloudflare Pages: build command `npm run build`, output directory `dist`, Node 22
+- Cloudflare Pages: build command `npm run build`, output directory `dist`, Node 22.12.0 or newer
 - `wrangler.toml` present
 - Deploy branch: `main` → production at `mike.lapidak.is`
 - Branch builds: every pushed branch gets a preview at `<branch>.mike-lapidak-is.pages.dev`
@@ -229,7 +229,7 @@ Don't reintroduce `html::after { position: fixed; inset: 0 }` for any reason. Do
 
 ## Test Suite
 
-Run with `npx vitest run` (236 tests across 10 files). Tests require a completed `npm run build` first · build tests read from `dist/`.
+Run with `npx vitest run` (237 tests across 10 files). Tests require a completed `npm run build` first · build tests read from `dist/`.
 
 ### Unit tests (`tests/unit/`) · no build required
 

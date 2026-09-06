@@ -133,6 +133,18 @@ describe('posts collection routes', () => {
 });
 
 describe('post detail markup (review-weatherflow-tempest-weather-station)', () => {
+  it('preserves Markdown body image dimensions and lazy loading through the unified processor', () => {
+    const $ = loadHtml('posts/review-weatherflow-tempest-weather-station/index.html');
+    const bodyImages = $('img[src^="/post-images/"]');
+    expect(bodyImages.length).toBeGreaterThan(0);
+    bodyImages.each((_, el) => {
+      expect(Number($(el).attr('width'))).toBeGreaterThan(0);
+      expect(Number($(el).attr('height'))).toBeGreaterThan(0);
+      expect($(el).attr('loading')).toBe('lazy');
+      expect($(el).attr('decoding')).toBe('async');
+    });
+  });
+
   it('renders a hero image from the image pipeline with responsive srcset', () => {
     const $ = loadHtml('posts/review-weatherflow-tempest-weather-station/index.html');
     const heroImg = $('.post__hero img');
