@@ -206,9 +206,9 @@ describe('Footer (homepage)', () => {
     expect(copy).toContain('Mike Lapidakis');
   });
 
-  it('.footer__link count is 7 (6 socials + RSS)', () => {
+  it('.footer__link count is 6 (5 socials + RSS)', () => {
     const $ = loadHtml('index.html');
-    expect($('.footer__link').length).toBe(7);
+    expect($('.footer__link').length).toBe(6);
   });
 
   it('footer contains an RSS link to /rss.xml', () => {
@@ -217,12 +217,18 @@ describe('Footer (homepage)', () => {
     expect(rss.length).toBe(1);
   });
 
-  it('Mastodon footer link has rel containing "me"', () => {
+  it('hero and footer use the requested social labels, URLs, and order', () => {
     const $ = loadHtml('index.html');
-    const mastodon = $('.footer__link').filter((_, el) => {
-      return ($(el).attr('href') ?? '').includes('lap.social');
-    });
-    expect(mastodon.length).toBe(1);
-    expect(mastodon.attr('rel')).toContain('me');
+    const expected = [
+      ['Threads', 'https://www.threads.net/@mikelapidakis'],
+      ['X', 'https://x.com/MikeLapidakis'],
+      ['LinkedIn', 'https://linkedin.com/in/mikelapidakis'],
+      ['GitHub', 'https://github.com/mlapida'],
+      ['glass', 'https://glass.photo/lap'],
+    ];
+    for (const selector of ['.hero__link', '.footer__link[target="_blank"]']) {
+      const links = $(selector).toArray().map(el => [$(el).text().trim(), $(el).attr('href')]);
+      expect(links).toEqual(expected);
+    }
   });
 });

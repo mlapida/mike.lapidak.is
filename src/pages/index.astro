@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { site, heroSocials } from '../config/site';
+import { site, socials, heroSocials } from '../config/site';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import profileImg from '../assets/profile.jpg';
@@ -27,14 +27,7 @@ const personJsonLd = {
   url: site.url,
   jobTitle: 'Security & Networking SA Leader',
   worksFor: { '@type': 'Organization', name: 'Amazon Web Services' },
-  sameAs: [
-    'https://linkedin.com/in/mikelapidakis',
-    'https://github.com/mlapidakis',
-    'https://bsky.app/profile/mike.lapidak.is',
-    'https://lap.social/@mike',
-    'https://glass.photo/lap',
-    'https://empty.coffee',
-  ],
+  sameAs: socials.map(link => link.href),
 };
 ---
 
@@ -569,6 +562,10 @@ const personJsonLd = {
 
     .hero__name {
       font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+
+    .hero__links li + li .hero__link::before {
+      margin: 0 var(--space-1);
     }
 
     .section-cards {

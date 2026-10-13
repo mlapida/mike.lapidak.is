@@ -7,24 +7,23 @@ export const site = {
 };
 
 export const socials = [
+  { label: 'Threads',      href: 'https://www.threads.net/@mikelapidakis' },
+  { label: 'X',            href: 'https://x.com/MikeLapidakis' },
   { label: 'LinkedIn',     href: 'https://linkedin.com/in/mikelapidakis' },
   { label: 'GitHub',       href: 'https://github.com/mlapida' },
-  { label: 'Threads',      href: 'https://www.threads.net/@mikelapidakis' },
+  { label: 'glass',        href: 'https://glass.photo/lap' },
   { label: 'Mastodon',     href: 'https://lap.social/@mike',              rel: 'me' },
   { label: 'Bluesky',      href: 'https://bsky.app/profile/mike.lapidak.is' },
-  { label: 'glass.photo',  href: 'https://glass.photo/lap' },
   { label: 'empty.coffee', href: 'https://empty.coffee' },
 ];
 
-// Subset shown in the hero (keep it short)
+// Display order follows the canonical list above.
 export const heroSocials = socials.filter(s =>
-  ['LinkedIn', 'GitHub', 'glass.photo'].includes(s.label)
+  ['Threads', 'X', 'LinkedIn', 'GitHub', 'glass'].includes(s.label)
 );
 
-// Subset shown in the footer
-export const footerSocials = socials.filter(s =>
-  ['LinkedIn', 'Threads', 'Mastodon', 'Bluesky', 'GitHub', 'glass.photo'].includes(s.label)
-);
+// Keep the footer's social links consistent with the hero.
+export const footerSocials = heroSocials;
 
 // Giscus comments configuration. Driven by GitHub Discussions on the
 // repo backing this site. repoId / categoryId come from the GitHub

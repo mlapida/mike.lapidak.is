@@ -1,6 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { site, socials, heroSocials, footerSocials } from '../../src/config/site.js';
 
+const expectedDisplaySocials = [
+  { label: 'Threads', href: 'https://www.threads.net/@mikelapidakis' },
+  { label: 'X', href: 'https://x.com/MikeLapidakis' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/mikelapidakis' },
+  { label: 'GitHub', href: 'https://github.com/mlapida' },
+  { label: 'glass', href: 'https://glass.photo/lap' },
+];
+
 describe('site metadata', () => {
   it('name is Mike Lapidakis', () => {
     expect(site.name).toBe('Mike Lapidakis');
@@ -52,18 +60,19 @@ describe('socials', () => {
   it('contains Bluesky', () => {
     expect(socials.some(s => s.label === 'Bluesky')).toBe(true);
   });
+
+  it('preserves Mastodon verification', () => {
+    expect(socials.find(s => s.label === 'Mastodon')?.rel).toBe('me');
+  });
 });
 
 describe('heroSocials', () => {
-  it('has exactly 3 entries', () => {
-    expect(heroSocials).toHaveLength(3);
+  it('has exactly 5 entries', () => {
+    expect(heroSocials).toHaveLength(5);
   });
 
-  it('contains LinkedIn, GitHub, glass.photo', () => {
-    const labels = heroSocials.map(s => s.label);
-    expect(labels).toContain('LinkedIn');
-    expect(labels).toContain('GitHub');
-    expect(labels).toContain('glass.photo');
+  it('uses the requested labels, verified destinations, and order', () => {
+    expect(heroSocials).toEqual(expectedDisplaySocials);
   });
 
   it('does not contain empty.coffee', () => {
@@ -71,10 +80,10 @@ describe('heroSocials', () => {
     expect(labels).not.toContain('empty.coffee');
   });
 
-  it('does not contain Threads or Mastodon', () => {
+  it('does not contain Mastodon or Bluesky', () => {
     const labels = heroSocials.map(s => s.label);
-    expect(labels).not.toContain('Threads');
     expect(labels).not.toContain('Mastodon');
+    expect(labels).not.toContain('Bluesky');
   });
 
   it('is a strict subset of socials', () => {
@@ -86,29 +95,17 @@ describe('heroSocials', () => {
 });
 
 describe('footerSocials', () => {
-  it('has exactly 6 entries', () => {
-    expect(footerSocials).toHaveLength(6);
+  it('has exactly 5 entries', () => {
+    expect(footerSocials).toHaveLength(5);
   });
 
-  it('contains LinkedIn, Threads, Mastodon, Bluesky, GitHub, glass.photo', () => {
-    const labels = footerSocials.map(s => s.label);
-    expect(labels).toContain('LinkedIn');
-    expect(labels).toContain('Threads');
-    expect(labels).toContain('Mastodon');
-    expect(labels).toContain('Bluesky');
-    expect(labels).toContain('GitHub');
-    expect(labels).toContain('glass.photo');
+  it('uses the requested labels, verified destinations, and order', () => {
+    expect(footerSocials).toEqual(expectedDisplaySocials);
   });
 
   it('does not contain empty.coffee', () => {
     const labels = footerSocials.map(s => s.label);
     expect(labels).not.toContain('empty.coffee');
-  });
-
-  it('Mastodon entry has rel: "me"', () => {
-    const mastodon = footerSocials.find(s => s.label === 'Mastodon');
-    expect(mastodon).toBeDefined();
-    expect((mastodon as any).rel).toBe('me');
   });
 
   it('is a strict subset of socials', () => {

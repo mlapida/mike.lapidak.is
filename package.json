@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "rm -rf .astro && astro build",
+    "build": "rm -rf .astro && ASTRO_TELEMETRY_DISABLED=1 NODE_USE_ENV_PROXY=1 astro build",
     "preview": "astro preview",
     "astro": "astro",
     "sync": "node scripts/sync-immich.mjs",
