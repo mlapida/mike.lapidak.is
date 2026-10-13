@@ -28,6 +28,17 @@ downloads. In Codex cloud, use Node 24.0.0+ or 22.21.0+ so `fetch` honors
 `HTTP_PROXY` / `HTTPS_PROXY` / `NO_PROXY`. For a clean install when the home
 directory is read-only, run `npm ci --cache /workspace/.npm-cache`.
 
+## Pull request reviews and CI
+
+Native Codex reviews follow [AGENTS.md](AGENTS.md), migrated from the previous
+Claude guidance. [Review setup and activation](docs/code-review.md) documents
+the owner settings needed for automatic reviews and `@codex` PR assistance.
+Repository changes alone do not activate the native reviewer.
+
+The **Build and test** GitHub Actions check runs `npm ci` and
+`npm run test:ci` on Node 24. Cloudflare Pages continues to supply its
+existing build and preview check.
+
 ## Routes
 
 | Route | Source | Notes |
