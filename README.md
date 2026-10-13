@@ -22,6 +22,12 @@ npm run preview      # preview built output locally
 npx vitest run       # 237 tests across 10 files (build tests need a dist/ first)
 ```
 
+The build disables Astro telemetry so it does not require a writable home
+directory, and enables Node's environment proxy support for remote photo
+downloads. In Codex cloud, use Node 24.0.0+ or 22.21.0+ so `fetch` honors
+`HTTP_PROXY` / `HTTPS_PROXY` / `NO_PROXY`. For a clean install when the home
+directory is read-only, run `npm ci --cache /workspace/.npm-cache`.
+
 ## Routes
 
 | Route | Source | Notes |

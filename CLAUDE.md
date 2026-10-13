@@ -142,8 +142,8 @@ The original feature/hero images were imported via a one-shot script (deleted af
 `src/config/site.ts` exports:
 - `site` · name, url, description, role, bio
 - `socials` · full list of social links
-- `heroSocials` · subset shown in homepage hero (currently LinkedIn, GitHub, glass.photo)
-- `footerSocials` · subset shown in footer
+- `heroSocials` · homepage hero links: Threads, X, LinkedIn, GitHub, glass (in that order)
+- `footerSocials` · the same five social links; the footer also includes RSS
 
 ## Fonts
 
@@ -235,7 +235,7 @@ Run with `npx vitest run` (237 tests across 10 files). Tests require a completed
 
 | File | What it covers |
 |------|---------------|
-| `config.test.ts` | `src/config/site.ts` · validates `site` metadata fields, `socials` list (≥5 entries, all `https://`), `heroSocials` (exactly 3: LinkedIn, GitHub, glass.photo; does NOT contain empty.coffee), `footerSocials` (exactly 6, Mastodon has `rel: "me"`) |
+| `config.test.ts` | `src/config/site.ts` · validates `site` metadata fields, `socials` list (≥5 entries, all `https://`; preserves Mastodon `rel: "me"`), hero and footer links (exactly 5: Threads, X, LinkedIn, GitHub, glass, with verified URLs and order) |
 | `work.test.ts` | `src/data/work.ts` · validates `spotlight` entries (type/title/desc/meta/links), `experience` (required fields, descending start years, first entry is AWS), `talks` (type/title/event/year/links), `skillGroups` (exactly 4 groups with expected labels) |
 | `content-photos.test.ts` | `src/content/photos/*.md` · validates every file has title, date, location, `https://` image URL; checks orientation values, positive integer dimensions, aspect ratio 0.2-5.0, GPS bounds, UUID-format immichId, and landscape/portrait dimension consistency |
 | `content-posts.test.ts` | `src/content/posts/*.md` · validates every file has `type: post`, valid status enum, non-empty title/slug/author, kebab-case slug, optional tags array; for `published` posts checks publish_date validity, feature_image path matches `/post-images/<slug>/feature.(jpg\|jpeg\|png)`, slug consistency, and the NextDNS slug-correction sanity (`caching` not `cacheing`) |
@@ -246,7 +246,7 @@ Run with `npx vitest run` (237 tests across 10 files). Tests require a completed
 |------|---------------|
 | `routes.test.ts` | Top-level pages + `404.html`, all 17 photo detail routes, both collection routes; `/posts/` index + pagination (`/posts/2/`, `/posts/3/`); 24 published post detail dirs; every detail has a sibling `.md` companion; `/rss.xml` exists; post-detail hero renders from `/_astro/feature.*` with srcset + fetchpriority; homepage Writing feed thumbnails are pipeline-generated `/_astro/feature.*.webp` |
 | `sitemap.test.ts` | `sitemap-index.xml` and `sitemap-0.xml` structure; total `<loc>` count is 49; contains `/posts/`, `/posts/2/`, `/posts/3/`, sample post slugs, all photos and collections; does NOT contain `/rss.xml`, `/llms.txt`, or `.md` companions |
-| `meta.test.ts` | Page titles use `·` separator (no em-dash anywhere in any rendered `<title>`); OG/Twitter image fallback; canonical URLs; nav active state; footer has 7 links (6 socials + RSS, with RSS pointing to `/rss.xml`); RSS auto-discovery `<link rel="alternate">` on every page; Posts index titles for page 1 and page 2; post-detail og:image and twitter:image use the absolute feature image URL |
+| `meta.test.ts` | Page titles use `·` separator (no em-dash anywhere in any rendered `<title>`); OG/Twitter image fallback; canonical URLs; nav active state; footer has 6 links (5 socials + RSS, with RSS pointing to `/rss.xml`); hero and footer social labels, URLs, and order; RSS auto-discovery `<link rel="alternate">` on every page; Posts index titles for page 1 and page 2; post-detail og:image and twitter:image use the absolute feature image URL |
 | `json-ld.test.ts` | `schema.org/Person` JSON-LD on homepage; `schema.org/Photograph` JSON-LD on photo detail pages; `schema.org/Article` JSON-LD on post detail pages (headline, url, datePublished, image, author/publisher); sanity test for posts without a feature image |
 | `rss.test.ts` | `/rss.xml` is RSS 2.0; channel title contains "Mike Lapidakis" + "Writing" with no em-dash; ≥23 items; every link is `/posts/<slug>/`; every item has a feature-image `<enclosure>` with `image/jpeg` or `image/png` MIME; pubDates parse and are descending; drafts excluded; no `draft`/`published`/`empty-coffee` literal categories |
 
