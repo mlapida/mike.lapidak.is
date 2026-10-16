@@ -44,7 +44,7 @@ export const giscus = {
   inputPosition: 'top',
   // Built-in giscus themes — cleanest default for now. A future
   // pass can swap these to URLs pointing at custom CSS files for
-  // paper/ink palette parity (see "Pending" in CLAUDE.md).
+  // paper/ink palette parity (see "Pending" in AGENTS.md).
   themeLight: 'light',
   themeDark: 'dark',
   lang: 'en',

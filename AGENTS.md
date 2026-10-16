@@ -1,8 +1,41 @@
-# mike.lapidak.is · Claude Context
+# mike.lapidak.is · Agent guidance
 
 Personal/professional site for Mike Lapidakis. Static Astro 7 site deployed to Cloudflare Pages.
 
 > **Design rules:** Before adding a component, writing copy, or making a visual change, read `docs/design.md`. It documents voice/tone, type/color/spacing/shadow conventions, hover patterns, the polaroid one-off rule, iconography limits, the iOS Safari safe-area pitfalls, and the no-em-dash rule. Tokens live in `src/styles/global.css`; design *decisions* live in `docs/design.md`.
+
+## Code Review Rules
+
+Review the changed behavior and identify concrete regressions with a failure
+scenario, affected lines, and impact. Prioritize correctness and security.
+The build/test workflow handles deterministic checks; report which checks
+actually ran and any limits on verification.
+
+- Preserve the publication boundary: only published posts produce public
+  detail routes, markdown companions, RSS entries, and writing feeds. Drafts
+  and ideas must not be published by the site; required publication dates
+  come from the content schema.
+- Preserve image contracts: body-image URLs remain stable for markdown
+  companions, while feature images use the Astro pipeline for rendered
+  pages, social metadata, and RSS. Keep the frontmatter-to-asset mapping
+  intact and avoid broken or mismatched image references.
+- For UI changes, check `docs/design.md` and the relevant architecture below.
+  Keep scripts inside the Base slot, preserve the body background and grain
+  behavior needed by iOS safe-area painting, and keep hover effects gated
+  for devices that support hover.
+
+## Validation
+
+Use Node 24 for the CI environment. Install locked dependencies with
+`npm ci`, then run `npm run test:ci` for a full Astro build and every unit
+and output test. In Codex cloud, use
+`npm ci --cache /workspace/.npm-cache` if the home directory is read-only.
+The build fetches public photo originals from the configured R2 CDN, so
+it needs network access. Photo sync and image migration scripts are content
+maintenance tools and are not part of build/test validation.
+
+Native Codex review setup and its activation checklist are documented in
+`docs/code-review.md`. The repository guidance does not enable that service.
 
 ## Stack
 
